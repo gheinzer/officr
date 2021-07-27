@@ -1,6 +1,6 @@
 @import url("font.css");
-@import url("style-d.css");
-@import url("style-m.css");
+@import url("style-d.css") only screen and (min-width: 992px);
+@import url("style-m.css") only screen and (max-width: 991px);
 body {
   background-color: #141428;
   font-family: "Titillium";

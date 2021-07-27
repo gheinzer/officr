@@ -1,1 +1,77 @@
-/* No CSS *//*# sourceMappingURL=font.css.map */
+@font-face {
+  font-family: "Titillium";
+  src: url("../assets/font/TitilliumWeb-Regular.ttf");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Titillium";
+  src: url("../assets/font/TitilliumWeb-Italic.ttf");
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Titillium";
+  src: url("../assets/font/TitilliumWeb-Light.ttf");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Titillium";
+  src: url("../assets/font/TitilliumWeb-LightItalic.ttf");
+  font-weight: 300;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Titillium";
+  src: url("../assets/font/TitilliumWeb-ExtraLight.ttf");
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Titillium";
+  src: url("../assets/font/TitilliumWeb-ExtraLightItalic.ttf");
+  font-weight: 200;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Titillium";
+  src: url("../assets/font/TitilliumWeb-SemiBold.ttf");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Titillium";
+  src: url("../assets/font/TitilliumWeb-SemiBold.ttf");
+  font-weight: 600;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Titillium";
+  src: url("../assets/font/TitilliumWeb-Bold.ttf");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Titillium";
+  src: url("../assets/font/TitilliumWeb-BoldItalic.ttf");
+  font-weight: 700;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Titillium";
+  src: url("../assets/font//TitilliumWeb-Black.ttf");
+  font-weight: 900;
+  font-style: normal;
+}
+/*# sourceMappingURL=font.css.map */

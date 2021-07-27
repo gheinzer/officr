@@ -1,1 +1,11 @@
-/* No CSS *//*# sourceMappingURL=style.css.map */
+@import url("font.css");
+@import url("style-d.css");
+@import url("style-m.css");
+body {
+  background-color: #141428;
+  font-family: "Titillium";
+  color: white;
+  margin: 0;
+  padding: 0;
+}
+/*# sourceMappingURL=style.css.map */

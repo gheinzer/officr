@@ -1,10 +1,100 @@
 @import url("font.css");
 @import url("style-d.css") only screen and (min-width: 992px);
 @import url("style-m.css") only screen and (max-width: 991px);
+$body-bg-color: rgb(20, 20, 30);
+$header-bg: lighten($body-bg-color, 5%);
 body {
-  background-color: rgb(20, 20, 40);
+  box-sizing: border-box;
+  background-color: $body-bg-color;
   font-family: "Titillium";
   color: white;
   margin: 0;
   padding: 0;
+  position: relative;
+  width: 100%;
+  .horizontal-container {
+    position: relative;
+    display: grid;
+    grid-template-columns: auto max-content;
+    grid-template-rows: max-content auto;
+    max-width: 100%;
+    @mixin header($grid-column, $grid-row) {
+      background-color: $header-bg;
+      grid-column: $grid-column;
+      grid-row: $grid-row;
+      min-height: 12%;
+      position: relative;
+      justify-content: start;
+      align-items: center;
+      display: flex;
+      padding: 1.5rem;
+      img {
+        width: 1.5rem;
+        margin: 0;
+        padding: 0;
+      }
+      p {
+        font-size: 1.5rem;
+      }
+      & > * {
+        width: fit-content;
+      }
+    }
+    header {
+      @include header(1, 1);
+      img {
+        margin-right: 1ch;
+        width: 2rem;
+      }
+    }
+    div.icons {
+      @include header(2, 1);
+    }
+    .searchBar {
+      @include header(span 2, 1);
+      z-index: 48;
+      position: absolute;
+      width: auto;
+      left: 0;
+      right: 0;
+      transition: 0.2s;
+      opacity: 0;
+      padding: 0 !important;
+      pointer-events: none;
+      height: 100%;
+      transition: 0.2s;
+      &:focus-within {
+        background-color: lighten($header-bg, 5%);
+      }
+      img {
+        margin-left: auto;
+        margin-right: 1rem;
+      }
+      input {
+        height: 100%;
+        left: 0;
+        top: 0;
+        //width: 100%;
+        position: absolute;
+        border: none;
+        padding: 1rem;
+        background-color: $header-bg;
+        color: white;
+        font-family: "Titillium";
+        font-size: 1.5rem;
+        transition: 0.2s;
+        &::placeholder {
+          color: lighten($header-bg, 20%);
+        }
+        &:focus {
+          outline: none;
+          background-color: lighten($header-bg, 5%);
+        }
+      }
+    }
+  }
+}
+
+.pointer {
+  cursor: pointer;
 }

@@ -6,11 +6,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MySQLOffice</title>
     <link rel="stylesheet" href="../../public_html/style/style.css" />
+    <script src="../../public_html/js/searchbar.js"></script>
   </head>
   <body>
-    <header>
-      <img src="../../assets/logo-white.svg" alt="MySQLOffice" />
-      <p>[SERVICE_NAME]</p>
-    </header>
+    <div class="horizontal-container">
+      <header>
+        <img src="../../assets/logo-white.svg" alt="MySQLOffice" />
+        <span>[SERVICE_NAME]</span>
+      </header>
+      <div class="icons">
+        <img
+          src="../../public_html/assets/icons/search_white_24dp.svg"
+          alt=""
+          class="pointer"
+          onclick="showSearch()"
+        />
+      </div>
+      <!--<div class="searchBar" id="searchBar">
+        <input type="search" name="search" id="search" placeholder="Search" />
+        <img
+          src="../../public_html/assets/icons/close_white_24dp.svg"
+          alt=""
+          class="pointer"
+          onclick="hideSearch()"
+        />-->
+      <div class="searchBar" id="searchBar">
+        <input type="search" name="search" id="search" placeholder="Search" />
+        <img
+          src="../../public_html/assets/icons/close_white_24dp.svg"
+          alt=""
+          class="pointer"
+          onclick="hideSearch()"
+        />
+      </div>
+    </div>
+    <div class="main-content"><h1>[CONTENT]</h1></div>
   </body>
 </html>

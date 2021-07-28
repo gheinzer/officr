@@ -332,7 +332,17 @@ body .horizontal-container .filterBar .content {
   cursor: pointer;
 }
 
+.createButtonMenu .secondary-img:hover {
+  opacity: 0.5;
+}
+
 .pointer {
   cursor: pointer;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+
+.pointer:hover {
+  opacity: 0.75;
 }
 /*# sourceMappingURL=style.css.map */

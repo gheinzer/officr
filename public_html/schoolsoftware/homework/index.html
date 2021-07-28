@@ -7,6 +7,7 @@
     <title>MySQLOffice</title>
     <link rel="stylesheet" href="../../style/style.css" />
     <script src="../../js/searchbar.js"></script>
+    <script src="../../js/filterbar.js"></script>
     <link
       rel="shortcut icon"
       href="../../assets/homework-logo-white.svg"
@@ -45,14 +46,24 @@
       <div class="filterBar" id="filterBar">
         <h1>FILTERS HERE</h1>
         <img
-          src="../../public_html/assets/icons/close_white_24dp.svg"
+          src="../../assets/icons/close_white_24dp.svg"
           alt=""
           class="pointer"
           onclick="hideFilterBar()"
         />
       </div>
     </div>
-    <div class="main-content"><h1>[CONTENT]</h1></div>
+    <div class="main-content">
+      <table>
+        <tr>
+          <th></th>
+          <th></th>
+          <th>Subject</th>
+          <th>Description</th>
+          <th>Deadline</th>
+        </tr>
+      </table>
+    </div>
     <div class="createButtonMenu">
       <img
         src="../../assets/icons/filter_alt_white_24dp.svg"

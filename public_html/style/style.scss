@@ -3,6 +3,8 @@
 @import url("style-m.css") only screen and (max-width: 991px);
 $body-bg-color: rgb(20, 20, 20);
 $header-bg: lighten($body-bg-color, 5%);
+
+$accentColor: rgb(50, 200, 0);
 body {
   box-sizing: border-box;
   background-color: $body-bg-color;
@@ -109,7 +111,25 @@ body {
     }
   }
 }
-
+.createButton {
+  padding: 1ch;
+  background-color: $accentColor;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20rem;
+  margin: 1rem;
+  transition: 0.2s;
+  &:hover {
+    background-color: darken($accentColor, 10%);
+  }
+  img {
+    width: 2rem;
+  }
+}
 .pointer {
   cursor: pointer;
 }

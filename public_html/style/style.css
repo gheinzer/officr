@@ -263,6 +263,35 @@ body .horizontal-container .filterBar .content {
   font-family: "Titillium";
 }
 
+.createButton {
+  padding: 1ch;
+  background-color: #32c800;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-radius: 20rem;
+  margin: 1rem;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+
+.createButton:hover {
+  background-color: #259500;
+}
+
+.createButton img {
+  width: 2rem;
+}
+
 .pointer {
   cursor: pointer;
 }

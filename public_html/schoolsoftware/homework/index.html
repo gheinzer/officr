@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MySQLOffice</title>
+    <link rel="stylesheet" href="../../style/style.css" />
+    <script src="../../js/searchbar.js"></script>
+    <link
+      rel="shortcut icon"
+      href="../../assets/homework-logo-white.svg"
+      type="image/x-icon"
+    />
+  </head>
+  <body>
+    <div class="horizontal-container">
+      <header>
+        <img src="../../assets/homework-logo-white.svg" alt="MySQLOffice" />
+        <span>Homework</span>
+      </header>
+      <div class="icons">
+        <img
+          src="../../assets/icons/search_white_24dp.svg"
+          alt=""
+          class="pointer"
+          onclick="showSearch()"
+        />
+      </div>
+      <div class="searchBar" id="searchBar">
+        <input type="search" name="search" id="search" placeholder="Search" />
+        <img
+          src="../../assets/icons/close_white_24dp.svg"
+          alt=""
+          class="pointer"
+          onclick="hideSearch()"
+        />
+      </div>
+    </div>
+    <div class="main-content"><h1>[CONTENT]</h1></div>
+  </body>
+</html>

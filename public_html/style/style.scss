@@ -137,7 +137,8 @@ body {
   //width: 3rem;
   &:hover {
     .main-img {
-      background-color: darken($accentColor, 10%);
+      background-color: darken($accentColor, 5%);
+      transform: rotate(90deg);
     }
     width: max-content;
     .secondary-img {
@@ -152,6 +153,7 @@ body {
     height: 0;
     margin: 0;
     padding: 0;
+    cursor: pointer;
   }
 }
 .createButtonMenu {

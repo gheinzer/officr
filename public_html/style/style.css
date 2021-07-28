@@ -311,7 +311,9 @@ body .horizontal-container .filterBar .content {
 }
 
 .createButtonMenu:hover .main-img {
-  background-color: #259500;
+  background-color: #2caf00;
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
 }
 
 .createButtonMenu:hover .secondary-img {
@@ -327,6 +329,7 @@ body .horizontal-container .filterBar .content {
   height: 0;
   margin: 0;
   padding: 0;
+  cursor: pointer;
 }
 
 .pointer {

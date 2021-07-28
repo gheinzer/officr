@@ -4,7 +4,7 @@
 body {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-  background-color: #14141e;
+  background-color: #141414;
   font-family: "Titillium";
   color: white;
   margin: 0;
@@ -27,7 +27,7 @@ body .horizontal-container {
 }
 
 body .horizontal-container header {
-  background-color: #1e1e2d;
+  background-color: #212121;
   -ms-grid-column: 1;
   grid-column: 1;
   -ms-grid-row: 1;
@@ -68,7 +68,7 @@ body .horizontal-container header img {
 }
 
 body .horizontal-container div.icons {
-  background-color: #1e1e2d;
+  background-color: #212121;
   -ms-grid-column: 2;
   grid-column: 2;
   -ms-grid-row: 1;
@@ -104,7 +104,7 @@ body .horizontal-container div.icons > * {
 }
 
 body .horizontal-container .searchBar {
-  background-color: #1e1e2d;
+  background-color: #212121;
   grid-column: span 2;
   -ms-grid-row: 1;
   grid-row: 1;
@@ -151,7 +151,7 @@ body .horizontal-container .searchBar > * {
 }
 
 body .horizontal-container .searchBar:focus-within {
-  background-color: #28283d;
+  background-color: #2e2e2e;
 }
 
 body .horizontal-container .searchBar img {
@@ -166,7 +166,7 @@ body .horizontal-container .searchBar input {
   position: absolute;
   border: none;
   padding: 1rem;
-  background-color: #1e1e2d;
+  background-color: #212121;
   color: white;
   font-family: "Titillium";
   font-size: 1.5rem;
@@ -175,24 +175,24 @@ body .horizontal-container .searchBar input {
 }
 
 body .horizontal-container .searchBar input::-webkit-input-placeholder {
-  color: #47476b;
+  color: #545454;
 }
 
 body .horizontal-container .searchBar input:-ms-input-placeholder {
-  color: #47476b;
+  color: #545454;
 }
 
 body .horizontal-container .searchBar input::-ms-input-placeholder {
-  color: #47476b;
+  color: #545454;
 }
 
 body .horizontal-container .searchBar input::placeholder {
-  color: #47476b;
+  color: #545454;
 }
 
 body .horizontal-container .searchBar input:focus {
   outline: none;
-  background-color: #28283d;
+  background-color: #2e2e2e;
 }
 
 .pointer {

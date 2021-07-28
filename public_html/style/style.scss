@@ -1,7 +1,7 @@
 @import url("font.css");
 @import url("style-d.css") only screen and (min-width: 992px);
 @import url("style-m.css") only screen and (max-width: 991px);
-$body-bg-color: rgb(20, 20, 30);
+$body-bg-color: rgb(20, 20, 20);
 $header-bg: lighten($body-bg-color, 5%);
 body {
   box-sizing: border-box;

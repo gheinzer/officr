@@ -44,6 +44,7 @@ body .horizontal-container header {
   display: -ms-flexbox;
   display: flex;
   padding: 1.5rem;
+  font-size: 1.5rem;
 }
 
 body .horizontal-container header img {
@@ -85,6 +86,7 @@ body .horizontal-container div.icons {
   display: -ms-flexbox;
   display: flex;
   padding: 1.5rem;
+  font-size: 1.5rem;
 }
 
 body .horizontal-container div.icons img {
@@ -124,6 +126,7 @@ body .horizontal-container .searchBar {
   display: -ms-flexbox;
   display: flex;
   padding: 1.5rem;
+  font-size: 1.5rem;
   z-index: 48;
   position: absolute;
   width: auto;
@@ -216,6 +219,7 @@ body .horizontal-container .filterBar {
   display: -ms-flexbox;
   display: flex;
   padding: 1.5rem;
+  font-size: 1.5rem;
   z-index: 48;
   position: absolute;
   width: auto;

@@ -7,6 +7,7 @@
     <title>MySQLOffice</title>
     <link rel="stylesheet" href="../../public_html/style/style.css" />
     <script src="../../public_html/js/searchbar.js"></script>
+    <script src="../../public_html/js/filterbar.js"></script>
     <link
       rel="shortcut icon"
       href="../../assets/homework-logo-white.svg"
@@ -26,6 +27,12 @@
           class="pointer"
           onclick="showSearch()"
         />
+        <img
+          src="../../public_html/assets/icons/filter_alt_white_24dp.svg"
+          alt=""
+          class="pointer"
+          onclick="showFilterBar()"
+        />
       </div>
       <div class="searchBar" id="searchBar">
         <input type="search" name="search" id="search" placeholder="Search" />
@@ -34,6 +41,15 @@
           alt=""
           class="pointer"
           onclick="hideSearch()"
+        />
+      </div>
+      <div class="filterBar" id="filterBar">
+        <h1>FILTERS HERE</h1>
+        <img
+          src="../../public_html/assets/icons/close_white_24dp.svg"
+          alt=""
+          class="pointer"
+          onclick="hideFilterBar()"
         />
       </div>
     </div>

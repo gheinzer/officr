@@ -50,37 +50,43 @@ body {
     div.icons {
       @include header(2, 1);
     }
-    .searchBar {
+    @mixin headerOverlayContent() {
+      height: 100%;
+      left: 0;
+      top: 0;
+      //width: 100%;
+      position: absolute;
+      border: none;
+      padding: 0 1rem;
+      background-color: $header-bg;
+      color: white;
+      font-family: "Titillium";
+    }
+    @mixin headerOverlay($z-index) {
       @include header(span 2, 1);
-      z-index: 48;
+      z-index: $z-index;
       position: absolute;
       width: auto;
       left: 0;
       right: 0;
       transition: 0.2s;
       opacity: 0;
-      padding: 0 !important;
+      padding: 0 1rem;
       pointer-events: none;
       height: 100%;
       transition: 0.2s;
-      &:focus-within {
-        background-color: lighten($header-bg, 5%);
-      }
       img {
         margin-left: auto;
         margin-right: 1rem;
       }
+    }
+    .searchBar {
+      @include headerOverlay(48);
+      &:focus-within {
+        background-color: lighten($header-bg, 5%);
+      }
       input {
-        height: 100%;
-        left: 0;
-        top: 0;
-        //width: 100%;
-        position: absolute;
-        border: none;
-        padding: 1rem;
-        background-color: $header-bg;
-        color: white;
-        font-family: "Titillium";
+        @include headerOverlayContent();
         font-size: 1.5rem;
         transition: 0.2s;
         &::placeholder {
@@ -90,6 +96,12 @@ body {
           outline: none;
           background-color: lighten($header-bg, 5%);
         }
+      }
+    }
+    .filterBar {
+      @include headerOverlay(48);
+      .content {
+        @include headerOverlayContent();
       }
     }
   }

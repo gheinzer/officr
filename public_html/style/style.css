@@ -128,7 +128,7 @@ body .horizontal-container .searchBar {
   -webkit-transition: 0.2s;
   transition: 0.2s;
   opacity: 0;
-  padding: 0 !important;
+  padding: 0 1rem;
   pointer-events: none;
   height: 100%;
   transition: 0.2s;
@@ -150,13 +150,13 @@ body .horizontal-container .searchBar > * {
   width: fit-content;
 }
 
-body .horizontal-container .searchBar:focus-within {
-  background-color: #2e2e2e;
-}
-
 body .horizontal-container .searchBar img {
   margin-left: auto;
   margin-right: 1rem;
+}
+
+body .horizontal-container .searchBar:focus-within {
+  background-color: #2e2e2e;
 }
 
 body .horizontal-container .searchBar input {
@@ -165,7 +165,7 @@ body .horizontal-container .searchBar input {
   top: 0;
   position: absolute;
   border: none;
-  padding: 1rem;
+  padding: 0 1rem;
   background-color: #212121;
   color: white;
   font-family: "Titillium";
@@ -193,6 +193,70 @@ body .horizontal-container .searchBar input::placeholder {
 body .horizontal-container .searchBar input:focus {
   outline: none;
   background-color: #2e2e2e;
+}
+
+body .horizontal-container .filterBar {
+  background-color: #212121;
+  grid-column: span 2;
+  -ms-grid-row: 1;
+  grid-row: 1;
+  min-height: 12%;
+  position: relative;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 1.5rem;
+  z-index: 48;
+  position: absolute;
+  width: auto;
+  left: 0;
+  right: 0;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  opacity: 0;
+  padding: 0 1rem;
+  pointer-events: none;
+  height: 100%;
+  transition: 0.2s;
+}
+
+body .horizontal-container .filterBar img {
+  width: 1.5rem;
+  margin: 0;
+  padding: 0;
+}
+
+body .horizontal-container .filterBar p {
+  font-size: 1.5rem;
+}
+
+body .horizontal-container .filterBar > * {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+body .horizontal-container .filterBar img {
+  margin-left: auto;
+  margin-right: 1rem;
+}
+
+body .horizontal-container .filterBar .content {
+  height: 100%;
+  left: 0;
+  top: 0;
+  position: absolute;
+  border: none;
+  padding: 0 1rem;
+  background-color: #212121;
+  color: white;
+  font-family: "Titillium";
 }
 
 .pointer {

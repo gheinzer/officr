@@ -171,3 +171,23 @@ body {
     opacity: 0.75;
   }
 }
+.main-content {
+  overflow: auto;
+  padding: 1rem;
+  max-width: 100%;
+  table {
+    border-collapse: collapse;
+    th {
+      text-align: left;
+    }
+    td,
+    th {
+      padding: 1ch 2ch;
+    }
+    tr {
+      border-bottom: white solid 1px;
+      padding: 3ch;
+      margin: 0;
+    }
+  }
+}

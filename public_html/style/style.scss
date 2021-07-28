@@ -49,6 +49,9 @@ body {
     }
     div.icons {
       @include header(2, 1);
+      img {
+        width: 1.75rem;
+      }
     }
     @mixin headerOverlayContent() {
       height: 100%;

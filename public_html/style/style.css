@@ -103,6 +103,10 @@ body .horizontal-container div.icons > * {
   width: fit-content;
 }
 
+body .horizontal-container div.icons img {
+  width: 1.75rem;
+}
+
 body .horizontal-container .searchBar {
   background-color: #212121;
   grid-column: span 2;

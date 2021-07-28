@@ -111,24 +111,52 @@ body {
     }
   }
 }
-.createButton {
-  padding: 1ch;
+@mixin icon-btn() {
+  border-radius: 20rem;
   background-color: $accentColor;
   position: fixed;
-  right: 0;
-  bottom: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 20rem;
   margin: 1rem;
   transition: 0.2s;
-  &:hover {
-    background-color: darken($accentColor, 10%);
+  flex-direction: column;
+  //height: 3rem;
+  & > * {
+    padding: 1ch;
+    border-radius: 20rem;
+    transition: 0.2s;
   }
   img {
-    width: 2rem;
+    height: 2rem;
+    padding: 1ch;
+    margin: 0;
   }
+
+  //width: 3rem;
+  &:hover {
+    .main-img {
+      background-color: darken($accentColor, 10%);
+    }
+    width: max-content;
+    .secondary-img {
+      width: 2rem;
+      height: 2rem;
+      padding: 1ch;
+    }
+  }
+  .secondary-img {
+    transition: 0.2s;
+    width: 0;
+    height: 0;
+    margin: 0;
+    padding: 0;
+  }
+}
+.createButtonMenu {
+  @include icon-btn;
+  right: 0;
+  bottom: 0;
 }
 .pointer {
   cursor: pointer;

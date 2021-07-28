@@ -263,12 +263,10 @@ body .horizontal-container .filterBar .content {
   font-family: "Titillium";
 }
 
-.createButton {
-  padding: 1ch;
+.createButtonMenu {
+  border-radius: 20rem;
   background-color: #32c800;
   position: fixed;
-  right: 0;
-  bottom: 0;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -278,18 +276,53 @@ body .horizontal-container .filterBar .content {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  border-radius: 20rem;
   margin: 1rem;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  right: 0;
+  bottom: 0;
+}
+
+.createButtonMenu > * {
+  padding: 1ch;
+  border-radius: 20rem;
   -webkit-transition: 0.2s;
   transition: 0.2s;
 }
 
-.createButton:hover {
+.createButtonMenu img {
+  height: 2rem;
+  padding: 1ch;
+  margin: 0;
+}
+
+.createButtonMenu:hover {
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+}
+
+.createButtonMenu:hover .main-img {
   background-color: #259500;
 }
 
-.createButton img {
+.createButtonMenu:hover .secondary-img {
   width: 2rem;
+  height: 2rem;
+  padding: 1ch;
+}
+
+.createButtonMenu .secondary-img {
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  width: 0;
+  height: 0;
+  margin: 0;
+  padding: 0;
 }
 
 .pointer {

@@ -34,3 +34,7 @@ var console_log = console.log;
 console.log = function (msg) {
     console_log(`[${path.basename(_getCallerFile())}]: ${msg}`);
 };
+var console_warn = console.warn;
+console.warn = function (msg) {
+    console_warn(`[${path.basename(_getCallerFile())}]: ${msg}`);
+};

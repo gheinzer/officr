@@ -1,4 +1,4 @@
-![Logo](assets/logo-white.svg)
+![Logo](assets/logo_with_text_light.svg)
 
 # officr
 

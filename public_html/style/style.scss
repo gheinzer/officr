@@ -6,189 +6,189 @@ $header-bg: lighten($body-bg-color, 5%);
 
 $accentColor: rgb(50, 200, 0);
 body {
-  box-sizing: border-box;
-  background-color: $body-bg-color;
-  font-family: "Titillium";
-  color: white;
-  margin: 0;
-  padding: 0;
-  position: relative;
-  width: 100%;
-  .horizontal-container {
-    position: relative;
-    display: grid;
-    grid-template-columns: auto max-content;
-    grid-template-rows: max-content auto;
-    max-width: 100%;
-    @mixin header($grid-column, $grid-row) {
-      background-color: $header-bg;
-      grid-column: $grid-column;
-      grid-row: $grid-row;
-      min-height: 12%;
-      position: relative;
-      justify-content: start;
-      align-items: center;
-      display: flex;
-      padding: 1.5rem;
-      font-size: 1.5rem;
-      img {
-        width: 1.5rem;
-        margin: 0;
-        padding: 0;
-      }
-      p {
-        font-size: 1.5rem;
-      }
-      & > * {
-        width: fit-content;
-      }
-    }
-    header {
-      @include header(1, 1);
-      img {
-        margin-right: 1ch;
-        width: 3rem;
-      }
-    }
-    div.icons {
-      @include header(2, 1);
-      img {
-        width: 1.75rem;
-      }
-    }
-    @mixin headerOverlayContent() {
-      height: 100%;
-      left: 0;
-      top: 0;
-      //width: 100%;
-      position: absolute;
-      border: none;
-      padding: 0 1rem;
-      background-color: $header-bg;
-      color: white;
-      font-family: "Titillium";
-    }
-    @mixin headerOverlay($z-index) {
-      @include header(span 2, 1);
-      z-index: $z-index;
-      position: absolute;
-      width: auto;
-      left: 0;
-      right: 0;
-      transition: 0.2s;
-      opacity: 0;
-      padding: 0 1rem;
-      pointer-events: none;
-      height: 100%;
-      transition: 0.2s;
-      img {
-        margin-left: auto;
-        margin-right: 1rem;
-      }
-    }
-    .searchBar {
-      @include headerOverlay(48);
-      &:focus-within {
-        background-color: lighten($header-bg, 5%);
-      }
-      input {
-        @include headerOverlayContent();
-        font-size: 1.5rem;
-        transition: 0.2s;
-        &::placeholder {
-          color: lighten($header-bg, 20%);
-        }
-        &:focus {
-          outline: none;
-          background-color: lighten($header-bg, 5%);
-        }
-      }
-    }
-    .filterBar {
-      @include headerOverlay(48);
-      .content {
-        @include headerOverlayContent();
-      }
-    }
-  }
-}
-@mixin icon-btn() {
-  border-radius: 20rem;
-  background-color: $accentColor;
-  position: fixed;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 1rem;
-  transition: 0.2s;
-  flex-direction: column;
-  //height: 3rem;
-  & > * {
-    padding: 1ch;
-    border-radius: 20rem;
-    transition: 0.2s;
-  }
-  img {
-    height: 2rem;
-    padding: 1ch;
-    margin: 0;
-  }
-
-  //width: 3rem;
-  &:hover {
-    .main-img {
-      background-color: darken($accentColor, 5%);
-      transform: rotate(90deg);
-    }
-    width: max-content;
-    .secondary-img {
-      width: 2rem;
-      height: 2rem;
-      padding: 1ch;
-    }
-  }
-  .secondary-img {
-    transition: 0.2s;
-    width: 0;
-    height: 0;
+    box-sizing: border-box;
+    background-color: $body-bg-color;
+    font-family: "Titillium";
+    color: white;
     margin: 0;
     padding: 0;
-    cursor: pointer;
-    &:hover {
-      opacity: 0.5;
+    position: relative;
+    width: 100%;
+    .horizontal-container {
+        position: relative;
+        display: grid;
+        grid-template-columns: auto max-content;
+        grid-template-rows: max-content auto;
+        max-width: 100%;
+        @mixin header($grid-column, $grid-row) {
+            background-color: $header-bg;
+            grid-column: $grid-column;
+            grid-row: $grid-row;
+            min-height: 12%;
+            position: relative;
+            justify-content: start;
+            align-items: center;
+            display: flex;
+            padding: 1.5rem;
+            font-size: 1.5rem;
+            img {
+                width: 1.5rem;
+                margin: 0;
+                padding: 0;
+            }
+            p {
+                font-size: 1.5rem;
+            }
+            & > * {
+                width: fit-content;
+            }
+        }
+        header {
+            @include header(1, 1);
+            img {
+                margin-right: 1ch;
+                width: 5rem;
+            }
+        }
+        div.icons {
+            @include header(2, 1);
+            img {
+                width: 1.75rem;
+            }
+        }
+        @mixin headerOverlayContent() {
+            height: 100%;
+            left: 0;
+            top: 0;
+            //width: 100%;
+            position: absolute;
+            border: none;
+            padding: 0 1rem;
+            background-color: $header-bg;
+            color: white;
+            font-family: "Titillium";
+        }
+        @mixin headerOverlay($z-index) {
+            @include header(span 2, 1);
+            z-index: $z-index;
+            position: absolute;
+            width: auto;
+            left: 0;
+            right: 0;
+            transition: 0.2s;
+            opacity: 0;
+            padding: 0 1rem;
+            pointer-events: none;
+            height: 100%;
+            transition: 0.2s;
+            img {
+                margin-left: auto;
+                margin-right: 1rem;
+            }
+        }
+        .searchBar {
+            @include headerOverlay(48);
+            &:focus-within {
+                background-color: lighten($header-bg, 5%);
+            }
+            input {
+                @include headerOverlayContent();
+                font-size: 1.5rem;
+                transition: 0.2s;
+                &::placeholder {
+                    color: lighten($header-bg, 20%);
+                }
+                &:focus {
+                    outline: none;
+                    background-color: lighten($header-bg, 5%);
+                }
+            }
+        }
+        .filterBar {
+            @include headerOverlay(48);
+            .content {
+                @include headerOverlayContent();
+            }
+        }
     }
-  }
+}
+@mixin icon-btn() {
+    border-radius: 20rem;
+    background-color: $accentColor;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem;
+    transition: 0.2s;
+    flex-direction: column;
+    //height: 3rem;
+    & > * {
+        padding: 1ch;
+        border-radius: 20rem;
+        transition: 0.2s;
+    }
+    img {
+        height: 2rem;
+        padding: 1ch;
+        margin: 0;
+    }
+
+    //width: 3rem;
+    &:hover {
+        .main-img {
+            background-color: darken($accentColor, 5%);
+            transform: rotate(90deg);
+        }
+        width: max-content;
+        .secondary-img {
+            width: 2rem;
+            height: 2rem;
+            padding: 1ch;
+        }
+    }
+    .secondary-img {
+        transition: 0.2s;
+        width: 0;
+        height: 0;
+        margin: 0;
+        padding: 0;
+        cursor: pointer;
+        &:hover {
+            opacity: 0.5;
+        }
+    }
 }
 .createButtonMenu {
-  @include icon-btn;
-  right: 0;
-  bottom: 0;
+    @include icon-btn;
+    right: 0;
+    bottom: 0;
 }
 .pointer {
-  cursor: pointer;
-  transition: 0.2s;
-  &:hover {
-    opacity: 0.75;
-  }
+    cursor: pointer;
+    transition: 0.2s;
+    &:hover {
+        opacity: 0.75;
+    }
 }
 .main-content {
-  overflow: auto;
-  padding: 1rem;
-  max-width: 100%;
-  table {
-    width: max-content;
-    border-collapse: collapse;
-    th {
-      text-align: left;
+    overflow: auto;
+    padding: 1rem;
+    max-width: 100%;
+    table {
+        width: max-content;
+        border-collapse: collapse;
+        th {
+            text-align: left;
+        }
+        td,
+        th {
+            padding: 1ch 2ch;
+        }
+        tr {
+            border-bottom: white solid 1px;
+            padding: 3ch;
+            margin: 0;
+        }
     }
-    td,
-    th {
-      padding: 1ch 2ch;
-    }
-    tr {
-      border-bottom: white solid 1px;
-      padding: 3ch;
-      margin: 0;
-    }
-  }
 }

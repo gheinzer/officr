@@ -1,6 +1,6 @@
 ![Logo](assets/logo-white.svg)
 
-# MySQLOffice
+# officr
 
 ## Goals
 

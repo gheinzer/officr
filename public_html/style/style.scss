@@ -8,7 +8,7 @@ $accentColor: rgb(50, 200, 0);
 body {
     box-sizing: border-box;
     background-color: $body-bg-color;
-    font-family: "Titillium";
+    font-family: "Montserrat";
     color: white;
     margin: 0;
     padding: 0;
@@ -47,7 +47,7 @@ body {
             @include header(1, 1);
             img {
                 margin-right: 1ch;
-                width: 5rem;
+                width: 8rem;
             }
         }
         div.icons {
@@ -66,7 +66,7 @@ body {
             padding: 0 1rem;
             background-color: $header-bg;
             color: white;
-            font-family: "Titillium";
+            font-family: "Montserrat";
         }
         @mixin headerOverlay($z-index) {
             @include header(span 2, 1);

@@ -6,8 +6,8 @@ const httpd_config = {
     lang: "{httpd_lang}", // Sets the language for the documents. When set to null, the default language of the client is used. Default: undefined
     logging: {
         // Configures, what is logged by the server.
-        remote_lang: "{httpd_logging_remote_lang}", // Configures, wheter the client language is logged or not. Default: true
-        requested_path: "{httpd_logging_requested_path}", // Configures, wheter the requested path is logged or not. Default: true
+        remote_lang: "true", // Configures, wheter the client language is logged or not. Default: true
+        requested_path: "true", // Configures, wheter the requested path is logged or not. Default: true
     },
 };
 

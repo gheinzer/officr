@@ -16,6 +16,10 @@ const labels = {
         10: "Benutzername",
         11: "Passwort",
         12: "Anmelden",
+        13: "Kostenlos registrieren",
+        14: "Benutzername",
+        15: "E-Mail",
+        16: "Passwort",
     },
     en: {
         1: "Subject",
@@ -30,6 +34,10 @@ const labels = {
         10: "Username",
         11: "Password",
         12: "Sign in",
+        13: "Sign up for free",
+        14: "Username",
+        15: "E-Mail",
+        16: "Password",
     },
 };
 

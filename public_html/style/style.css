@@ -348,14 +348,11 @@ body .horizontal-container .filterBar .content {
 
 .main-content {
   overflow: auto;
-  padding: 1rem;
   max-width: 100%;
 }
 
 .main-content table {
-  width: -webkit-max-content;
-  width: -moz-max-content;
-  width: max-content;
+  width: 100%;
   border-collapse: collapse;
 }
 
@@ -581,6 +578,10 @@ body .horizontal-container .filterBar .content {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+
+.flex-container > * {
+  max-width: 70vw;
 }
 
 .max-content-width {

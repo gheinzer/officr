@@ -177,10 +177,9 @@ body {
 }
 .main-content {
     overflow: auto;
-    padding: 1rem;
     max-width: 100%;
     table {
-        width: max-content;
+        width: 100%;
         border-collapse: collapse;
         th {
             text-align: left;
@@ -336,6 +335,9 @@ body {
     &.centered {
         justify-content: center;
         align-items: center;
+    }
+    & > * {
+        max-width: 70vw;
     }
 }
 .max-content-width {

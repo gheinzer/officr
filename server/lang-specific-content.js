@@ -9,6 +9,10 @@ const labels = {
         3: "Fälligkeitsdatum",
         4: "Aufgabe hinzufügen",
         5: "Kategorie hinzufügen",
+        6: "Aufgabe hinzufügen",
+        7: "Beschreibung",
+        8: "Speichern",
+        9: "Zurücksetzen",
     },
     en: {
         1: "Subject",
@@ -16,6 +20,10 @@ const labels = {
         3: "Due date",
         4: "Add task",
         5: "Add category",
+        6: "Add task",
+        7: "Description",
+        8: "Save",
+        9: "Reset",
     },
 };
 

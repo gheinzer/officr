@@ -4,11 +4,14 @@
 $body-bg-color: rgb(20, 20, 20);
 $header-bg: lighten($body-bg-color, 5%);
 
-$accentColor: rgb(50, 200, 0);
+$accentColor: #d40000;
+$secondColor: #00d4d4;
+$font-family: "Montserrat";
+
 body {
     box-sizing: border-box;
     background-color: $body-bg-color;
-    font-family: "Montserrat";
+    font-family: $font-family;
     color: white;
     margin: 0;
     padding: 0;
@@ -66,7 +69,7 @@ body {
             padding: 0 1rem;
             background-color: $header-bg;
             color: white;
-            font-family: "Montserrat";
+            font-family: $font-family;
         }
         @mixin headerOverlay($z-index) {
             @include header(span 2, 1);
@@ -135,10 +138,11 @@ body {
     }
 
     //width: 3rem;
-    &:hover {
+    &:hover,
+    &:active {
         .main-img {
             background-color: darken($accentColor, 5%);
-            transform: rotate(90deg);
+            transform: rotate(45deg);
         }
         width: max-content;
         .secondary-img {
@@ -155,7 +159,7 @@ body {
         padding: 0;
         cursor: pointer;
         &:hover {
-            opacity: 0.5;
+            opacity: 0.75;
         }
     }
 }
@@ -189,6 +193,139 @@ body {
             border-bottom: white solid 1px;
             padding: 3ch;
             margin: 0;
+        }
+    }
+}
+.createTaskOverlay {
+    background-color: rgba($body-bg-color, 0.9);
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.2s;
+    .inner {
+        height: 100%;
+        position: relative;
+        .flex {
+            display: flex;
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            .content {
+                height: max-content;
+            }
+        }
+        .close-img {
+            position: absolute;
+            right: 1ch;
+            top: 1ch;
+            height: 2rem;
+            cursor: pointer;
+        }
+    }
+}
+.input-container {
+    margin: 1ch;
+    position: relative;
+    width: max-content;
+    height: max-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    //padding: 0 1ch;
+    label {
+        position: absolute;
+        color: white;
+        left: 0;
+        transition: 0.5s;
+        top: 30%;
+        opacity: 0.75;
+        pointer-events: none;
+        font-weight: 100;
+    }
+    &:focus-within label,
+    & input:not(:placeholder-shown) ~ label {
+        font-size: 0.5rem;
+        top: 0;
+        opacity: 1;
+        color: $secondColor;
+        font-weight: bold;
+    }
+    &:not(:focus-within) input:not(:placeholder-shown) ~ label {
+        color: $accentColor;
+    }
+
+    input {
+        width: 100%;
+        border: none;
+        background-color: transparent;
+        color: white;
+        font-family: inherit;
+        padding: 1ch;
+        position: relative;
+        display: block;
+        font-size: 1.1rem;
+        font-weight: 600;
+        height: max-content;
+        padding-left: 0;
+        &::placeholder {
+            color: rgba(white, 0.8);
+            font-family: inherit;
+            font-weight: 100;
+        }
+        &:focus {
+            outline: none;
+        }
+    }
+    &::after {
+        content: "";
+        padding: 0;
+        margin: 0;
+        background-color: $accentColor;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 5%;
+        display: block;
+        transition: 0.5s;
+    }
+    &:focus-within::after {
+        background-color: $secondColor;
+    }
+}
+.classic-button {
+    background: none;
+    border: $accentColor solid 0.15rem;
+    outline: none;
+    color: $accentColor;
+    padding: 1ch 3ch;
+    font-family: $font-family;
+    font-size: 1.1rem;
+    transition: 0.2s;
+    cursor: pointer;
+    font-weight: bold;
+    margin: 1ch;
+    width: 100%;
+    &:hover,
+    &:active {
+        background: $secondColor;
+        border-color: $secondColor;
+        color: black;
+    }
+    &:disabled {
+        border-color: gray;
+        color: gray;
+        cursor: not-allowed;
+        &:hover,
+        &:active {
+            border-color: gray;
+            color: gray;
+            background: none;
         }
     }
 }

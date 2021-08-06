@@ -343,3 +343,10 @@ body {
 .max-content-width {
     width: max-content !important;
 }
+a {
+    color: $accentColor;
+    &:visited {
+        color: $secondColor;
+    }
+    font-weight: 10;
+}

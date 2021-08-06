@@ -589,4 +589,13 @@ body .horizontal-container .filterBar .content {
   width: -moz-max-content !important;
   width: max-content !important;
 }
+
+a {
+  color: #d40000;
+  font-weight: 10;
+}
+
+a:visited {
+  color: #00d4d4;
+}
 /*# sourceMappingURL=style.css.map */

@@ -21,7 +21,8 @@
         </div>
         <div class="main-content">
             <div class="flex-container centered">
-                <form action="/login/submit" method="POST">
+                <form action="/login/reset_password/submit" method="POST">
+                    <h1>{label18}</h1>
                     <div class="input-container">
                         <input
                             type="text"
@@ -33,17 +34,6 @@
                         />
                         <label>{label10}</label>
                     </div>
-                    <div class="input-container">
-                        <input
-                            type="password"
-                            placeholder=""
-                            id="password"
-                            name="password"
-                            required
-                        />
-                        <label>{label11}</label>
-                    </div>
-                    <a href="login/reset_password">{label17}</a>
                     <input
                         type="reset"
                         value="{label9}"
@@ -51,15 +41,9 @@
                     />
                     <input
                         type="submit"
-                        value="{label12}"
+                        value="{label18}"
                         class="classic-button"
                     />
-                    <button
-                        class="classic-button"
-                        onclick="window.location = '/signup'"
-                    >
-                        {label13}
-                    </button>
                 </form>
             </div>
         </div>

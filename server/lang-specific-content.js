@@ -20,6 +20,8 @@ const labels = {
         14: "Benutzername",
         15: "E-Mail",
         16: "Passwort",
+        17: "Passwort vergessen",
+        18: "Passwort zurücksetzen",
     },
     en: {
         1: "Subject",
@@ -38,6 +40,8 @@ const labels = {
         14: "Username",
         15: "E-Mail",
         16: "Password",
+        17: "Forgot password",
+        18: "Reset password",
     },
 };
 

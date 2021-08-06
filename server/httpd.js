@@ -4,9 +4,24 @@ const http = require("http");
 const labels = require("./lang-specific-content");
 const { exit } = require("process");
 const httpd_config = require("../config");
+const handleFormInput = require("./handleFormInput");
 
 const server = http.createServer((req, res) => {}).listen(httpd_config.port);
 server.on("request", (req, res) => {
+    req.on("data", (data) => {
+        handleFormInput(data, req, res);
+    });
+    const { method } = req;
+    if (method === "POST") {
+        return;
+    }
+    /*
+    const { headers } = req;
+    console.warn(headers.cookie);
+    res.setHeader(
+        "Set-Cookie",
+        "testtest=testonlyonetimevalue; HttpOnly; SameSite=Lax"
+    ); */ // This is for setting and getting cookies
     var remote_lang = httpd_config.lang;
     const url = req.url;
     if (httpd_config.lang == null) {

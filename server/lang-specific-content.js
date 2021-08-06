@@ -13,6 +13,9 @@ const labels = {
         7: "Beschreibung",
         8: "Speichern",
         9: "Zurücksetzen",
+        10: "Benutzername",
+        11: "Passwort",
+        12: "Anmelden",
     },
     en: {
         1: "Subject",
@@ -24,6 +27,9 @@ const labels = {
         7: "Description",
         8: "Save",
         9: "Reset",
+        10: "Username",
+        11: "Password",
+        12: "Sign in",
     },
 };
 

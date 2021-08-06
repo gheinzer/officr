@@ -4,86 +4,57 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>officr ToDo</title>
+        <title>officr</title>
         <link rel="stylesheet" href="/style/style.css" />
-        <script src="/js/searchbar.js"></script>
-        <script src="/js/filterbar.js"></script>
-        <script src="/js/overlays.js"></script>
-        <script src="/js/checkForValues.js"></script>
         <link
             rel="shortcut icon"
             href="/assets/logo_single.svg"
             type="image/x-icon"
         />
     </head>
-    <body
-        onload="setTimeout(setLoaderAsFinished, 1200); checkForValuesInCreateTaskOverlay()"
-    >
+    <body onload="setTimeout(setLoaderAsFinished, 1200);">
         <div class="horizontal-container">
             <header>
                 <img src="/assets/logo_with_text_light.svg" alt="officr" />
-                <span>ToDo</span>
+                <span>Accounts</span>
             </header>
-            <div class="icons">
-                <img
-                    src="/assets/icons/search_white_24dp.svg"
-                    alt=""
-                    class="pointer"
-                    onclick="showSearch()"
-                />
-            </div>
-            <div class="searchBar" id="searchBar">
-                <input
-                    type="search"
-                    name="search"
-                    id="search"
-                    placeholder="Search"
-                />
-                <img
-                    src="/assets/icons/close_white_24dp.svg"
-                    alt=""
-                    class="pointer"
-                    onclick="hideSearch()"
-                />
-            </div>
         </div>
         <div class="main-content">
-            <table>
-                <tr>
-                    <th></th>
-                    <th></th>
-                    <th>{label1}</th>
-                    <th>{label2}</th>
-                    <th>{label3}</th>
-                </tr>
-                <tr>
-                    <td>To do</td>
-                    <td>Exam</td>
-                    <td>Math</td>
-                    <td>Addition and Subtraction</td>
-                    <td>1.1.2021</td>
-                </tr>
-            </table>
-        </div>
-        <div class="createButtonMenu">
-            <img
-                src="/assets/icons/add_task_white_24dp.svg"
-                alt=""
-                class="secondary-img"
-                title="{label4}"
-                onclick="showOverlay('createTaskOverlay'); document.getElementById('createTaskOverlayForm').reset()"
-            />
-            <img
-                src="/assets/icons/category_white_24dp.svg"
-                alt=""
-                class="secondary-img"
-                title="{label5}"
-            />
-            <img
-                src="/assets/icons/add_white_24dp.svg"
-                alt=""
-                class="main-img"
-            />
+            <div class="flex-container centered">
+                <form action="/login/submit" method="POST">
+                    <div class="input-container">
+                        <input
+                            type="text"
+                            placeholder=""
+                            id="usernames"
+                            name="username"
+                            autocomplete="off"
+                            required
+                        />
+                        <label>{label10}</label>
+                    </div>
+                    <div class="input-container">
+                        <input
+                            type="password"
+                            placeholder=""
+                            id="password"
+                            name="password"
+                            required
+                        />
+                        <label>{label11}</label>
+                    </div>
+                    <input
+                        type="reset"
+                        value="{label9}"
+                        class="classic-button"
+                    />
+                    <input
+                        type="submit"
+                        value="{label12}"
+                        class="classic-button"
+                    />
+                </form>
+            </div>
         </div>
         <div class="loader-overlay" id="loader-overlay">
             <input
@@ -408,63 +379,6 @@
                     hideLoader();
                 }
             </script>
-        </div>
-        <div class="createTaskOverlay" id="createTaskOverlay">
-            <div class="inner">
-                <img
-                    src="/assets/icons/close_white_24dp.svg"
-                    alt=""
-                    onclick="hideOverlay('createTaskOverlay')"
-                    class="close-img"
-                />
-                <div class="flex">
-                    <div class="content">
-                        <form
-                            id="createTaskOverlayForm"
-                            action=""
-                            onkeyup="checkForValuesInCreateTaskOverlay()"
-                            onchange="checkForValuesInCreateTaskOverlay()"
-                            onreset="                                setTimeout(checkForValuesInCreateTaskOverlay, 1)"
-                            method="POST"
-                        >
-                            <img
-                                src="/assets/icons/add_task_white_24dp.svg"
-                                alt=""
-                                style="height: 2rem"
-                            />
-                            <h2>{label6}</h2>
-                            <div class="input-container">
-                                <input
-                                    type="text"
-                                    placeholder=""
-                                    id="task_description"
-                                />
-                                <label>{label7}</label>
-                            </div>
-                            <div class="input-container">
-                                <input
-                                    type="date"
-                                    placeholder=""
-                                    id="task_date"
-                                />
-                                <label>{label3}</label>
-                            </div>
-                            <input
-                                type="reset"
-                                class="classic-button"
-                                value="{label9}"
-                            />
-                        </form>
-                        <button
-                            class="classic-button"
-                            id="task_submit"
-                            disabled
-                        >
-                            {label8}
-                        </button>
-                    </div>
-                </div>
-            </div>
         </div>
     </body>
 </html>

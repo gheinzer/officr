@@ -10,5 +10,18 @@ const httpd_config = {
         requested_path: "true", // Configures, wheter the requested path is logged or not. Default: true
     },
 };
+/**
+ * This sets up the my sql configuration.
+ */
+const mysql_config = {
+    connection: {
+        host: "localhost", // Default: "localhost"
+        user: "root", // Default: "root"
+        password: "", // Default: ""
+        database: "officr_testing", // Default: "officr_testing"
+        debug: false, // Default: false
+    },
+};
 
 module.exports = httpd_config;
+module.exports = mysql_config;

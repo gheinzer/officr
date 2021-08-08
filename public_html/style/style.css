@@ -183,18 +183,22 @@ body .horizontal-container .searchBar input {
 
 body .horizontal-container .searchBar input::-webkit-input-placeholder {
   color: #545454;
+  letter-spacing: 0.5ch;
 }
 
 body .horizontal-container .searchBar input:-ms-input-placeholder {
   color: #545454;
+  letter-spacing: 0.5ch;
 }
 
 body .horizontal-container .searchBar input::-ms-input-placeholder {
   color: #545454;
+  letter-spacing: 0.5ch;
 }
 
 body .horizontal-container .searchBar input::placeholder {
   color: #545454;
+  letter-spacing: 0.5ch;
 }
 
 body .horizontal-container .searchBar input:focus {
@@ -448,6 +452,7 @@ body .horizontal-container .filterBar .content {
   opacity: 0.75;
   pointer-events: none;
   font-weight: 100;
+  letter-spacing: 0.5ch;
 }
 
 .input-container:focus-within label,
@@ -528,36 +533,26 @@ body .horizontal-container .filterBar .content {
 
 .classic-button {
   background: none;
-  border: #d40000 solid 0.15rem;
-  outline: none;
-  color: #d40000;
-  padding: 1ch 3ch;
+  border: none;
   font-family: "Montserrat";
-  font-size: 1.1rem;
-  -webkit-transition: 0.2s;
-  transition: 0.2s;
+  font-size: 0.9rem;
+  letter-spacing: 0.5ch;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: white;
+  display: block;
+  text-align: center;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  padding: 1rem;
   cursor: pointer;
-  font-weight: bold;
-  margin: 1ch;
-  width: 100%;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
 }
 
 .classic-button:hover, .classic-button:active {
-  background: #00d4d4;
-  border-color: #00d4d4;
-  color: black;
-}
-
-.classic-button:disabled {
-  border-color: gray;
-  color: gray;
-  cursor: not-allowed;
-}
-
-.classic-button:disabled:hover, .classic-button:disabled:active {
-  border-color: gray;
-  color: gray;
-  background: none;
+  color: #d40000;
 }
 
 .flex-container {
@@ -588,14 +583,5 @@ body .horizontal-container .filterBar .content {
   width: -webkit-max-content !important;
   width: -moz-max-content !important;
   width: max-content !important;
-}
-
-a {
-  color: #d40000;
-  font-weight: 10;
-}
-
-a:visited {
-  color: #00d4d4;
 }
 /*# sourceMappingURL=style.css.map */

@@ -1,13 +1,15 @@
 // This script is responsible serving the files in public_html via http.
 const { readFileSync, existsSync, lstatSync } = require("fs");
 const http = require("http");
-const labels = require("./lang-specific-content");
 const { exit } = require("process");
-const httpd_config = require("../config");
+const { httpd_config } = require("../config");
 const handleFormInput = require("./handleFormInput");
+
+console.log("httpd.js started");
 
 const server = http.createServer((req, res) => {}).listen(httpd_config.port);
 server.on("request", (req, res) => {
+    let labels = require("./lang-specific-content");
     req.on("data", (data) => {
         handleFormInput(data, req, res);
     });

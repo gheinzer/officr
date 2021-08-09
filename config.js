@@ -19,9 +19,8 @@ const mysql_config = {
         user: "root", // Default: "root"
         password: "", // Default: ""
         database: "officr_testing", // Default: "officr_testing"
-        debug: false, // Default: false
+        debug: true, // Default: false
     },
 };
 
-module.exports = httpd_config;
-module.exports = mysql_config;
+module.exports = { httpd_config, mysql_config };

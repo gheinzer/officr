@@ -4,7 +4,7 @@
  */
 const labels = {
     de: {
-        1: "Fach",
+        1: "Kategorie",
         2: "Beschreibung",
         3: "Fälligkeitsdatum",
         4: "Aufgabe hinzufügen",
@@ -24,7 +24,7 @@ const labels = {
         18: "Passwort zurücksetzen",
     },
     en: {
-        1: "Subject",
+        1: "Category",
         2: "Description",
         3: "Due date",
         4: "Add task",

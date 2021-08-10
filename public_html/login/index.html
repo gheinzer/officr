@@ -43,6 +43,19 @@
                         />
                         <label>{label11}</label>
                     </div>
+                    <p class="important hidden" id="passwordUsernameLabel">
+                        {label19}
+                    </p>
+                    <script>
+                        if (
+                            window.location.search ===
+                            "?showUsernamePasswordError"
+                        ) {
+                            document.getElementById(
+                                "passwordUsernameLabel"
+                            ).style.display = "block";
+                        }
+                    </script>
                     <a class="classic-button" href="login/reset_password"
                         >{label17}</a
                     >

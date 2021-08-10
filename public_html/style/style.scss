@@ -335,3 +335,12 @@ body {
 .max-content-width {
     width: max-content !important;
 }
+.important {
+    color: red;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: $letter-spacing;
+}
+.hidden {
+    display: none;
+}

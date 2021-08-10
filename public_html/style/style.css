@@ -584,4 +584,15 @@ body .horizontal-container .filterBar .content {
   width: -moz-max-content !important;
   width: max-content !important;
 }
+
+.important {
+  color: red;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 0.5ch;
+}
+
+.hidden {
+  display: none;
+}
 /*# sourceMappingURL=style.css.map */

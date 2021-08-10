@@ -22,6 +22,7 @@ const labels = {
         16: "Passwort",
         17: "Passwort vergessen",
         18: "Passwort zurücksetzen",
+        19: "Benutzername oder Password falsch.",
     },
     en: {
         1: "Category",
@@ -42,6 +43,7 @@ const labels = {
         16: "Password",
         17: "Forgot password",
         18: "Reset password",
+        19: "Wrong username or password.",
     },
 };
 

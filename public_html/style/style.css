@@ -455,8 +455,18 @@ body .horizontal-container .filterBar .content {
   letter-spacing: 0.5ch;
 }
 
+.input-container img {
+  height: 24px;
+  width: 24px;
+}
+
+.input-container img ~ label {
+  left: 26px;
+}
+
 .input-container:focus-within label,
-.input-container input:not(:placeholder-shown) ~ label {
+.input-container input:not(:placeholder-shown) ~ label,
+.input-container select ~ label {
   font-size: 0.5rem;
   top: 0;
   opacity: 1;
@@ -464,11 +474,17 @@ body .horizontal-container .filterBar .content {
   font-weight: bold;
 }
 
-.input-container:not(:focus-within) input:not(:placeholder-shown) ~ label {
+.input-container select ~ label {
   color: #d40000;
 }
 
-.input-container input {
+.input-container:not(:focus-within) input:not(:placeholder-shown) ~ label,
+.input-container :not(:focus-within) select ~ label {
+  color: #d40000;
+}
+
+.input-container input,
+.input-container select {
   width: 100%;
   border: none;
   background-color: transparent;
@@ -483,34 +499,47 @@ body .horizontal-container .filterBar .content {
   height: -moz-max-content;
   height: max-content;
   padding-left: 0;
+  height: max-content;
 }
 
-.input-container input::-webkit-input-placeholder {
+.input-container input::-webkit-input-placeholder,
+.input-container select::-webkit-input-placeholder {
   color: rgba(255, 255, 255, 0.8);
   font-family: inherit;
   font-weight: 100;
 }
 
-.input-container input:-ms-input-placeholder {
+.input-container input:-ms-input-placeholder,
+.input-container select:-ms-input-placeholder {
   color: rgba(255, 255, 255, 0.8);
   font-family: inherit;
   font-weight: 100;
 }
 
-.input-container input::-ms-input-placeholder {
+.input-container input::-ms-input-placeholder,
+.input-container select::-ms-input-placeholder {
   color: rgba(255, 255, 255, 0.8);
   font-family: inherit;
   font-weight: 100;
 }
 
-.input-container input::placeholder {
+.input-container input::placeholder,
+.input-container select::placeholder {
   color: rgba(255, 255, 255, 0.8);
   font-family: inherit;
   font-weight: 100;
 }
 
-.input-container input:focus {
+.input-container input:focus,
+.input-container select:focus {
   outline: none;
+}
+
+.input-container input option,
+.input-container select option {
+  font-family: "Arial";
+  font-size: 0.75rem;
+  padding: 1ch;
 }
 
 .input-container::after {
@@ -521,7 +550,7 @@ body .horizontal-container .filterBar .content {
   position: absolute;
   bottom: 0;
   width: 100%;
-  height: 5%;
+  height: 2px;
   display: block;
   -webkit-transition: 0.5s;
   transition: 0.5s;

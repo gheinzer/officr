@@ -47,7 +47,7 @@ function user_create_session(username) {
         );
     });
 
-    return { private: privateID, public: publicID };
+    return { public: publicID };
 }
 function user_get_sessions(username, callback = (err, result, fields) => {}) {
     getUserByName(username, function (result) {

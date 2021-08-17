@@ -7,7 +7,7 @@ const httpd_config = {
     logging: {
         // Configures, what is logged by the server.
         remote_lang: false, // Configures, wheter the client language is logged or not. Default: true
-        requested_path: false, // Configures, wheter the requested path is logged or not. Default: true
+        requested_path: true, // Configures, wheter the requested path is logged or not. Default: true
     },
 };
 /**
@@ -19,8 +19,13 @@ const mysql_config = {
         user: "root", // Default: "root"
         password: "", // Default: ""
         database: "officr_testing", // Default: "officr_testing"
-        debug: true, // Default: false
+        debug: false, // Default: false
     },
 };
 
-module.exports = { httpd_config, mysql_config };
+const pages = {
+    authentication_required: [/todo/],
+    redirect_when_authenticated: [/login*/, /signup*/],
+};
+
+module.exports = { httpd_config, mysql_config, pages };

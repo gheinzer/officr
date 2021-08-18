@@ -19,51 +19,253 @@
     <body
         onload="setTimeout(setLoaderAsFinished, 1200); checkForValuesInCreateTaskOverlay()"
     >
-        <div class="horizontal-container">
-            <header>
-                <img src="/assets/logo_with_text_light.svg" alt="officr" />
-                <span>ToDo</span>
-            </header>
-            <div class="icons">
-                <img
-                    src="/assets/icons/search_white_24dp.svg"
-                    alt=""
-                    class="pointer"
-                    onclick="showSearch()"
-                />
+        <div class="vertical-container">
+            <div class="horizontal-container">
+                <header>
+                    <img
+                        src="/assets/logo_with_text_light.svg"
+                        alt="officr"
+                        class="desktop-only"
+                    />
+                    <img
+                        src="/assets/logo_single.svg"
+                        alt="officr"
+                        class="mobile-only"
+                    />
+                    <span>To Do</span>
+                </header>
+                <div class="icons">
+                    <img
+                        src="/assets/icons/search_white_24dp.svg"
+                        alt=""
+                        class="pointer"
+                        onclick="showSearch()"
+                    />
+                </div>
+                <div class="searchBar" id="searchBar">
+                    <input
+                        type="search"
+                        name="search"
+                        id="search"
+                        placeholder="Search"
+                    />
+                    <img
+                        src="/assets/icons/close_white_24dp.svg"
+                        alt=""
+                        class="pointer"
+                        onclick="hideSearch()"
+                    />
+                </div>
+                <div class="account-options">
+                    <img
+                        src="/assets/icons/account_circle_white_24dp.svg"
+                        alt=""
+                        class="pointer"
+                    />
+                </div>
             </div>
-            <div class="searchBar" id="searchBar">
-                <input
-                    type="search"
-                    name="search"
-                    id="search"
-                    placeholder="Search"
-                />
-                <img
-                    src="/assets/icons/close_white_24dp.svg"
-                    alt=""
-                    class="pointer"
-                    onclick="hideSearch()"
-                />
+            <div class="main-content">
+                <table>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th>{label1}</th>
+                        <th>{label2}</th>
+                        <th>{label3}</th>
+                    </tr>
+                    <tr>
+                        <td>To do</td>
+                        <td>Exam</td>
+                        <td>Math</td>
+                        <td>Addition and Subtraction</td>
+                        <td>1.1.2021</td>
+                    </tr>
+                    <tr>
+                        <td>To do</td>
+                        <td>Exam</td>
+                        <td>Math</td>
+                        <td>Addition and Subtraction</td>
+                        <td>1.1.2021</td>
+                    </tr>
+                    <tr>
+                        <td>To do</td>
+                        <td>Exam</td>
+                        <td>Math</td>
+                        <td>Addition and Subtraction</td>
+                        <td>1.1.2021</td>
+                    </tr>
+                    <tr>
+                        <td>To do</td>
+                        <td>Exam</td>
+                        <td>Math</td>
+                        <td>Addition and Subtraction</td>
+                        <td>1.1.2021</td>
+                    </tr>
+                    <tr>
+                        <td>To do</td>
+                        <td>Exam</td>
+                        <td>Math</td>
+                        <td>Addition and Subtraction</td>
+                        <td>1.1.2021</td>
+                    </tr>
+                    <tr>
+                        <td>To do</td>
+                        <td>Exam</td>
+                        <td>Math</td>
+                        <td>Addition and Subtraction</td>
+                        <td>1.1.2021</td>
+                    </tr>
+                    <tr>
+                        <td>To do</td>
+                        <td>Exam</td>
+                        <td>Math</td>
+                        <td>Addition and Subtraction</td>
+                        <td>1.1.2021</td>
+                    </tr>
+                    <tr>
+                        <td>To do</td>
+                        <td>Exam</td>
+                        <td>Math</td>
+                        <td>Addition and Subtraction</td>
+                        <td>1.1.2021</td>
+                    </tr>
+                    <tr>
+                        <td>To do</td>
+                        <td>Exam</td>
+                        <td>Math</td>
+                        <td>Addition and Subtraction</td>
+                        <td>1.1.2021</td>
+                    </tr>
+                    <tr>
+                        <td>To do</td>
+                        <td>Exam</td>
+                        <td>Math</td>
+                        <td>Addition and Subtraction</td>
+                        <td>1.1.2021</td>
+                    </tr>
+                    <tr>
+                        <td>To do</td>
+                        <td>Exam</td>
+                        <td>Math</td>
+                        <td>Addition and Subtraction</td>
+                        <td>1.1.2021</td>
+                    </tr>
+                    <tr>
+                        <td>To do</td>
+                        <td>Exam</td>
+                        <td>Math</td>
+                        <td>Addition and Subtraction</td>
+                        <td>1.1.2021</td>
+                    </tr>
+                    <tr>
+                        <td>To do</td>
+                        <td>Exam</td>
+                        <td>Math</td>
+                        <td>Addition and Subtraction</td>
+                        <td>1.1.2021</td>
+                    </tr>
+                    <tr>
+                        <td>To do</td>
+                        <td>Exam</td>
+                        <td>Math</td>
+                        <td>Addition and Subtraction</td>
+                        <td>1.1.2021</td>
+                    </tr>
+                    <tr>
+                        <td>To do</td>
+                        <td>Exam</td>
+                        <td>Math</td>
+                        <td>Addition and Subtraction</td>
+                        <td>1.1.2021</td>
+                    </tr>
+                    <tr>
+                        <td>To do</td>
+                        <td>Exam</td>
+                        <td>Math</td>
+                        <td>Addition and Subtraction</td>
+                        <td>1.1.2021</td>
+                    </tr>
+                    <tr>
+                        <td>To do</td>
+                        <td>Exam</td>
+                        <td>Math</td>
+                        <td>Addition and Subtraction</td>
+                        <td>1.1.2021</td>
+                    </tr>
+                    <tr>
+                        <td>To do</td>
+                        <td>Exam</td>
+                        <td>Math</td>
+                        <td>Addition and Subtraction</td>
+                        <td>1.1.2021</td>
+                    </tr>
+                    <tr>
+                        <td>To do</td>
+                        <td>Exam</td>
+                        <td>Math</td>
+                        <td>Addition and Subtraction</td>
+                        <td>1.1.2021</td>
+                    </tr>
+                    <tr>
+                        <td>To do</td>
+                        <td>Exam</td>
+                        <td>Math</td>
+                        <td>Addition and Subtraction</td>
+                        <td>1.1.2021</td>
+                    </tr>
+                    <tr>
+                        <td>To do</td>
+                        <td>Exam</td>
+                        <td>Math</td>
+                        <td>Addition and Subtraction</td>
+                        <td>1.1.2021</td>
+                    </tr>
+                    <tr>
+                        <td>To do</td>
+                        <td>Exam</td>
+                        <td>Math</td>
+                        <td>Addition and Subtraction</td>
+                        <td>1.1.2021</td>
+                    </tr>
+                    <tr>
+                        <td>To do</td>
+                        <td>Exam</td>
+                        <td>Math</td>
+                        <td>Addition and Subtraction</td>
+                        <td>1.1.2021</td>
+                    </tr>
+                    <tr>
+                        <td>To do</td>
+                        <td>Exam</td>
+                        <td>Math</td>
+                        <td>Addition and Subtraction</td>
+                        <td>1.1.2021</td>
+                    </tr>
+                    <tr>
+                        <td>To do</td>
+                        <td>Exam</td>
+                        <td>Math</td>
+                        <td>Addition and Subtraction</td>
+                        <td>1.1.2021</td>
+                    </tr>
+                    <tr>
+                        <td>To do</td>
+                        <td>Exam</td>
+                        <td>Math</td>
+                        <td>Addition and Subtraction</td>
+                        <td>1.1.2021</td>
+                    </tr>
+                </table>
             </div>
         </div>
-        <div class="main-content">
-            <table>
-                <tr>
-                    <th></th>
-                    <th></th>
-                    <th>{label1}</th>
-                    <th>{label2}</th>
-                    <th>{label3}</th>
-                </tr>
-                <tr>
-                    <td>To do</td>
-                    <td>Exam</td>
-                    <td>Math</td>
-                    <td>Addition and Subtraction</td>
-                    <td>1.1.2021</td>
-                </tr>
-            </table>
+        <div class="account-option-overlay">
+            <img
+                src="/assets/icons/close_white_24dp.svg"
+                alt=""
+                onclick="hideOverlay('createTaskOverlay')"
+                class="close-img"
+            />
+            <div class="content"><h1>{USERNAME}</h1></div>
         </div>
         <div class="createButtonMenu">
             <img

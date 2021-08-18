@@ -4,7 +4,7 @@ const http = require("http");
 const { exit } = require("process");
 const { httpd_config, pages } = require("../config");
 const { handleFormInput } = require("./handleFormInput");
-const { session_verify } = require("./user_management");
+const { session_verify, getUserByID } = require("./user_management");
 const labels = require("./lang-specific-content");
 
 console.log("httpd.js started");
@@ -27,10 +27,12 @@ server.on("request", (req, res) => {
                     );
                     return;
                 }
-                if (checkForAuthenticatedRedirect()) {
-                    handleNormalRequest();
-                    return;
-                }
+                getUserByID(result, function (result) {
+                    if (checkForAuthenticatedRedirect()) {
+                        handleNormalRequest(result.Username);
+                        return;
+                    }
+                });
             });
         } else {
             if (checkForNoAuthenticationRedirect()) {
@@ -50,9 +52,9 @@ server.on("request", (req, res) => {
             }
         });
         if (matched) {
-            res.statusCode = 300;
+            res.statusCode = 302;
             res.setHeader("Location", "/login");
-            res.end("300 - You will be redirected to /login");
+            res.end("302 - You will be redirected to /login");
             return false;
         } else {
             return true;
@@ -66,15 +68,15 @@ server.on("request", (req, res) => {
             }
         });
         if (matched) {
-            res.statusCode = 300;
+            res.statusCode = 302;
             res.setHeader("Location", "/");
-            res.end("300 - You will be redirected to /");
+            res.end("302 - You will be redirected to /");
             return false;
         } else {
             return true;
         }
     }
-    function handleNormalRequest() {
+    function handleNormalRequest(username = undefined) {
         req.on("data", (data) => {
             handleFormInput(data, req, res);
         });
@@ -169,6 +171,16 @@ server.on("request", (req, res) => {
                     }
                 }
                 originalHtmlContent = htmlContent;
+            }
+            if (
+                originalHtmlContent.toString().match(/{USERNAME}/) !== null &&
+                username !== undefined
+            ) {
+                originalHtmlContent = originalHtmlContent.toString();
+                originalHtmlContent = originalHtmlContent.replace(
+                    "{USERNAME}",
+                    username
+                );
             }
             res.write(originalHtmlContent);
         } else {

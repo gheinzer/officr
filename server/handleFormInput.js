@@ -17,7 +17,7 @@ function handleFormInput(body, req, res) {
             }
             const username = data.username.toString();
             const password = data.password.toString();
-            res.statusCode = 300;
+            res.statusCode = 302;
             user_verify(username, password, function (result) {
                 if (result) {
                     const publicSessionID =

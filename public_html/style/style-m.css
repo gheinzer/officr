@@ -1,4 +1,22 @@
 body .horizontal-container .searchBar input {
   width: auto;
 }
+
+header img {
+  margin-right: 1ch !important;
+  height: 1.5rem !important;
+}
+
+header span {
+  font-size: 1rem !important;
+  font-weight: 200;
+}
+
+.desktop-only {
+  display: none;
+}
+
+.mobile-only {
+  display: initial;
+}
 /*# sourceMappingURL=style-m.css.map */

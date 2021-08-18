@@ -13,17 +13,36 @@ body {
   width: 100%;
 }
 
+body .vertical-container {
+  position: fixed;
+  display: -ms-grid;
+  display: grid;
+  width: 100%;
+  height: 100%;
+  inset: 0;
+  padding: 0;
+  -ms-grid-columns: auto;
+      grid-template-columns: auto;
+  -ms-grid-rows: max-content auto;
+      grid-template-rows: -webkit-max-content auto;
+      grid-template-rows: max-content auto;
+}
+
 body .horizontal-container {
   position: relative;
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: auto max-content;
-      grid-template-columns: auto -webkit-max-content;
-      grid-template-columns: auto max-content;
+  -ms-grid-columns: auto max-content max-content;
+      grid-template-columns: auto -webkit-max-content -webkit-max-content;
+      grid-template-columns: auto max-content max-content;
   -ms-grid-rows: max-content auto;
       grid-template-rows: -webkit-max-content auto;
       grid-template-rows: max-content auto;
   max-width: 100%;
+  -ms-grid-column: 1;
+  grid-column: 1;
+  -ms-grid-row: 1;
+  grid-row: 1;
 }
 
 body .horizontal-container header {
@@ -61,11 +80,6 @@ body .horizontal-container header > * {
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
-}
-
-body .horizontal-container header img {
-  margin-right: 1ch;
-  width: 8rem;
 }
 
 body .horizontal-container div.icons {
@@ -111,7 +125,7 @@ body .horizontal-container div.icons img {
 
 body .horizontal-container .searchBar {
   background-color: #212121;
-  grid-column: span 2;
+  grid-column: span 3;
   -ms-grid-row: 1;
   grid-row: 1;
   min-height: 12%;
@@ -160,6 +174,7 @@ body .horizontal-container .searchBar > * {
 body .horizontal-container .searchBar img {
   margin-left: auto;
   margin-right: 1rem;
+  z-index: 49;
 }
 
 body .horizontal-container .searchBar:focus-within {
@@ -208,7 +223,7 @@ body .horizontal-container .searchBar input:focus {
 
 body .horizontal-container .filterBar {
   background-color: #212121;
-  grid-column: span 2;
+  grid-column: span 3;
   -ms-grid-row: 1;
   grid-row: 1;
   min-height: 12%;
@@ -257,6 +272,7 @@ body .horizontal-container .filterBar > * {
 body .horizontal-container .filterBar img {
   margin-left: auto;
   margin-right: 1rem;
+  z-index: 49;
 }
 
 body .horizontal-container .filterBar .content {
@@ -269,6 +285,47 @@ body .horizontal-container .filterBar .content {
   background-color: #212121;
   color: white;
   font-family: "Montserrat";
+}
+
+body .horizontal-container .account-options {
+  background-color: #212121;
+  -ms-grid-column: 3;
+  grid-column: 3;
+  -ms-grid-row: 1;
+  grid-row: 1;
+  min-height: 12%;
+  position: relative;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 1.5rem;
+  font-size: 1.5rem;
+}
+
+body .horizontal-container .account-options img {
+  width: 1.5rem;
+  margin: 0;
+  padding: 0;
+}
+
+body .horizontal-container .account-options p {
+  font-size: 1.5rem;
+}
+
+body .horizontal-container .account-options > * {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+body .horizontal-container .account-options img {
+  height: 1.5rem;
 }
 
 .createButtonMenu {
@@ -351,8 +408,14 @@ body .horizontal-container .filterBar .content {
 }
 
 .main-content {
+  position: relative;
   overflow: auto;
   max-width: 100%;
+  height: auto;
+  -ms-grid-column: 1;
+  grid-column: 1;
+  -ms-grid-row: 2;
+  grid-row: 2;
 }
 
 .main-content table {
@@ -623,5 +686,30 @@ body .horizontal-container .filterBar .content {
 
 .hidden {
   display: none;
+}
+
+.account-option-overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  inset: 0;
+  background-color: rgba(20, 20, 20, 0.9);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.account-option-overlay .close-img {
+  position: absolute;
+  right: 1ch;
+  top: 1ch;
+  height: 2rem;
+  cursor: pointer;
 }
 /*# sourceMappingURL=style.css.map */

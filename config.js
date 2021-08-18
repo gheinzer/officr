@@ -2,6 +2,7 @@
  * This is the configuration for the server that servers the files in public_html.
  */
 const httpd_config = {
+    public_html: "public_html", // Sets the path to the public_html directory. Default is public_html.
     port: "8001", // Sets the port for the server. Default: 80
     lang: null, // Sets the language for the documents. When set to null, the default language of the client is used. Default: undefined
     logging: {

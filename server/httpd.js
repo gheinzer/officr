@@ -114,25 +114,31 @@ server.on("request", (req, res) => {
             remote_lang = "en";
         }
         if (
-            (existsSync(`public_html/${url}`) &&
-                lstatSync(`public_html/${url}`).isDirectory() === false) ||
-            (existsSync(`public_html/${url}/index.html`) &&
-                lstatSync(`public_html/${url}/index.html`).isDirectory() ===
-                    false)
+            (existsSync(`${httpd_config.public_html}/${url}`) &&
+                lstatSync(
+                    `${httpd_config.public_html}/${url}`
+                ).isDirectory() === false) ||
+            (existsSync(`${httpd_config.public_html}/${url}/index.html`) &&
+                lstatSync(
+                    `${httpd_config.public_html}/${url}/index.html`
+                ).isDirectory() === false)
         ) {
             var path = "none";
             if (
-                existsSync(`public_html/${url}`) &&
-                lstatSync(`public_html/${url}`).isDirectory() === false
+                existsSync(`${httpd_config.public_html}/${url}`) &&
+                lstatSync(
+                    `${httpd_config.public_html}/${url}`
+                ).isDirectory() === false
             ) {
-                path = `public_html/${url}`;
+                path = `${httpd_config.public_html}/${url}`;
             }
             if (
-                existsSync(`public_html/${url}/index.html`) &&
-                lstatSync(`public_html/${url}/index.html`).isDirectory() ===
-                    false
+                existsSync(`${httpd_config.public_html}/${url}/index.html`) &&
+                lstatSync(
+                    `${httpd_config.public_html}/${url}/index.html`
+                ).isDirectory() === false
             ) {
-                path = `public_html/${url}/index.html`;
+                path = `${httpd_config.public_html}/${url}/index.html`;
             }
             if (httpd_config.logging.requested_path) {
                 console.log("Requested Path: " + path);

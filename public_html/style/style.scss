@@ -347,7 +347,8 @@ body {
     text-decoration: none;
     text-transform: uppercase;
     color: white;
-    display: block;
+    display: flex;
+    align-items: center;
     text-align: center;
     width: max-content;
     padding: 1rem;
@@ -356,6 +357,12 @@ body {
     &:hover,
     &:active {
         color: $accentColor;
+    }
+    img {
+        height: 2em;
+        margin-right: 2ch;
+        fill: white;
+        transition: 0.5s;
     }
 }
 .flex-container {
@@ -383,6 +390,8 @@ body {
     display: none;
 }
 .account-option-overlay {
+    opacity: 0;
+    pointer-events: none;
     position: fixed;
     width: 100%;
     height: 100%;
@@ -398,4 +407,5 @@ body {
         height: 2rem;
         cursor: pointer;
     }
+    transition: 0.2s;
 }

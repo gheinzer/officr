@@ -61,6 +61,7 @@
                         src="/assets/icons/account_circle_white_24dp.svg"
                         alt=""
                         class="pointer"
+                        onclick="showOverlay('account-option-overlay')"
                     />
                 </div>
             </div>
@@ -258,14 +259,22 @@
                 </table>
             </div>
         </div>
-        <div class="account-option-overlay">
+        <div class="account-option-overlay" id="account-option-overlay">
             <img
                 src="/assets/icons/close_white_24dp.svg"
                 alt=""
-                onclick="hideOverlay('createTaskOverlay')"
+                onclick="hideOverlay('account-option-overlay')"
                 class="close-img"
             />
-            <div class="content"><h1>{USERNAME}</h1></div>
+            <div class="content">
+                <h2>{label21}{USERNAME}</h2>
+                <a href="/logout" class="classic-button"
+                    ><img
+                        src="/assets/icons/logout_white_24dp.svg"
+                        alt=""
+                    />{label22}</a
+                >
+            </div>
         </div>
         <div class="createButtonMenu">
             <img
@@ -691,7 +700,10 @@
                             id="task_submit"
                             disabled
                         >
-                            {label8}
+                            <img
+                                src="/assets/icons/done_white_24dp.svg"
+                                alt=""
+                            />{label8}
                         </button>
                     </div>
                 </div>

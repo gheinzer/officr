@@ -20,11 +20,14 @@ server.on("request", (req, res) => {
         if (sessionID !== null) {
             sessionID = sessionID[0].toString().split("=")[1];
             session_verify(sessionID, function (result) {
-                if (!result) {
+                if (!result || req.url == "/logout") {
                     res.setHeader(
                         "Set-Cookie",
                         `officr-user-session-id=deleted; path=/; expires=${new Date()}`
                     );
+                    res.setHeader("Location", "/");
+                    res.statusCode = 302;
+                    res.end("302 - You should be redirected to the home page.");
                     return;
                 }
                 getUserByID(result, function (result) {

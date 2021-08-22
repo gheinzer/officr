@@ -22,10 +22,23 @@ function handleFormInput(body, req, res) {
                 if (result) {
                     const publicSessionID =
                         user_create_session(username).public;
-                    res.setHeader(
-                        "Set-Cookie",
-                        `officr-user-session-id=${publicSessionID}; HttpOnly; Path=/`
-                    );
+                    if (
+                        data.keepmeloggedin === undefined ||
+                        data.keepmeloggedin === "off"
+                    ) {
+                        res.setHeader(
+                            "Set-Cookie",
+                            `officr-user-session-id=${publicSessionID}; HttpOnly; Path=/`
+                        );
+                    } else {
+                        var date = new Date();
+                        date.setDate(date.getDate() + 7);
+                        console.log(date.toUTCString());
+                        res.setHeader(
+                            "Set-Cookie",
+                            `officr-user-session-id=${publicSessionID}; HttpOnly; Path=/; expires=${date.toUTCString()}`
+                        );
+                    }
                     res.setHeader("Location", "/");
                     res.end("Authentication successful");
                 } else {

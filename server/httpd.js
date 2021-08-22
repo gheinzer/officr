@@ -80,6 +80,14 @@ server.on("request", (req, res) => {
         }
     }
     function handleNormalRequest(username = undefined) {
+        if (req.url === "/logout") {
+            res.setHeader("Location", "/");
+            res.statusCode = 302;
+            res.end(
+                "302 - Want to logout but was not logged in. Redirecting to root."
+            );
+            return;
+        }
         req.on("data", (data) => {
             handleFormInput(data, req, res);
         });

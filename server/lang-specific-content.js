@@ -26,6 +26,7 @@ const labels = {
         20: "Typ",
         21: "Hallo, ",
         22: "Abmelden",
+        23: "Ich möchte angemeldet bleiben",
     },
     en: {
         1: "Category",
@@ -50,6 +51,7 @@ const labels = {
         20: "Type",
         21: "Hello, ",
         22: "Sign out",
+        23: "Kee me logged in",
     },
 };
 

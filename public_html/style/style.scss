@@ -409,3 +409,17 @@ body {
     }
     transition: 0.2s;
 }
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    padding: 1ch;
+    label {
+        font-size: 1rem;
+        font-family: $font-family;
+        font-weight: 300;
+    }
+    input {
+        height: 1.2rem;
+        width: 1.2rem;
+    }
+}

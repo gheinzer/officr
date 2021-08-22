@@ -729,4 +729,25 @@ body .horizontal-container .account-options img {
   height: 2rem;
   cursor: pointer;
 }
+
+.checkbox-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 1ch;
+}
+
+.checkbox-container label {
+  font-size: 1rem;
+  font-family: "Montserrat";
+  font-weight: 300;
+}
+
+.checkbox-container input {
+  height: 1.2rem;
+  width: 1.2rem;
+}
 /*# sourceMappingURL=style.css.map */

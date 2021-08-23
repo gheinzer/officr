@@ -8,5 +8,3 @@ function execQuery(query, placeholders, callback = (err, res, fields) => {}) {
 }
 
 module.exports = execQuery;
-
-console.log(execQuery("SELECT * FROM testtesttets"));

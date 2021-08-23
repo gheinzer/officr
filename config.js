@@ -29,4 +29,11 @@ const pages = {
     redirect_when_authenticated: [/login*/, /signup*/],
 };
 
-module.exports = { httpd_config, mysql_config, pages };
+const ws_config = {
+    port: "3000", // Sets the port for the websocket. Default: 3000
+    logging: {
+        connections: true,
+    },
+};
+
+module.exports = { httpd_config, mysql_config, pages, ws_config };

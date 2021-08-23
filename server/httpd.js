@@ -2,7 +2,7 @@
 const { readFileSync, existsSync, lstatSync } = require("fs");
 const http = require("http");
 const { exit } = require("process");
-const { httpd_config, pages } = require("../config");
+const { httpd_config, pages, ws_config } = require("../config");
 const { handleFormInput } = require("./handleFormInput");
 const { session_verify, getUserByID } = require("./user_management");
 const labels = require("./lang-specific-content");
@@ -179,6 +179,27 @@ server.on("request", (req, res) => {
                             );
                         }
                     }
+                    if (htmlContent.match(regexForLabels) !== null) {
+                        element = htmlContent
+                            .match(regexForLabels)[0]
+                            .toString();
+                    } else {
+                        element = null;
+                    }
+                }
+                originalHtmlContent = htmlContent;
+            }
+            htmlContent = originalHtmlContent.toString();
+            regexForLabels = /{rawCodeLabel<.*>}/;
+            element = htmlContent.match(regexForLabels);
+            console.log(element);
+            if (element !== null) {
+                element = element[0].toString();
+                while (element !== null) {
+                    var code = element.match(/<.*>/)[0].toString();
+                    code = "(" + code.replace("<", "").replace(">", "") + ")";
+                    var result = eval(code);
+                    htmlContent = htmlContent.replace(element, result);
                     if (htmlContent.match(regexForLabels) !== null) {
                         element = htmlContent
                             .match(regexForLabels)[0]

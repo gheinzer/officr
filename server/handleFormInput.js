@@ -32,13 +32,11 @@ function handleFormInput(body, req, res) {
                     } else {
                         var date = new Date();
                         date.setDate(date.getDate() + 7);
-                        console.log(date.toUTCString());
                         res.setHeader(
                             "Set-Cookie",
                             `officr-user-session-id=${publicSessionID}; HttpOnly; Path=/; expires=${date.toUTCString()}`
                         );
                     }
-                    console.log("User was logged in successfully");
                     res.setHeader("Location", "/");
                     setTimeout(function () {
                         res.end("Authentication successful");

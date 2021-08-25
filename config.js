@@ -8,7 +8,7 @@ const httpd_config = {
     logging: {
         // Configures, what is logged by the server.
         remote_lang: false, // Configures, wheter the client language is logged or not. Default: true
-        requested_path: true, // Configures, wheter the requested path is logged or not. Default: true
+        requested_path: false, // Configures, wheter the requested path is logged or not. Default: true
     },
 };
 /**

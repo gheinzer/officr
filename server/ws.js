@@ -8,5 +8,12 @@ const messagesFunctions = {
 };
 
 server.on("connection", (socket) => {
-    socket.on("message", (message) => {});
+    socket.on("message", (message) => {
+        const init = message.match(/INITIALIZE_WITH_SESSION_ID=.*/);
+        if (init !== null) {
+            const sessionID = init.split("=")[1];
+            console.log(sessionID);
+            return;
+        }
+    });
 });

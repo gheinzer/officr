@@ -18,12 +18,14 @@ server.on("request", (req, res) => {
             .toString()
             .match(/officr-user-session-id=[A-Za-z0-9]{32}/);
         if (sessionID !== null) {
-            sessionID = sessionID[0].toString().split("=")[1];
-            session_verify(sessionID, function (result) {
+            sessionID = sessionID[0]
+                .toString()
+                .replace("officr-user-session-id=", "");
+            session_verify(sessionID, function (result, publicSessionID) {
                 if (!result || req.url == "/logout") {
                     res.setHeader(
                         "Set-Cookie",
-                        `officr-user-session-id=deleted; path=/; expires=${new Date()}`
+                        `officr-user-session-id=deleted; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT`
                     );
                     res.setHeader("Location", "/");
                     res.statusCode = 302;
@@ -32,7 +34,7 @@ server.on("request", (req, res) => {
                 }
                 getUserByID(result, function (result) {
                     if (checkForAuthenticatedRedirect()) {
-                        handleNormalRequest(result.Username);
+                        handleNormalRequest(result.Username, publicSessionID);
                         return;
                     }
                 });
@@ -79,7 +81,10 @@ server.on("request", (req, res) => {
             return true;
         }
     }
-    function handleNormalRequest(username = undefined) {
+    function handleNormalRequest(
+        username = undefined,
+        publicSessionID = undefined
+    ) {
         if (req.url === "/logout") {
             res.setHeader("Location", "/");
             res.statusCode = 302;
@@ -192,13 +197,16 @@ server.on("request", (req, res) => {
             htmlContent = originalHtmlContent.toString();
             regexForLabels = /{rawCodeLabel<.*>}/;
             element = htmlContent.match(regexForLabels);
-            console.log(element);
             if (element !== null) {
                 element = element[0].toString();
                 while (element !== null) {
                     var code = element.match(/<.*>/)[0].toString();
                     code = "(" + code.replace("<", "").replace(">", "") + ")";
-                    var result = eval(code);
+                    try {
+                        var result = eval(code);
+                    } catch {
+                        var result = "";
+                    }
                     htmlContent = htmlContent.replace(element, result);
                     if (htmlContent.match(regexForLabels) !== null) {
                         element = htmlContent

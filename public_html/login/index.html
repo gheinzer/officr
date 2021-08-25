@@ -89,7 +89,7 @@
                 name="loaderFinished"
                 value="false"
             />
-            <div class="loader">
+            <div class="loader" id="loader">
                 <svg
                     width="200"
                     height="200"
@@ -379,6 +379,14 @@
                         transform: rotate(0deg);
                     }
                 }
+                @keyframes spin {
+                    from {
+                        transform: rotate(0deg);
+                    }
+                    to {
+                        transform: rotate(360deg);
+                    }
+                }
             </style>
             <script>
                 function showLoader() {
@@ -398,6 +406,8 @@
                         document.getElementById(
                             "loader-overlay"
                         ).style.pointerEvents = "none";
+                        document.getElementById("loader").style.animation =
+                            "spin 2s 1.5s infinite";
                     }
                 }
                 function setLoaderAsFinished() {

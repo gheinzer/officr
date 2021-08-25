@@ -20,8 +20,7 @@ function handleFormInput(body, req, res) {
             res.statusCode = 302;
             user_verify(username, password, function (result) {
                 if (result) {
-                    const publicSessionID =
-                        user_create_session(username).public;
+                    let publicSessionID = user_create_session(username).public;
                     if (
                         data.keepmeloggedin === undefined ||
                         data.keepmeloggedin === "off"
@@ -39,8 +38,11 @@ function handleFormInput(body, req, res) {
                             `officr-user-session-id=${publicSessionID}; HttpOnly; Path=/; expires=${date.toUTCString()}`
                         );
                     }
+                    console.log("User was logged in successfully");
                     res.setHeader("Location", "/");
-                    res.end("Authentication successful");
+                    setTimeout(function () {
+                        res.end("Authentication successful");
+                    }, 500); // This is delayed because of some speed issues with the MySQL Server.
                 } else {
                     res.setHeader(
                         "Location",

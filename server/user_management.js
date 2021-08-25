@@ -38,7 +38,7 @@ function user_create_session(username) {
         const userID = result.ID;
 
         execQuery(
-            `INSERT INTO usersessions (privateID, userID) VALUES ('${privateID}', ${userID})`,
+            `INSERT INTO usersessions (PrivateID, UserID) VALUES ('${privateID}', ${userID})`,
             function (err, result) {
                 if (err) {
                     throw err;
@@ -117,7 +117,10 @@ function user_verify(username, password, callback = function (result) {}) {
  * @param {string} session_id The public session identifier.
  * @param {function} callback This function is called when the verification is complete. The function needs one parameter, which will be set to the user id, if the session is valid. In any other case, the parameter is set to false.
  */
-function session_verify(session_id, callback = function (result) {}) {
+function session_verify(
+    session_id,
+    callback = function (result, publicSessionID) {}
+) {
     execQuery("SELECT * FROM usersessions", [], function (err, result) {
         if (err) throw err;
         if (result === undefined || result === []) {
@@ -125,16 +128,40 @@ function session_verify(session_id, callback = function (result) {}) {
             return;
         } else {
             var userIDFound = false;
+            console.table(result);
             result.forEach((element) => {
                 const publicID = _md5(element.PrivateID);
-                if (session_id.toString() === publicID.toString()) {
+                if (
+                    session_id.toString() === publicID.toString() &&
+                    !userIDFound
+                ) {
                     userIDFound = true;
-                    callback(element.UserID);
+                    console.log("session valid. : " + session_id);
+                    callback(element.UserID, publicID);
                 }
             });
-            if (!userIDFound) callback(false);
+            if (!userIDFound) {
+                console.log("session invalid. : " + session_id);
+                callback(false);
+            }
         }
     });
+}
+
+/**
+ * Gets all the category entries of a specified user.
+ * @param {int} userID The user ID of the user to get the categories for.
+ * @param {function} callback The callback to be called when categories are got. This has to have one parameter, that will be set to the subject entries of the user.
+ */
+function user_get_categories(userID, callback = function (result) {}) {
+    execQuery(
+        "SELECT * FROM todo_categories WHERE UserID=?",
+        userID,
+        function (err, res, fields) {
+            if (err) throw err;
+            callback(res);
+        }
+    );
 }
 
 module.exports = {

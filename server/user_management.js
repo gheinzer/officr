@@ -128,7 +128,6 @@ function session_verify(
             return;
         } else {
             var userIDFound = false;
-            console.table(result);
             result.forEach((element) => {
                 const publicID = _md5(element.PrivateID);
                 if (
@@ -136,12 +135,10 @@ function session_verify(
                     !userIDFound
                 ) {
                     userIDFound = true;
-                    console.log("session valid. : " + session_id);
                     callback(element.UserID, publicID);
                 }
             });
             if (!userIDFound) {
-                console.log("session invalid. : " + session_id);
                 callback(false);
             }
         }

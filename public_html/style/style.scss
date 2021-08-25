@@ -439,6 +439,9 @@ body {
     flex-direction: column;
     padding: 3rem;
     text-align: center;
+    p {
+        max-width: 50%;
+    }
     img {
         display: block;
         height: 5rem;

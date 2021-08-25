@@ -778,6 +778,10 @@ body .horizontal-container .account-options img {
   text-align: center;
 }
 
+#erroroverlay p {
+  max-width: 50%;
+}
+
 #erroroverlay img {
   display: block;
   height: 5rem;

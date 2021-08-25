@@ -55,7 +55,7 @@ const labels = {
         22: "Sign out",
         23: "Kee me logged in",
         24: "Oooops! Verification failed. Please try again or <a href='/logout'>sign out</a> and sign in again.",
-        25: "Oooops! Something in our server went crazy wrong. Please reload the page.,
+        25: "Oooops! Something in our server went terribly wrong. Please reload the page.",
     },
 };
 

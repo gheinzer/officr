@@ -768,12 +768,14 @@ body .horizontal-container .account-options img {
           align-items: center;
   color: white;
   font-weight: 500;
-  font-size: 3rem;
+  font-size: 1.5rem;
   display: none;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  padding: 3rem;
+  text-align: center;
 }
 
 #erroroverlay img {

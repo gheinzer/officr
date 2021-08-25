@@ -434,9 +434,11 @@ body {
     align-items: center;
     color: white;
     font-weight: 500;
-    font-size: 3rem;
+    font-size: 1.5rem;
     display: none;
     flex-direction: column;
+    padding: 3rem;
+    text-align: center;
     img {
         display: block;
         height: 5rem;

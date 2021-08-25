@@ -27,6 +27,8 @@ const labels = {
         21: "Hallo, ",
         22: "Abmelden",
         23: "Ich möchte angemeldet bleiben",
+        24: "Uuups! Verifizierung fehlgeschlagen. Bitte versuchen Sie es erneut oder <a href='/logout'>melden</a> Sie sich ab und wieder an.",
+        25: "Uuups! Etwas ist ziemlich schiefgegangen. Bitte laden Sie die Seite neu.",
     },
     en: {
         1: "Category",
@@ -52,6 +54,8 @@ const labels = {
         21: "Hello, ",
         22: "Sign out",
         23: "Kee me logged in",
+        24: "Oooops! Verification failed. Please try again or <a href='/logout'>sign out</a> and sign in again.",
+        25: "Oooops! Something in our server went crazy wrong. Please reload the page.,
     },
 };
 

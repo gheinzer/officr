@@ -41,6 +41,16 @@ socket.onopen = () => {
             getCategoriesHandleAnswer(category_data);
             return;
         }
+        if (data.toString().match(/DATA-FOR-GET-TYPES=\[{.*}\]/)) {
+            const jsondata = data
+                .toString()
+                .match(/DATA-FOR-GET-TYPES=\[{.*}\]/)[0]
+                .toString()
+                .replace("DATA-FOR-GET-TYPES=", "");
+            const category_data = JSON.parse(jsondata);
+            getTypesHandleAnswer(category_data);
+            return;
+        }
     };
     socket.send("INITIALIZE_WITH_SESSION_ID={rawCodeLabel<publicSessionID>}");
 };
@@ -66,7 +76,7 @@ function _getCategories(callback) {
 }
 function _getTypes(callback) {
     socket.send("getTypes");
-    getCategoriesHandleAnswer = function (msg) {
+    getTypesHandleAnswer = function (msg) {
         callback(msg);
     };
 }

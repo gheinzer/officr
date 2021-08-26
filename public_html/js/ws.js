@@ -64,6 +64,12 @@ function _getCategories(callback) {
         callback(msg);
     };
 }
+function _getTypes(callback) {
+    socket.send("getTypes");
+    getCategoriesHandleAnswer = function (msg) {
+        callback(msg);
+    };
+}
 window.addEventListener("beforeunload", function () {
     document.getElementById("erroroverlay").style.opacity = 0;
 });

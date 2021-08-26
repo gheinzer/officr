@@ -33,6 +33,14 @@
                         />
                         <label>{label14}</label>
                     </div>
+                    <p class="important hidden" id="usernameError">{label27}</p>
+                    <script>
+                        if (window.location.search == "?alreadyTakenUsername") {
+                            document
+                                .getElementById("usernameError")
+                                .classList.remove("hidden");
+                        }
+                    </script>
                     <div class="input-container">
                         <input
                             type="email"
@@ -44,6 +52,7 @@
                         />
                         <label>{label15}</label>
                     </div>
+                    <p>{label26}</p>
                     <div class="input-container">
                         <input
                             type="password"

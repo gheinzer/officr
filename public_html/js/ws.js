@@ -22,6 +22,7 @@ socket.onopen = () => {
         });
     }
     todo_get_categories();
+    todo_get_types();
     socket.onmessage = ({ data }) => {
         const verification_failed = "Verification failed.";
         switch (data.toString()) {
@@ -62,6 +63,15 @@ function todo_get_categories() {
             html += `<option value="${element.ID}">${element.Name}</option>`;
         });
         document.getElementById("task_category").innerHTML = html;
+    });
+}
+function todo_get_types() {
+    _getTypes(function (result) {
+        var html = "";
+        result.forEach((element, index) => {
+            html += `<option value="${element.ID}">${element.Name}</option>`;
+        });
+        document.getElementById("task_type").innerHTML = html;
     });
 }
 

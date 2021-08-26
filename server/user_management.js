@@ -160,6 +160,16 @@ function user_get_todo_categories(userID, callback = function (result) {}) {
         }
     );
 }
+function user_get_todo_types(userID, callback = function (result) {}) {
+    execQuery(
+        "SELECT * FROM todo_types WHERE UserID=?",
+        userID,
+        function (err, res, fields) {
+            if (err) throw err;
+            callback(res);
+        }
+    );
+}
 function user_create_todo_task(
     userID,
     categoryID,
@@ -184,4 +194,5 @@ module.exports = {
     user_create_todo_task,
     user_get_todo_categories,
     getUserByName,
+    user_get_todo_types,
 };

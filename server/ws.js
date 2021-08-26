@@ -7,6 +7,7 @@ const {
     getUserByID,
     user_get_todo_categories,
     user_create_todo_task,
+    user_get_todo_types,
 } = require("./user_management");
 
 const server = new WebSocket.Server({ port: parseInt(ws_config.port) });
@@ -28,6 +29,11 @@ server.on("connection", (socket) => {
                     socket.send(
                         "DATA-FOR-GET-CATEGORIES=" + JSON.stringify(result)
                     );
+                });
+                break;
+            case "getTypes":
+                user_get_todo_types(userID, function (result) {
+                    socket.send("DATA-FOR-GET-TYPES=" + JSON.stringify(result));
                 });
         }
         const add_todo_task = message.toString().match(/ADD_TODO_TASK={.*}/);

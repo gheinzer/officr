@@ -29,6 +29,8 @@ const labels = {
         23: "Ich möchte angemeldet bleiben",
         24: "Uuups! Verifizierung fehlgeschlagen. Bitte versuchen Sie es erneut oder <a href='/logout'>melden</a> Sie sich ab und wieder an.",
         25: "Uuups! Etwas ist ziemlich schiefgegangen. Bitte laden Sie die Seite neu.",
+        26: "Die E-Mail-Adresse wird ausschliesslichh gespeichert, damit eine Möglichkeit besteht, Sie zu kontaktieren.",
+        27: "Dieser Benutzername ist bereits besetzt. Bitte versuchen Sie einen anderen.",
     },
     en: {
         1: "Category",
@@ -56,6 +58,8 @@ const labels = {
         23: "Kee me logged in",
         24: "Oooops! Verification failed. Please try again or <a href='/logout'>sign out</a> and sign in again.",
         25: "Oooops! Something in our server went terribly wrong. Please reload the page.",
+        26: "The E-Mail adress is only saved to have a way to contact you.",
+        27: "This username is already taken. Please try another username.",
     },
 };
 

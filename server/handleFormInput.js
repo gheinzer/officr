@@ -1,4 +1,10 @@
-const { user_verify, user_create_session } = require("./user_management");
+const {
+    user_verify,
+    user_create_session,
+    createAccount,
+    getUserByID,
+    getUserByName,
+} = require("./user_management");
 
 function handleFormInput(body, req, res) {
     switch (req.url) {
@@ -12,7 +18,7 @@ function handleFormInput(body, req, res) {
             });
             if (data.username === undefined || data.password === undefined) {
                 res.statusCode = 400;
-                res.end("Bad requests");
+                res.end("Bad request");
                 return;
             }
             const username = data.username.toString();
@@ -47,6 +53,44 @@ function handleFormInput(body, req, res) {
                         "/login?showUsernamePasswordError"
                     );
                     res.end("Authentication failed.");
+                }
+            });
+            break;
+        case "/signup/submit":
+            var datachunks = body.toString().split("&");
+            var data = {};
+            datachunks.forEach((element) => {
+                var key = element.split("=")[0];
+                var value = element.split("=")[1];
+                data[key] = value;
+            });
+            if (
+                data.username === undefined ||
+                data.password === undefined ||
+                data.email === undefined
+            ) {
+                res.statusCode = 400;
+                res.end("Bad request");
+                return;
+            }
+            const username_to_register = data.username.toString();
+            const password_to_register = data.password.toString();
+            const email = data.email.toString();
+            res.statusCode = 302;
+            getUserByName(username_to_register, function (result) {
+                console.log(result);
+                if (!result) {
+                    createAccount(
+                        username_to_register,
+                        password_to_register,
+                        email
+                    );
+
+                    res.setHeader("Location", "/login");
+                    res.end("Registration succesful.");
+                } else {
+                    res.setHeader("Location", "/signup?alreadyTakenUsername");
+                    res.end("Username already registered");
                 }
             });
             break;

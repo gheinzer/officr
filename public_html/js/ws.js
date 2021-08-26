@@ -23,6 +23,7 @@ socket.onopen = () => {
     }
     todo_get_categories();
     todo_get_types();
+    todo_get_tasks();
     socket.onmessage = ({ data }) => {
         const verification_failed = "Verification failed.";
         switch (data.toString()) {
@@ -52,6 +53,16 @@ socket.onopen = () => {
             getTypesHandleAnswer(category_data);
             return;
         }
+        if (data.toString().match(/DATA-FOR-GET-TASKS=\[{.*}\]/)) {
+            const jsondata = data
+                .toString()
+                .match(/DATA-FOR-GET-TASKS=\[{.*}\]/)[0]
+                .toString()
+                .replace("DATA-FOR-GET-TASKS=", "");
+            const category_data = JSON.parse(jsondata);
+            getTasksHandleAnswer(category_data);
+            return;
+        }
     };
     socket.send("INITIALIZE_WITH_SESSION_ID={rawCodeLabel<publicSessionID>}");
 };
@@ -74,6 +85,21 @@ function todo_get_types() {
         document.getElementById("task_type").innerHTML = html;
     });
 }
+function todo_get_tasks() {
+    _getTasks(function (result) {
+        var html = "";
+        result.forEach((element, index) => {
+            html += `<tr>¨
+                            <td>${element.StateID}</td>
+                            <td>${element.TypeID}</td>
+                            <td>${element.CategoryID}</td>
+                            <td>${element.Description}</td>
+                            <td>${element.Date}</td>
+                        </tr>`;
+        });
+        document.getElementById("tasks").innerHTML = html;
+    });
+}
 
 socket.onclose = function () {
     showErrorOverlay("{label25}");
@@ -87,6 +113,12 @@ function _getCategories(callback) {
 function _getTypes(callback) {
     socket.send("getTypes");
     getTypesHandleAnswer = function (msg) {
+        callback(msg);
+    };
+}
+function _getTasks(callback) {
+    socket.send("getTasks");
+    getTasksHandleAnswer = function (msg) {
         callback(msg);
     };
 }

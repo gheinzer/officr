@@ -150,7 +150,7 @@ function session_verify(
  * @param {int} userID The user ID of the user to get the categories for.
  * @param {function} callback The callback to be called when categories are got. This has to have one parameter, that will be set to the subject entries of the user.
  */
-function user_get_categories(userID, callback = function (result) {}) {
+function user_get_todo_categories(userID, callback = function (result) {}) {
     execQuery(
         "SELECT * FROM todo_categories WHERE UserID=?",
         userID,
@@ -158,6 +158,18 @@ function user_get_categories(userID, callback = function (result) {}) {
             if (err) throw err;
             callback(res);
         }
+    );
+}
+function user_create_todo_task(
+    userID,
+    categoryID,
+    typeID,
+    description,
+    duedate
+) {
+    execQuery(
+        "INSERT INTO todo_tasks (UserID, CategoryID, TypeID, Description, Date) VALUES (?,?,?,?,?)",
+        [userID, categoryID, typeID, description, duedate]
     );
 }
 
@@ -169,4 +181,7 @@ module.exports = {
     user_verify,
     session_verify,
     getUserByID,
+    user_create_todo_task,
+    user_get_todo_categories,
+    getUserByName,
 };

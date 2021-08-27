@@ -35,6 +35,7 @@ const labels = {
         29: "In Arbeit",
         30: "Erledigt",
         31: "Typ hinzufügen",
+        32: "Name",
     },
     en: {
         1: "Category",
@@ -68,6 +69,7 @@ const labels = {
         29: "Pending",
         30: "Done",
         31: "Create Type",
+        32: "Name",
     },
 };
 

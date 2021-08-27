@@ -47,6 +47,15 @@ socket.onopen = () => {
             case "updateTasks":
                 todo_get_tasks();
                 return;
+            case "updateTypes":
+                todo_get_types();
+                return;
+            case "ADD-TODO-TYPE-ANSWER=OK":
+                addTypeHandleAnswer();
+                return;
+            case "ADD-TODO-CATEGORY-ANSWER=OK":
+                addCategoryHandleAnswer();
+                return;
         }
         if (data.toString().match(/DATA-FOR-GET-CATEGORIES=\[{.*}\]/)) {
             const jsondata = data
@@ -198,6 +207,36 @@ function todo_add_task() {
         });
     });
 }
+function _addType(type_name, callback) {
+    socket.send(`ADD-TYPE=${type_name}`);
+    addTypeHandleAnswer = function () {
+        if (callback) callback();
+    };
+}
+function _addCategory(category_name, callback) {
+    socket.send(`ADD-CATEGORY=${category_name}`);
+    addCategoryHandleAnswer = function () {
+        if (callback) callback();
+    };
+}
 function todo_toggle_state(id, state) {
     socket.send(`TOGGLE_STATE=${id},${state}`);
+}
+function todo_add_type() {
+    showLoader();
+    const type_name = document.getElementById("type_name").value;
+    _addType(type_name, function () {
+        hideLoader();
+        hideOverlay("createTypeOverlay");
+        todo_get_types();
+    });
+}
+function todo_add_category() {
+    showLoader();
+    const type_name = document.getElementById("category_name").value;
+    _addCategory(type_name, function () {
+        hideLoader();
+        hideOverlay("createCategoryOverlay");
+        todo_get_categories();
+    });
 }

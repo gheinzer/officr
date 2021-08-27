@@ -109,12 +109,14 @@
                 alt=""
                 class="secondary-img"
                 title="{label5}"
+                onclick="showOverlay('createCategoryOverlay'); document.getElementById('createCategoryOverlayForm').reset()"
             />
             <img
                 src="/assets/icons/format_list_bulleted_white_24dp.svg"
                 alt=""
                 class="secondary-img"
                 title="{label31}"
+                onclick="showOverlay('createTypeOverlay'); document.getElementById('createTypeOverlayForm').reset()"
             />
             <img
                 src="/assets/icons/add_white_24dp.svg"
@@ -534,6 +536,112 @@
                             class="classic-button"
                             id="task_submit"
                             onclick="todo_add_task()"
+                            disabled
+                        >
+                            <img
+                                src="/assets/icons/done_white_24dp.svg"
+                                alt=""
+                            />{label8}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="createCategoryOverlay" id="createCategoryOverlay">
+            <div class="inner">
+                <img
+                    src="/assets/icons/close_white_24dp.svg"
+                    alt=""
+                    onclick="hideOverlay('createCategoryOverlay')"
+                    class="close-img"
+                />
+                <div class="flex">
+                    <div class="content">
+                        <form
+                            id="createCategoryOverlayForm"
+                            action=""
+                            onkeyup="checkForValuesInCreateCategoryOverlay()"
+                            onchange="checkForValuesInCreateCategoryOverlay()"
+                            onreset="                                setTimeout(checkForValuesInCreateCategoryOverlay, 1)"
+                            method="POST"
+                            W
+                        >
+                            <img
+                                src="/assets/icons/category_white_24dp.svg"
+                                style="height: 2rem"
+                            />
+                            <h2>{label5}</h2>
+                            <div class="input-container">
+                                <input
+                                    type="text"
+                                    placeholder=""
+                                    id="category_name"
+                                />
+                                <label>{label32}</label>
+                            </div>
+                            <input
+                                type="reset"
+                                class="classic-button"
+                                value="{label9}"
+                            />
+                        </form>
+                        <button
+                            class="classic-button"
+                            id="category_submit"
+                            onclick="todo_add_category()"
+                            disabled
+                        >
+                            <img
+                                src="/assets/icons/done_white_24dp.svg"
+                                alt=""
+                            />{label8}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="createTypeOverlay" id="createTypeOverlay">
+            <div class="inner">
+                <img
+                    src="/assets/icons/close_white_24dp.svg"
+                    alt=""
+                    onclick="hideOverlay('createTypeOverlay')"
+                    class="close-img"
+                />
+                <div class="flex">
+                    <div class="content">
+                        <form
+                            id="createTypeOverlayForm"
+                            action=""
+                            onkeyup="checkForValuesInCreateTypeOverlay()"
+                            onchange="checkForValuesInCreateTypeOverlay()"
+                            onreset="                                setTimeout(checkForValuesInCreateTypeOverlay, 1)"
+                            method="POST"
+                            W
+                        >
+                            <img
+                                src="/assets/icons/format_list_bulleted_white_24dp.svg"
+                                style="height: 2rem"
+                            />
+                            <h2>{label5}</h2>
+                            <div class="input-container">
+                                <input
+                                    type="text"
+                                    placeholder=""
+                                    id="type_name"
+                                />
+                                <label>{label32}</label>
+                            </div>
+                            <input
+                                type="reset"
+                                class="classic-button"
+                                value="{label9}"
+                            />
+                        </form>
+                        <button
+                            class="classic-button"
+                            id="type_submit"
+                            onclick="todo_add_type()"
                             disabled
                         >
                             <img

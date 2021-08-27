@@ -216,7 +216,9 @@ body {
         }
     }
 }
-.createTaskOverlay {
+.createTaskOverlay,
+.createCategoryOverlay,
+.createTypeOverlay {
     background-color: rgba($body-bg-color, 0.9);
     height: 100%;
     width: 100%;
@@ -363,6 +365,13 @@ body {
         margin-right: 2ch;
         fill: white;
         transition: 0.5s;
+    }
+    &:disabled {
+        opacity: 20%;
+        &:hover,
+        &:active {
+            color: white;
+        }
     }
 }
 .flex-container {

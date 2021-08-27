@@ -10,6 +10,8 @@ const {
     user_get_todo_types,
     user_get_todo_tasks,
     user_todo_task_toggle_state,
+    user_todo_add_type,
+    user_todo_add_category,
 } = require("./user_management");
 
 const server = new WebSocket.Server({ port: parseInt(ws_config.port) });
@@ -76,6 +78,20 @@ server.on("connection", (socket) => {
             const state = data.split(",")[1];
             user_todo_task_toggle_state(id, state, function () {
                 socket.send("updateTasks");
+            });
+        }
+        const add_type = message.toString().match(/ADD-TYPE=.*/);
+        if (add_type) {
+            const name = add_type[0].split("=")[1];
+            user_todo_add_type(userID, name, function () {
+                socket.send("ADD-TODO-TYPE-ANSWER=OK");
+            });
+        }
+        const add_category = message.toString().match(/ADD-CATEGORY=.*/);
+        if (add_category) {
+            const name = add_category[0].split("=")[1];
+            user_todo_add_category(userID, name, function () {
+                socket.send("ADD-TODO-CATEGORY-ANSWER=OK");
             });
         }
     }

@@ -437,7 +437,9 @@ body .horizontal-container .account-options img {
   margin: 0;
 }
 
-.createTaskOverlay {
+.createTaskOverlay,
+.createCategoryOverlay,
+.createTypeOverlay {
   background-color: rgba(20, 20, 20, 0.9);
   height: 100%;
   width: 100%;
@@ -450,12 +452,16 @@ body .horizontal-container .account-options img {
   transition: 0.2s;
 }
 
-.createTaskOverlay .inner {
+.createTaskOverlay .inner,
+.createCategoryOverlay .inner,
+.createTypeOverlay .inner {
   height: 100%;
   position: relative;
 }
 
-.createTaskOverlay .inner .flex {
+.createTaskOverlay .inner .flex,
+.createCategoryOverlay .inner .flex,
+.createTypeOverlay .inner .flex {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -469,13 +475,17 @@ body .horizontal-container .account-options img {
   height: 100%;
 }
 
-.createTaskOverlay .inner .flex .content {
+.createTaskOverlay .inner .flex .content,
+.createCategoryOverlay .inner .flex .content,
+.createTypeOverlay .inner .flex .content {
   height: -webkit-max-content;
   height: -moz-max-content;
   height: max-content;
 }
 
-.createTaskOverlay .inner .close-img {
+.createTaskOverlay .inner .close-img,
+.createCategoryOverlay .inner .close-img,
+.createTypeOverlay .inner .close-img {
   position: absolute;
   right: 1ch;
   top: 1ch;
@@ -657,6 +667,14 @@ body .horizontal-container .account-options img {
   fill: white;
   -webkit-transition: 0.5s;
   transition: 0.5s;
+}
+
+.classic-button:disabled {
+  opacity: 20%;
+}
+
+.classic-button:disabled:hover, .classic-button:disabled:active {
+  color: white;
 }
 
 .flex-container {

@@ -194,7 +194,26 @@ function user_create_todo_task(
 }
 function user_todo_task_toggle_state(task_id, new_state, callback) {
     execQuery(
-        `UPDATE todo_tasks SET StateID=${new_state} WHERE ID=${task_id}`,
+        `UPDATE todo_tasks SET StateID=? WHERE ID=?`,
+        [new_state, task_id],
+        function (result) {
+            callback();
+        }
+    );
+}
+function user_todo_add_type(userID, typeName, callback) {
+    execQuery(
+        `INSERT INTO todo_types (UserID, Name) VALUES (?, ?)`,
+        [userID, typeName],
+        function (result) {
+            callback();
+        }
+    );
+}
+function user_todo_add_category(userID, categoryName, callback) {
+    execQuery(
+        `INSERT INTO todo_categories (UserID, Name) VALUES (?, ?)`,
+        [userID, categoryName],
         function (result) {
             callback();
         }
@@ -215,4 +234,6 @@ module.exports = {
     user_get_todo_types,
     user_get_todo_tasks,
     user_todo_task_toggle_state,
+    user_todo_add_type,
+    user_todo_add_category,
 };

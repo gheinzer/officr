@@ -447,3 +447,12 @@ body {
         height: 5rem;
     }
 }
+.todo_state_symbol {
+    filter: brightness(150%);
+    height: 2rem;
+    cursor: pointer;
+    transition: 0.75s;
+    &:hover {
+        filter: brightness(300%);
+    }
+}

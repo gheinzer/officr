@@ -31,6 +31,10 @@ const labels = {
         25: "Uuups! Etwas ist ziemlich schiefgegangen. Bitte laden Sie die Seite neu.",
         26: "Die E-Mail-Adresse wird ausschliesslichh gespeichert, damit eine Möglichkeit besteht, Sie zu kontaktieren.",
         27: "Dieser Benutzername ist bereits besetzt. Bitte versuchen Sie einen anderen.",
+        28: "Status",
+        29: "In Arbeit",
+        30: "Erledigt",
+        31: "Typ hinzufügen",
     },
     en: {
         1: "Category",
@@ -60,6 +64,10 @@ const labels = {
         25: "Oooops! Something in our server went terribly wrong. Please reload the page.",
         26: "The E-Mail adress is only saved to have a way to contact you.",
         27: "This username is already taken. Please try another username.",
+        28: "State",
+        29: "Pending",
+        30: "Done",
+        31: "Create Type",
     },
 };
 

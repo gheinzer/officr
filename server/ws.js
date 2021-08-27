@@ -9,6 +9,7 @@ const {
     user_create_todo_task,
     user_get_todo_types,
     user_get_todo_tasks,
+    user_todo_task_toggle_state,
 } = require("./user_management");
 
 const server = new WebSocket.Server({ port: parseInt(ws_config.port) });
@@ -44,28 +45,38 @@ server.on("connection", (socket) => {
         }
         const add_todo_task = message.toString().match(/ADD_TODO_TASK={.*}/);
         if (add_todo_task) {
-            const json_data = add_todo_task[0]
-                .toString()
-                .replace("ADD_TODO_TASK=", "");
-            if (
-                !(
-                    json_data.userID &&
-                    json_data.categoryID &&
-                    json_data.typeID &&
-                    json_data.description &&
-                    json_data.duedate
-                )
-            ) {
-                socket.send("ADD_TODO_TASK_ANSWER=Bad JSON");
-            }
-            user_create_todo_task(
-                json_data.userID,
-                json_data.categoryID,
-                json_data.typeID,
-                json_data.description,
-                json_data.duedate
+            const json_data = JSON.parse(
+                add_todo_task[0].toString().replace("ADD_TODO_TASK=", "")
             );
-            socket.send("ADD_TODO_TASK_ANSWER=OK");
+            if (
+                json_data.categoryID &&
+                json_data.typeID &&
+                json_data.description &&
+                json_data.duedate
+            ) {
+                user_create_todo_task(
+                    userID,
+                    json_data.categoryID,
+                    json_data.typeID,
+                    json_data.description,
+                    json_data.duedate
+                );
+                socket.send("ADD_TODO_TASK_ANSWER=OK");
+            } else {
+                socket.send("ADD_TODO_TASK_ANSWER=Bad JSON");
+                return;
+            }
+        }
+        const toggle_state = message
+            .toString()
+            .match(/TOGGLE_STATE=[0-9]+,[0-1]/);
+        if (toggle_state) {
+            const data = toggle_state[0].split("=")[1];
+            const id = data.split(",")[0];
+            const state = data.split(",")[1];
+            user_todo_task_toggle_state(id, state, function () {
+                socket.send("updateTasks");
+            });
         }
     }
     socket.on("message", (message) => {

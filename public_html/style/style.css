@@ -785,4 +785,18 @@ body .horizontal-container .account-options img {
   display: block;
   height: 5rem;
 }
+
+.todo_state_symbol {
+  -webkit-filter: brightness(150%);
+          filter: brightness(150%);
+  height: 2rem;
+  cursor: pointer;
+  -webkit-transition: 0.75s;
+  transition: 0.75s;
+}
+
+.todo_state_symbol:hover {
+  -webkit-filter: brightness(300%);
+          filter: brightness(300%);
+}
 /*# sourceMappingURL=style.css.map */

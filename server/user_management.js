@@ -172,7 +172,7 @@ function user_get_todo_types(userID, callback = function (result) {}) {
 }
 function user_get_todo_tasks(userID, callback = function (result) {}) {
     execQuery(
-        "SELECT * FROM todo_tasks WHERE UserID=?",
+        "SELECT * FROM todo_tasks WHERE UserID=? ORDER BY Date ASC",
         [userID],
         function (err, res, fileds) {
             if (err) throw err;
@@ -192,6 +192,14 @@ function user_create_todo_task(
         [userID, categoryID, typeID, description, duedate]
     );
 }
+function user_todo_task_toggle_state(task_id, new_state, callback) {
+    execQuery(
+        `UPDATE todo_tasks SET StateID=${new_state} WHERE ID=${task_id}`,
+        function (result) {
+            callback();
+        }
+    );
+}
 
 module.exports = {
     user_create_session,
@@ -206,4 +214,5 @@ module.exports = {
     getUserByName,
     user_get_todo_types,
     user_get_todo_tasks,
+    user_todo_task_toggle_state,
 };

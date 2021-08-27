@@ -69,8 +69,8 @@
             <div class="main-content">
                 <table>
                     <tr>
-                        <th></th>
-                        <th></th>
+                        <th>{label28}</th>
+                        <th>{label20}</th>
                         <th>{label1}</th>
                         <th>{label2}</th>
                         <th>{label3}</th>
@@ -111,6 +111,12 @@
                 title="{label5}"
             />
             <img
+                src="/assets/icons/format_list_bulleted_white_24dp.svg"
+                alt=""
+                class="secondary-img"
+                title="{label31}"
+            />
+            <img
                 src="/assets/icons/add_white_24dp.svg"
                 alt=""
                 class="main-img"
@@ -123,7 +129,7 @@
                 name="loaderFinished"
                 value="false"
             />
-            <div class="loader">
+            <div class="loader" id="loader">
                 <svg
                     width="200"
                     height="200"
@@ -372,6 +378,7 @@
                     align-items: center;
                     transition: 0.5s;
                     flex-direction: column;
+                    z-index: 50;
                 }
                 .loader {
                     animation: logo-single-rotate 1.2s;
@@ -413,6 +420,14 @@
                         transform: rotate(0deg);
                     }
                 }
+                @keyframes spin {
+                    from {
+                        transform: rotate(0deg);
+                    }
+                    to {
+                        transform: rotate(360deg);
+                    }
+                }
             </style>
             <script>
                 function showLoader() {
@@ -432,6 +447,8 @@
                         document.getElementById(
                             "loader-overlay"
                         ).style.pointerEvents = "none";
+                        document.getElementById("loader").style.animation =
+                            "spin 2s 1.5s infinite";
                     }
                 }
                 function setLoaderAsFinished() {
@@ -516,6 +533,7 @@
                         <button
                             class="classic-button"
                             id="task_submit"
+                            onclick="todo_add_task()"
                             disabled
                         >
                             <img

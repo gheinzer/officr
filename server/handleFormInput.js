@@ -43,7 +43,7 @@ function handleFormInput(body, req, res) {
                             `officr-user-session-id=${publicSessionID}; HttpOnly; Path=/; expires=${date.toUTCString()}`
                         );
                     }
-                    res.setHeader("Location", "/");
+                    res.setHeader("Location", "/todo");
                     setTimeout(function () {
                         res.end("Authentication successful");
                     }, 500); // This is delayed because of some speed issues with the MySQL Server.

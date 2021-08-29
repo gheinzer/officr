@@ -74,8 +74,8 @@ server.on("request", (req, res) => {
         });
         if (matched) {
             res.statusCode = 302;
-            res.setHeader("Location", "/");
-            res.end("302 - You will be redirected to /");
+            res.setHeader("Location", "/todo");
+            res.end("302 - You will be redirected to /todo");
             return false;
         } else {
             return true;

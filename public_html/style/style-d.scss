@@ -24,3 +24,12 @@ header {
 .mobile-only {
     display: none;
 }
+.flex.column {
+    flex-direction: column;
+}
+.flex {
+    position: relative;
+    img {
+        height: 40%;
+    }
+}

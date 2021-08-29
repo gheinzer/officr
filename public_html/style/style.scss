@@ -206,6 +206,8 @@ body {
     height: auto;
     grid-column: 1;
     grid-row: 2;
+    margin: 0;
+    padding: 0;
     table {
         width: 100%;
         border-collapse: collapse;
@@ -228,7 +230,8 @@ body {
 .createTypeOverlay,
 .filter-overlay,
 .editTypesOverlay,
-.editCategoriesOverlay {
+.editCategoriesOverlay,
+.cookie-note {
     background-color: rgba($body-bg-color, 0.9);
     height: 100%;
     width: 100%;
@@ -549,4 +552,67 @@ body {
             }
         }
     }
+}
+.viewport-size {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    p {
+        font-size: 2rem;
+        word-wrap: break-word;
+    }
+}
+.flex {
+    display: flex;
+    gap: 1rem;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.centered {
+    justify-content: center;
+    align-items: center;
+}
+.bg-white {
+    background: white;
+}
+.bg-accent1 {
+    background-color: $accentColor;
+}
+.bg-accent2 {
+    background-color: $secondColor;
+    color: black;
+}
+.text-img {
+    display: inline-block;
+    vertical-align: middle;
+    height: 1em;
+}
+.border-button {
+    color: black;
+    text-decoration: none;
+    padding: 0.75em 2em;
+    background-color: $secondColor;
+    border: none;
+    border-radius: 10em;
+    cursor: pointer;
+    transition: 0.2s;
+    font-family: $font-family;
+    font-size: 1.2rem;
+    &:hover,
+    &:active {
+        background-color: lighten($secondColor, 30%);
+    }
+}
+.bg-gray {
+    background-color: lighten(black, 15%);
+}
+.footer {
+    * {
+        margin: 0.5rem !important;
+        padding: 0;
+    }
+    padding: 1.5rem;
+    font-size: 1.5rem;
 }

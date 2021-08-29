@@ -6,78 +6,86 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>officr</title>
         <link rel="stylesheet" href="/style/style.css" />
+        <script src="/js/overlays.js"></script>
+        <script src="/js/cookies.js"></script>
         <link
             rel="shortcut icon"
             href="/assets/logo_single.svg"
             type="image/x-icon"
         />
     </head>
-    <body onload="setTimeout(setLoaderAsFinished, 1200);">
-        <div class="horizontal-container">
-            <header>
-                <img src="/assets/logo_with_text_light.svg" alt="officr" />
-                <span>Accounts</span>
-            </header>
-        </div>
-        <div class="main-content">
-            <div class="flex-container centered">
-                <form action="/login/submit" method="POST">
-                    <div class="input-container">
-                        <input
-                            type="text"
-                            placeholder=""
-                            id="usernames"
-                            name="username"
-                            autocomplete="off"
-                            required
-                        />
-                        <label>{label10}</label>
-                    </div>
-                    <div class="input-container">
-                        <input
-                            type="password"
-                            placeholder=""
-                            id="password"
-                            name="password"
-                            required
-                        />
-                        <label>{label11}</label>
-                    </div>
-                    <div class="checkbox-container">
-                        <input
-                            type="checkbox"
-                            name="keepmeloggedin"
-                            id="keepmeloggedin"
-                        />
-                        <label for="keepmeloggedin">{label23}</label>
-                    </div>
-                    <p class="important hidden" id="passwordUsernameLabel">
-                        {label19}
+    <body
+        onload="setTimeout(setLoaderAsFinished, 1200); showCookieOverlay()"
+    >
+        <div class="vertical-container">
+            <div class="horizontal-container">
+                <header>
+                    <img src="/assets/logo_with_text_light.svg" alt="officr" />
+                </header>
+                <div class="icons">
+                    <img
+                        src="/assets/icons/account_circle_white_24dp.svg"
+                        alt=""
+                        class="pointer"
+                        onclick="window.location.href = '/login'"
+                    />
+                </div>
+            </div>
+            <div class="main-content">
+                <div class="viewport-size flex centered column">
+                    <img
+                        src="/assets/logo_only_text_light.svg"
+                        alt=""
+                        style="width: 20%"
+                    />
+                    <h1>Your todo software</h1>
+                    <a href="/signup" class="border-button">{label36}</a>
+                    <a href="/signup" class="border-button">{label12}</a>
+                </div>
+                <div class="viewport-size flex bg-accent1">
+                    <p>{label37}</p>
+                    <img src="/assets/officr_todo_overview.png" alt="" />
+                </div>
+                <div class="viewport-size flex bg-accent2">
+                    <img
+                        src="/assets/officr_todo_categories_and_types.png"
+                        alt=""
+                    />
+                    <p>{label38}</p>
+                </div>
+                <div class="viewport-size flex bg-accent1">
+                    <p>{label39}</p>
+                    <img src="/assets/officr_todo_filters.png" alt="" />
+                </div>
+                <div class="viewport-size flex bg-accent2">
+                    <p>{label40}</p>
+                    <a href="/signup" class="border-button">{label42}</a>
+                </div>
+                <div class="viewport-size flex">
+                    <p>{label41}</p>
+                    <a href="/signup" class="border-button">{label42}</a>
+                </div>
+                <div class="viewport-size flex column">
+                    <img
+                        src="/assets/logo_with_text_light.svg"
+                        alt=""
+                        style="width: 30%"
+                    />
+                    <a href="/signup" class="border-button">{label42}</a>
+                </div>
+                <div class="flex column bg-gray footer">
+                    <p>officr is a open-source project.</p>
+                    <p>
+                        <a
+                            href="https://www.github.com/gheinzer/officr"
+                            class="classic-button"
+                            ><img
+                                src="assets/GitHub-Mark-Light-120px-plus.png"
+                            />
+                            Contribute on GitHub</a
+                        >
                     </p>
-
-                    <script>
-                        if (
-                            window.location.search ===
-                            "?showUsernamePasswordError"
-                        ) {
-                            document.getElementById(
-                                "passwordUsernameLabel"
-                            ).style.display = "block";
-                        }
-                    </script>
-                    <input
-                        type="reset"
-                        value="{label9}"
-                        class="classic-button"
-                    />
-                    <input
-                        type="submit"
-                        value="{label12}"
-                        class="classic-button"
-                        onclick="showLoader()"
-                    />
-                    <a class="classic-button" href="signup"> {label13} </a>
-                </form>
+                </div>
             </div>
         </div>
         <div class="loader-overlay" id="loader-overlay">

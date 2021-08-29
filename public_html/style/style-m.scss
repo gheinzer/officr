@@ -23,3 +23,13 @@ header {
 .mobile-only {
     display: initial;
 }
+.flex {
+    flex-direction: column;
+    position: relative;
+    img {
+        width: 90%;
+    }
+    * {
+        text-align: center;
+    }
+}

@@ -19,4 +19,20 @@ header span {
 .mobile-only {
   display: initial;
 }
+
+.flex {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  position: relative;
+}
+
+.flex img {
+  width: 90%;
+}
+
+.flex * {
+  text-align: center;
+}
 /*# sourceMappingURL=style-m.css.map */

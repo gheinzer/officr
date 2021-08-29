@@ -458,6 +458,8 @@ body .horizontal-container .account-options img {
   grid-column: 1;
   -ms-grid-row: 2;
   grid-row: 2;
+  margin: 0;
+  padding: 0;
 }
 
 .main-content table {
@@ -484,7 +486,8 @@ body .horizontal-container .account-options img {
 .createTypeOverlay,
 .filter-overlay,
 .editTypesOverlay,
-.editCategoriesOverlay {
+.editCategoriesOverlay,
+.cookie-note {
   background-color: rgba(20, 20, 20, 0.9);
   height: 100%;
   width: 100%;
@@ -502,7 +505,8 @@ body .horizontal-container .account-options img {
 .createTypeOverlay .inner,
 .filter-overlay .inner,
 .editTypesOverlay .inner,
-.editCategoriesOverlay .inner {
+.editCategoriesOverlay .inner,
+.cookie-note .inner {
   height: 100%;
   position: relative;
 }
@@ -512,7 +516,8 @@ body .horizontal-container .account-options img {
 .createTypeOverlay .inner .flex,
 .filter-overlay .inner .flex,
 .editTypesOverlay .inner .flex,
-.editCategoriesOverlay .inner .flex {
+.editCategoriesOverlay .inner .flex,
+.cookie-note .inner .flex {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -531,7 +536,8 @@ body .horizontal-container .account-options img {
 .createTypeOverlay .inner .flex .content,
 .filter-overlay .inner .flex .content,
 .editTypesOverlay .inner .flex .content,
-.editCategoriesOverlay .inner .flex .content {
+.editCategoriesOverlay .inner .flex .content,
+.cookie-note .inner .flex .content {
   height: -webkit-max-content;
   height: -moz-max-content;
   height: max-content;
@@ -543,7 +549,8 @@ body .horizontal-container .account-options img {
 .createTypeOverlay .inner .close-img,
 .filter-overlay .inner .close-img,
 .editTypesOverlay .inner .close-img,
-.editCategoriesOverlay .inner .close-img {
+.editCategoriesOverlay .inner .close-img,
+.cookie-note .inner .close-img {
   position: absolute;
   right: 1ch;
   top: 1ch;
@@ -994,5 +1001,91 @@ body .horizontal-container .account-options img {
       -ms-flex-align: center;
           align-items: center;
   gap: 1ch;
+}
+
+.viewport-size {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+.viewport-size p {
+  font-size: 2rem;
+  word-wrap: break-word;
+}
+
+.flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 1rem;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.centered {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.bg-white {
+  background: white;
+}
+
+.bg-accent1 {
+  background-color: #d40000;
+}
+
+.bg-accent2 {
+  background-color: #00d4d4;
+  color: black;
+}
+
+.text-img {
+  display: inline-block;
+  vertical-align: middle;
+  height: 1em;
+}
+
+.border-button {
+  color: black;
+  text-decoration: none;
+  padding: 0.75em 2em;
+  background-color: #00d4d4;
+  border: none;
+  border-radius: 10em;
+  cursor: pointer;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  font-family: "Montserrat";
+  font-size: 1.2rem;
+}
+
+.border-button:hover, .border-button:active {
+  background-color: #6effff;
+}
+
+.bg-gray {
+  background-color: #262626;
+}
+
+.footer {
+  padding: 1.5rem;
+  font-size: 1.5rem;
+}
+
+.footer * {
+  margin: 0.5rem !important;
+  padding: 0;
 }
 /*# sourceMappingURL=style.css.map */

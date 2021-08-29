@@ -81,21 +81,22 @@
                 <table>
                     <tr>
                         <th>{label28}</th>
-                        <th class="center-flex">
+                        <th>
                             {label20}
                             <img
                                 src="/assets/icons/edit_white_24dp.svg"
                                 alt=""
                                 ¨
-                                class="pointer"
+                                class="pointer text-img"
                                 onclick="showOverlay('editTypesOverlay')"
                             />
                         </th>
-                        <th class="center-flex">
-                            {label1}<img
+                        <th>
+                            {label1}
+                            <img
                                 src="/assets/icons/edit_white_24dp.svg"
                                 alt=""
-                                class="pointer"
+                                class="pointer text-img"
                                 onclick="showOverlay('editCategoriesOverlay')"
                             />
                         </th>
@@ -835,6 +836,18 @@
         <div id="erroroverlay">
             <img src="/assets/icons/error_white_24dp.svg" alt="" />
             <p id="errormessage"></p>
+        </div>
+        <div class="cookie-note" id="cookie-note">
+            <div class="inner">
+                <div class="flex">
+                    <div class="content">
+                        <h2>{label43}</h2>
+                        <button class="border-button" style="width: max-content" onclick="disableCookieOverlay()">
+                            {label44}
+                        </butt>
+                    </div>
+                </div>
+            </div>
         </div>
     </body>
 </html>

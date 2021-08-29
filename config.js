@@ -19,7 +19,7 @@ const mysql_config = {
         host: "localhost", // Default: "localhost"
         user: "root", // Default: "root"
         password: "", // Default: ""
-        database: "officr_testing", // Default: "officr_testing"
+        database: "officr", // Default: "officr_testing"
         debug: false, // Default: false
     },
 };

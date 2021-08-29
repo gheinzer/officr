@@ -12,6 +12,10 @@ const {
     user_todo_task_toggle_state,
     user_todo_add_type,
     user_todo_add_category,
+    user_todo_edit_category,
+    user_todo_edit_type,
+    user_todo_delete_type,
+    user_todo_delete_category,
 } = require("./user_management");
 
 const server = new WebSocket.Server({ port: parseInt(ws_config.port) });
@@ -92,6 +96,34 @@ server.on("connection", (socket) => {
             const name = add_category[0].split("=")[1];
             user_todo_add_category(userID, name, function () {
                 socket.send("ADD-TODO-CATEGORY-ANSWER=OK");
+            });
+        }
+        const edit_category = message.toString().match(/EDIT-CATEGORY={.*}/);
+        if (edit_category) {
+            const data = JSON.parse(edit_category[0].split("=")[1]);
+            user_todo_edit_category(userID, data.id, data.new, function () {
+                socket.send("updateAll");
+            });
+        }
+        const edit_type = message.toString().match(/EDIT-TYPE={.*}/);
+        if (edit_type) {
+            const data = JSON.parse(edit_type[0].split("=")[1]);
+            user_todo_edit_type(userID, data.id, data.new, function () {
+                socket.send("updateAll");
+            });
+        }
+        const delete_type = message.toString().match(/DELETE-TYPE=.*/);
+        if (delete_type) {
+            const id = delete_type[0].split("=")[1];
+            user_todo_delete_type(userID, id, function () {
+                socket.send("updateAll");
+            });
+        }
+        const delete_category = message.toString().match(/DELETE-CATEGORY=.*/);
+        if (delete_category) {
+            const id = delete_category[0].split("=")[1];
+            user_todo_delete_category(userID, id, function () {
+                socket.send("updateAll");
             });
         }
     }

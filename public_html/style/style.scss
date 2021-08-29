@@ -31,7 +31,7 @@ body {
     .horizontal-container {
         position: relative;
         display: grid;
-        grid-template-columns: auto max-content max-content;
+        grid-template-columns: auto max-content max-content max-content;
         grid-template-rows: max-content auto;
         max-width: 100%;
         grid-column: 1;
@@ -81,7 +81,7 @@ body {
             font-family: $font-family;
         }
         @mixin headerOverlay($z-index) {
-            @include header(span 3, 1);
+            @include header(span 4, 1);
             z-index: $z-index;
             position: absolute;
             width: auto;
@@ -124,8 +124,15 @@ body {
                 @include headerOverlayContent();
             }
         }
-        .account-options {
+        .filter {
             @include header(3, 1);
+            img {
+                height: 1.5rem;
+            }
+            padding: 0;
+        }
+        .account-options {
+            @include header(4, 1);
             img {
                 height: 1.5rem;
             }
@@ -218,7 +225,10 @@ body {
 }
 .createTaskOverlay,
 .createCategoryOverlay,
-.createTypeOverlay {
+.createTypeOverlay,
+.filter-overlay,
+.editTypesOverlay,
+.editCategoriesOverlay {
     background-color: rgba($body-bg-color, 0.9);
     height: 100%;
     width: 100%;
@@ -239,6 +249,7 @@ body {
             height: 100%;
             .content {
                 height: max-content;
+                margin: 2rem;
             }
         }
         .close-img {
@@ -460,8 +471,82 @@ body {
     filter: brightness(150%);
     height: 2rem;
     cursor: pointer;
-    transition: 0.75s;
+    transition: 0.2s;
     &:hover {
-        filter: brightness(300%);
+        opacity: 0.75;
+    }
+}
+.filter-item {
+    padding: 1.5ch;
+    border-radius: 0.5rem;
+    background-color: transparent;
+    cursor: pointer;
+    transition: 0.2s;
+    margin: 0.3ch;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1ch;
+    &:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+    &.selected {
+        background: $accentColor;
+        color: white;
+        transition: 0.2s;
+        &:hover {
+            background: lighten($accentColor, 15%);
+        }
+    }
+}
+.filter-list {
+    max-height: 50vh;
+    overflow: auto;
+}
+.filter-content {
+    flex-direction: row;
+    display: flex;
+    h2 {
+        margin-top: 0;
+    }
+    img + h2 {
+        margin-top: initial;
+    }
+}
+.center-flex {
+    display: flex inline;
+    justify-content: center;
+    align-items: center;
+    gap: 1ch;
+}
+.editTypesOverlay,
+.editCategoriesOverlay {
+    .flex {
+        gap: 3rem;
+    }
+    .list {
+        max-height: 70vh;
+        .listEntry {
+            display: grid block;
+            grid-template-rows: auto;
+            grid-template-columns: auto max-content;
+            width: auto;
+            align-items: center;
+            gap: 4ch;
+            background-color: transparent;
+            p {
+                grid-row: 1;
+                grid-column: 1;
+                text-align: left;
+            }
+            .actions {
+                grid-row: 1;
+                grid-column: span 1;
+                height: max-content;
+                display: flex;
+                align-items: center;
+                gap: 1ch;
+            }
+        }
     }
 }

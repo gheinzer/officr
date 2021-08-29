@@ -219,6 +219,55 @@ function user_todo_add_category(userID, categoryName, callback) {
         }
     );
 }
+function user_todo_edit_category(userID, categoryID, categoryName, callback) {
+    execQuery(
+        `UPDATE todo_categories SET Name=? WHERE UserID=? AND ID=?`,
+        [categoryName, userID, categoryID],
+        function (result) {
+            callback();
+        }
+    );
+}
+
+function user_todo_edit_type(userID, typeID, typeName, callback) {
+    execQuery(
+        `UPDATE todo_types SET Name=? WHERE UserID=? AND ID=?`,
+        [typeName, userID, typeID],
+        function (result) {
+            callback();
+        }
+    );
+}
+function user_todo_delete_type(userID, id, callback) {
+    execQuery(
+        `DELETE FROM todo_types WHERE UserID=? AND ID=?`,
+        [userID, id],
+        function (result) {
+            execQuery(
+                `DELETE FROM todo_tasks WHERE UserID=? AND TypeID=?`,
+                [userID, id],
+                function (result) {
+                    callback();
+                }
+            );
+        }
+    );
+}
+function user_todo_delete_category(userID, id, callback) {
+    execQuery(
+        `DELETE FROM todo_categories WHERE UserID=? AND ID=?`,
+        [userID, id],
+        function (result) {
+            execQuery(
+                `DELETE FROM todo_tasks WHERE UserID=? AND CategoryID=?`,
+                [userID, id],
+                function (result) {
+                    callback();
+                }
+            );
+        }
+    );
+}
 
 module.exports = {
     user_create_session,
@@ -236,4 +285,8 @@ module.exports = {
     user_todo_task_toggle_state,
     user_todo_add_type,
     user_todo_add_category,
+    user_todo_edit_category,
+    user_todo_edit_type,
+    user_todo_delete_type,
+    user_todo_delete_category,
 };

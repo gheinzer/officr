@@ -32,9 +32,9 @@ body .horizontal-container {
   position: relative;
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: auto max-content max-content;
-      grid-template-columns: auto -webkit-max-content -webkit-max-content;
-      grid-template-columns: auto max-content max-content;
+  -ms-grid-columns: auto max-content max-content max-content;
+      grid-template-columns: auto -webkit-max-content -webkit-max-content -webkit-max-content;
+      grid-template-columns: auto max-content max-content max-content;
   -ms-grid-rows: max-content auto;
       grid-template-rows: -webkit-max-content auto;
       grid-template-rows: max-content auto;
@@ -125,7 +125,7 @@ body .horizontal-container div.icons img {
 
 body .horizontal-container .searchBar {
   background-color: #212121;
-  grid-column: span 3;
+  grid-column: span 4;
   -ms-grid-row: 1;
   grid-row: 1;
   min-height: 12%;
@@ -223,7 +223,7 @@ body .horizontal-container .searchBar input:focus {
 
 body .horizontal-container .filterBar {
   background-color: #212121;
-  grid-column: span 3;
+  grid-column: span 4;
   -ms-grid-row: 1;
   grid-row: 1;
   min-height: 12%;
@@ -287,10 +287,52 @@ body .horizontal-container .filterBar .content {
   font-family: "Montserrat";
 }
 
-body .horizontal-container .account-options {
+body .horizontal-container .filter {
   background-color: #212121;
   -ms-grid-column: 3;
   grid-column: 3;
+  -ms-grid-row: 1;
+  grid-row: 1;
+  min-height: 12%;
+  position: relative;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 1.5rem;
+  font-size: 1.5rem;
+  padding: 0;
+}
+
+body .horizontal-container .filter img {
+  width: 1.5rem;
+  margin: 0;
+  padding: 0;
+}
+
+body .horizontal-container .filter p {
+  font-size: 1.5rem;
+}
+
+body .horizontal-container .filter > * {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+body .horizontal-container .filter img {
+  height: 1.5rem;
+}
+
+body .horizontal-container .account-options {
+  background-color: #212121;
+  -ms-grid-column: 4;
+  grid-column: 4;
   -ms-grid-row: 1;
   grid-row: 1;
   min-height: 12%;
@@ -439,7 +481,10 @@ body .horizontal-container .account-options img {
 
 .createTaskOverlay,
 .createCategoryOverlay,
-.createTypeOverlay {
+.createTypeOverlay,
+.filter-overlay,
+.editTypesOverlay,
+.editCategoriesOverlay {
   background-color: rgba(20, 20, 20, 0.9);
   height: 100%;
   width: 100%;
@@ -454,14 +499,20 @@ body .horizontal-container .account-options img {
 
 .createTaskOverlay .inner,
 .createCategoryOverlay .inner,
-.createTypeOverlay .inner {
+.createTypeOverlay .inner,
+.filter-overlay .inner,
+.editTypesOverlay .inner,
+.editCategoriesOverlay .inner {
   height: 100%;
   position: relative;
 }
 
 .createTaskOverlay .inner .flex,
 .createCategoryOverlay .inner .flex,
-.createTypeOverlay .inner .flex {
+.createTypeOverlay .inner .flex,
+.filter-overlay .inner .flex,
+.editTypesOverlay .inner .flex,
+.editCategoriesOverlay .inner .flex {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -477,15 +528,22 @@ body .horizontal-container .account-options img {
 
 .createTaskOverlay .inner .flex .content,
 .createCategoryOverlay .inner .flex .content,
-.createTypeOverlay .inner .flex .content {
+.createTypeOverlay .inner .flex .content,
+.filter-overlay .inner .flex .content,
+.editTypesOverlay .inner .flex .content,
+.editCategoriesOverlay .inner .flex .content {
   height: -webkit-max-content;
   height: -moz-max-content;
   height: max-content;
+  margin: 2rem;
 }
 
 .createTaskOverlay .inner .close-img,
 .createCategoryOverlay .inner .close-img,
-.createTypeOverlay .inner .close-img {
+.createTypeOverlay .inner .close-img,
+.filter-overlay .inner .close-img,
+.editTypesOverlay .inner .close-img,
+.editCategoriesOverlay .inner .close-img {
   position: absolute;
   right: 1ch;
   top: 1ch;
@@ -809,12 +867,132 @@ body .horizontal-container .account-options img {
           filter: brightness(150%);
   height: 2rem;
   cursor: pointer;
-  -webkit-transition: 0.75s;
-  transition: 0.75s;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
 }
 
 .todo_state_symbol:hover {
-  -webkit-filter: brightness(300%);
-          filter: brightness(300%);
+  opacity: 0.75;
+}
+
+.filter-item {
+  padding: 1.5ch;
+  border-radius: 0.5rem;
+  background-color: transparent;
+  cursor: pointer;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  margin: 0.3ch;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 1ch;
+}
+
+.filter-item:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.filter-item.selected {
+  background: #d40000;
+  color: white;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+
+.filter-item.selected:hover {
+  background: #ff2222;
+}
+
+.filter-list {
+  max-height: 50vh;
+  overflow: auto;
+}
+
+.filter-content {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.filter-content h2 {
+  margin-top: 0;
+}
+
+.filter-content img + h2 {
+  margin-top: initial;
+}
+
+.center-flex {
+  display: flex inline;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 1ch;
+}
+
+.editTypesOverlay .flex,
+.editCategoriesOverlay .flex {
+  gap: 3rem;
+}
+
+.editTypesOverlay .list,
+.editCategoriesOverlay .list {
+  max-height: 70vh;
+}
+
+.editTypesOverlay .list .listEntry,
+.editCategoriesOverlay .list .listEntry {
+  display: grid block;
+  -ms-grid-rows: auto;
+      grid-template-rows: auto;
+  -ms-grid-columns: auto max-content;
+      grid-template-columns: auto -webkit-max-content;
+      grid-template-columns: auto max-content;
+  width: auto;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 4ch;
+  background-color: transparent;
+}
+
+.editTypesOverlay .list .listEntry p,
+.editCategoriesOverlay .list .listEntry p {
+  -ms-grid-row: 1;
+  grid-row: 1;
+  -ms-grid-column: 1;
+  grid-column: 1;
+  text-align: left;
+}
+
+.editTypesOverlay .list .listEntry .actions,
+.editCategoriesOverlay .list .listEntry .actions {
+  -ms-grid-row: 1;
+  grid-row: 1;
+  grid-column: span 1;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 1ch;
 }
 /*# sourceMappingURL=style.css.map */

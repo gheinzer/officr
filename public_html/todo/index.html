@@ -49,6 +49,9 @@
                         name="search"
                         id="search"
                         placeholder="Search"
+                        oninput="todo_set_search_filter()"
+                        onkeydown="todo_set_search_filter()"
+                        onpaste="todo_set_search_filter()"
                     />
                     <img
                         src="/assets/icons/close_white_24dp.svg"
@@ -57,7 +60,7 @@
                         onclick="hideSearch()"
                     />
                 </div>
-                <div class="account-options">
+                <div class="filter">
                     <img
                         src="/assets/icons/account_circle_white_24dp.svg"
                         alt=""
@@ -65,13 +68,37 @@
                         onclick="showOverlay('account-option-overlay')"
                     />
                 </div>
+                <div class="account-options">
+                    <img
+                        src="/assets/icons/filter_alt_white_24dp.svg"
+                        alt=""
+                        class="pointer"
+                        onclick="showOverlay('filter-overlay')"
+                    />
+                </div>
             </div>
             <div class="main-content">
                 <table>
                     <tr>
                         <th>{label28}</th>
-                        <th>{label20}</th>
-                        <th>{label1}</th>
+                        <th class="center-flex">
+                            {label20}
+                            <img
+                                src="/assets/icons/edit_white_24dp.svg"
+                                alt=""
+                                ¨
+                                class="pointer"
+                                onclick="showOverlay('editTypesOverlay')"
+                            />
+                        </th>
+                        <th class="center-flex">
+                            {label1}<img
+                                src="/assets/icons/edit_white_24dp.svg"
+                                alt=""
+                                class="pointer"
+                                onclick="showOverlay('editCategoriesOverlay')"
+                            />
+                        </th>
                         <th>{label2}</th>
                         <th>{label3}</th>
                     </tr>
@@ -476,7 +503,15 @@
                             onchange="checkForValuesInCreateTaskOverlay()"
                             onreset="                                setTimeout(checkForValuesInCreateTaskOverlay, 1)"
                             method="POST"
+                            onsubmit="taskSubmit()"
                         >
+                            <script>
+                                function taskSubmit(event) {
+                                    event.preventDefault();
+                                    todo_add_task();
+                                    return false;
+                                }
+                            </script>
                             <img
                                 src="/assets/icons/add_task_white_24dp.svg"
                                 alt=""
@@ -564,8 +599,15 @@
                             onchange="checkForValuesInCreateCategoryOverlay()"
                             onreset="                                setTimeout(checkForValuesInCreateCategoryOverlay, 1)"
                             method="POST"
-                            W
+                            onsubmit="categorySubmit()"
                         >
+                            <script>
+                                function categorySubmit(event) {
+                                    event.preventDefault();
+                                    todo_add_category();
+                                    return false;
+                                }
+                            </script>
                             <img
                                 src="/assets/icons/category_white_24dp.svg"
                                 style="height: 2rem"
@@ -617,13 +659,20 @@
                             onchange="checkForValuesInCreateTypeOverlay()"
                             onreset="                                setTimeout(checkForValuesInCreateTypeOverlay, 1)"
                             method="POST"
-                            W
+                            onsubmit="typeSubmit()"
                         >
+                            <script>
+                                function typeSubmit(event) {
+                                    event.preventDefault();
+                                    todo_add_type();
+                                    return false;
+                                }
+                            </script>
                             <img
                                 src="/assets/icons/format_list_bulleted_white_24dp.svg"
                                 style="height: 2rem"
                             />
-                            <h2>{label5}</h2>
+                            <h2>{label31}</h2>
                             <div class="input-container">
                                 <input
                                     type="text"
@@ -649,6 +698,136 @@
                                 alt=""
                             />{label8}
                         </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="editTypesOverlay" id="editTypesOverlay">
+            <div class="inner">
+                <img
+                    src="/assets/icons/close_white_24dp.svg"
+                    alt=""
+                    onclick="hideOverlay('editTypesOverlay')"
+                    class="close-img"
+                />
+                <div class="flex">
+                    <div class="list" id="editTypesList"></div>
+                    <div class="edit-form hidden" id="editTypesForm">
+                        <div class="input-container">
+                            <input
+                                type="text"
+                                placeholder=""
+                                id="type_edit_name"
+                            />
+                            <label>{label32}</label>
+                        </div>
+                        <input type="hidden" id="editTypeID" />
+                        <button
+                            class="classic-button"
+                            id="type_edit_submit"
+                            onclick="todo_edit_type()"
+                        >
+                            <img
+                                src="/assets/icons/done_white_24dp.svg"
+                                alt=""
+                            />{label8}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="editCategoriesOverlay" id="editCategoriesOverlay">
+            <div class="inner">
+                <img
+                    src="/assets/icons/close_white_24dp.svg"
+                    alt=""
+                    onclick="hideOverlay('editCategoriesOverlay')"
+                    class="close-img"
+                />
+
+                <div class="flex">
+                    <div class="list" id="editCategoriesList"></div>
+                    <div class="edit-form hidden" id="editCategoriesForm">
+                        <div class="input-container">
+                            <input
+                                type="text"
+                                placeholder=""
+                                id="category_edit_name"
+                            />
+                            <label>{label32}</label>
+                        </div>
+                        <input type="hidden" id="editCategoryID" />
+                        <button
+                            class="classic-button"
+                            id="category_edit_submit"
+                            onclick="todo_edit_category()"
+                        >
+                            <img
+                                src="/assets/icons/done_white_24dp.svg"
+                                alt=""
+                            />{label8}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="filter-overlay" id="filter-overlay">
+            <div class="inner">
+                <img
+                    src="/assets/icons/close_white_24dp.svg"
+                    alt=""
+                    onclick="hideOverlay('filter-overlay')"
+                    class="close-img"
+                />
+                <div class="flex">
+                    <div class="filter-content">
+                        <div class="content">
+                            <img
+                                src="/assets/icons/format_list_bulleted_white_24dp.svg"
+                                alt=""
+                            />
+                            <h2>{label20}</h2>
+                            <div
+                                class="filter-list"
+                                id="type-filter-list"
+                            ></div>
+                        </div>
+                        <div class="content">
+                            <img
+                                src="/assets/icons/category_white_24dp.svg"
+                                alt=""
+                            />
+                            <h2>{label1}</h2>
+                            <div
+                                class="filter-list"
+                                id="category-filter-list"
+                            ></div>
+                        </div>
+                        <div class="content">
+                            <h2>{label28}</h2>
+                            <div class="filter-list">
+                                <div
+                                    class="filter-item selected"
+                                    onclick="todo_set_state_filter(this)"
+                                    id="state-0"
+                                >
+                                    <img
+                                        src="/assets/icons/pending_white_24dp.svg"
+                                        alt=""
+                                    />{label29}
+                                </div>
+                                <div
+                                    class="filter-item"
+                                    onclick="todo_set_state_filter(this)"
+                                    id="state-1"
+                                >
+                                    <img
+                                        src="/assets/icons/done_white_24dp.svg"
+                                        alt=""
+                                    />{label30}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

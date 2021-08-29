@@ -20,6 +20,14 @@ let tasks = [];
 let typeIDs = {};
 let categoryIDs = {};
 let lastestActionCompleted = false;
+
+let searchFilter = "";
+let stateFilter = 0;
+let typeFilter = -1;
+let categoryFilter = -1;
+let stateFilterIDs = ["state-1", "state-0"];
+let typeFilterIDs = [];
+let categoryFilterIDs = [];
 socket.onopen = () => {
     if (queue.length > 0) {
         queue.forEach((element, index) => {
@@ -27,19 +35,18 @@ socket.onopen = () => {
             queue.splice(index, 1);
         });
     }
-    todo_get_categories(function () {
-        todo_get_types(function () {
-            todo_get_tasks();
-        });
-    });
     socket.onmessage = ({ data }) => {
-        console.log(data);
         const verification_failed = "Verification failed.";
         switch (data.toString()) {
             case verification_failed:
                 showErrorOverlay("{label24}");
                 return;
             case "Verification successful.":
+                todo_get_categories(function () {
+                    todo_get_types(function () {
+                        todo_get_tasks();
+                    });
+                });
                 return;
             case "ADD_TODO_TASK_ANSWER=OK":
                 addTaskHandleAnswer();
@@ -47,8 +54,12 @@ socket.onopen = () => {
             case "updateTasks":
                 todo_get_tasks();
                 return;
-            case "updateTypes":
-                todo_get_types();
+            case "updateAll":
+                todo_get_categories(function () {
+                    todo_get_types(function () {
+                        todo_get_tasks();
+                    });
+                });
                 return;
             case "ADD-TODO-TYPE-ANSWER=OK":
                 addTypeHandleAnswer();
@@ -99,6 +110,42 @@ function todo_get_categories(callback) {
         });
         document.getElementById("task_category").innerHTML = html;
 
+        html = "";
+        categoryFilterIDs = [];
+        result.forEach((element) => {
+            html += `<div
+                                class="filter-item"
+                                onclick="todo_set_category_filter(this)"
+                                id="category-${element.ID}"
+                            >
+                                ${element.Name}
+                            </div>`;
+            categoryFilterIDs.push(`category-${element.ID}`);
+        });
+        document.getElementById("category-filter-list").innerHTML = html;
+
+        html = "";
+        result.forEach((element) => {
+            html += `<div class="listEntry">
+                            <p>${element.Name}</p>
+                            <div class="actions">
+                                <img
+                                    src="/assets/icons/edit_white_24dp.svg"
+                                    alt=""
+                                    class="pointer"
+                                    onclick="editCategory(${element.ID})"
+                                />
+                                <img
+                                    src="/assets/icons/delete_white_24dp.svg"
+                                    alt=""
+                                    class="pointer"
+                                    onclick="deleteCategory(${element.ID})"
+                                />
+                            </div>
+                        </div>`;
+        });
+        document.getElementById("editCategoriesList").innerHTML = html;
+
         categories = result;
         result.forEach((element) => {
             categoryIDs[element.ID] = element.Name;
@@ -110,44 +157,124 @@ function todo_get_categories(callback) {
 function todo_get_types(callback) {
     _getTypes(function (result) {
         var html = "";
-        result.forEach((element, index) => {
+        result.forEach((element) => {
             html += `<option value="${element.ID}">${element.Name}</option>`;
         });
         document.getElementById("task_type").innerHTML = html;
+
+        html = "";
+        typeFilterIDs = [];
+        result.forEach((element) => {
+            html += `<div
+                                class="filter-item"
+                                onclick="todo_set_type_filter(this)"
+                                id="type-${element.ID}"
+                            >
+                                ${element.Name}
+                            </div>`;
+            typeFilterIDs.push(`type-${element.ID}`);
+        });
+        document.getElementById("type-filter-list").innerHTML = html;
+
+        html = "";
+        result.forEach((element) => {
+            html += `<div class="listEntry">
+                            <p>${element.Name}</p>
+                            <div class="actions">
+                                <img
+                                    src="/assets/icons/edit_white_24dp.svg"
+                                    alt=""
+                                    class="pointer"
+                                    onclick="editType(${element.ID})"
+                                />
+                                <img
+                                    src="/assets/icons/delete_white_24dp.svg"
+                                    alt=""
+                                    class="pointer"
+                                    onclick="deleteType(${element.ID})"
+                                />
+                            </div>
+                        </div>`;
+        });
+        document.getElementById("editTypesList").innerHTML = html;
 
         types = result;
         result.forEach((element) => {
             typeIDs[element.ID] = element.Name;
         });
+
         lastestActionCompleted = true;
         if (callback) callback();
     });
 }
 function todo_get_tasks(callback) {
     _getTasks(function (result) {
-        var html = "";
-        result.forEach((element, index) => {
-            if (element.StateID == 0) {
-                element.StateID = `<img class="todo_state_symbol" src="/assets/icons/pending_darkred_24dp.svg" onclick="todo_toggle_state(${element.ID}, 1)" title="{label29}">`;
-            }
-            if (element.StateID == 1) {
-                element.StateID = `<img  class="todo_state_symbol" src="/assets/icons/done_green_24dp.svg" onclick="todo_toggle_state(${element.ID}, 0)" title="{label30}">`;
-            }
-            html += `<tr>
-                            <td>${element.StateID}</td>
+        tasks = result;
+        todo_update_tasks();
+        if (callback) callback();
+    });
+}
+function todo_update_tasks() {
+    var html = testForFilters();
+    document.getElementById("tasks").innerHTML = html;
+}
+function testForFilters() {
+    var html = "";
+    tasks.forEach((element, index) => {
+        if (typeFilter !== -1 && parseInt(element.TypeID) !== typeFilter) {
+            return;
+        }
+        if (
+            categoryFilter !== -1 &&
+            parseInt(element.CategoryID) !== categoryFilter
+        ) {
+            return;
+        }
+        if (stateFilter !== -1 && parseInt(element.StateID) !== stateFilter) {
+            return;
+        }
+        if (element.StateID == 0) {
+            state = `<img class="todo_state_symbol" src="/assets/icons/pending_darkred_24dp.svg" onclick="todo_toggle_state(${element.ID}, 1)" title="{label29}">`;
+        }
+        if (element.StateID == 1) {
+            state = `<img  class="todo_state_symbol" src="/assets/icons/done_green_24dp.svg" onclick="todo_toggle_state(${element.ID}, 0)" title="{label30}">`;
+        }
+        searchRegex = new RegExp(searchFilter, "ig");
+        if (
+            searchFilter !== "" &&
+            (element.Description.toString().match(searchRegex) ||
+                element.Date.toString().match(searchRegex))
+        ) {
+            var desc = element.Description.replaceAll(
+                searchRegex,
+                function (str) {
+                    return "<b>" + str + "</b>";
+                }
+            );
+            var date = element.Date.replaceAll(searchRegex, function (str) {
+                return "<b>" + str + "</b>";
+            });
+            elementHTML = `<tr>
+                            <td>${state}</td>
+                            <td>${typeIDs[element.TypeID]}</td>
+                            <td>${categoryIDs[element.CategoryID]}</td>
+                            <td>${desc}</td>
+                            <td>${date}</td>
+                        </tr>`;
+            html += elementHTML;
+        } else if (searchFilter == "") {
+            elementHTML = `<tr>
+                            <td>${state}</td>
                             <td>${typeIDs[element.TypeID]}</td>
                             <td>${categoryIDs[element.CategoryID]}</td>
                             <td>${element.Description}</td>
                             <td>${element.Date}</td>
                         </tr>`;
-        });
-        document.getElementById("tasks").innerHTML = html;
-
-        tasks = result;
-        if (callback) callback();
+            html += elementHTML;
+        }
     });
+    return html;
 }
-
 socket.onclose = function () {
     showErrorOverlay("{label25}");
 };
@@ -239,4 +366,112 @@ function todo_add_category() {
         hideOverlay("createCategoryOverlay");
         todo_get_categories();
     });
+}
+function todo_set_search_filter() {
+    searchFilter = document.getElementById("search").value;
+    todo_update_tasks();
+}
+function todo_set_state_filter(element) {
+    const selected = element.classList.contains("selected");
+    const id = element.id;
+    const SQLID = id.replace("state-", "");
+    stateFilterIDs.forEach((filterID) => {
+        document.getElementById(filterID).classList.remove("selected");
+    });
+    if (!selected) {
+        element.classList.add("selected");
+        stateFilter = parseInt(SQLID);
+    }
+    if (selected) {
+        stateFilter = -1;
+    }
+    todo_update_tasks();
+}
+function todo_set_type_filter(element) {
+    const selected = element.classList.contains("selected");
+    const id = element.id;
+    const SQLID = id.replace("type-", "");
+    typeFilterIDs.forEach((filterID) => {
+        document.getElementById(filterID).classList.remove("selected");
+    });
+    if (!selected) {
+        element.classList.add("selected");
+        typeFilter = parseInt(SQLID);
+    }
+    if (selected) {
+        typeFilter = -1;
+    }
+    todo_update_tasks();
+}
+function todo_set_category_filter(element) {
+    const selected = element.classList.contains("selected");
+    const id = element.id;
+    const SQLID = id.replace("category-", "");
+    categoryFilterIDs.forEach((filterID) => {
+        document.getElementById(filterID).classList.remove("selected");
+    });
+    if (!selected) {
+        element.classList.add("selected");
+        categoryFilter = parseInt(SQLID);
+    }
+    if (selected) {
+        categoryFilter = -1;
+    }
+    todo_update_tasks();
+}
+function editCategory(id) {
+    document.getElementById("editCategoryID").value = id;
+    document.getElementById("category_edit_name").value = categoryIDs[id];
+    document.getElementById("editCategoriesForm").classList.remove("hidden");
+}
+function editType(id) {
+    document.getElementById("editTypeID").value = id;
+    document.getElementById("type_edit_name").value = typeIDs[id];
+    document.getElementById("editTypesForm").classList.remove("hidden");
+}
+function todo_edit_category() {
+    var category_id = document.getElementById("editCategoryID").value;
+    var category_name = document.getElementById("category_edit_name").value;
+    document.getElementById("editCategoriesForm").classList.add("hidden");
+
+    if (category_name !== "" && category_id !== -1) {
+        if (categoryIDs[category_id] == undefined) {
+            showErrorOverlay("{label35}");
+        } else {
+            const data = {
+                id: category_id,
+                new: category_name,
+            };
+            const jsondata = JSON.stringify(data);
+            socket.send("EDIT-CATEGORY=" + jsondata);
+        }
+    } else {
+        showErrorOverlay("{label35}");
+    }
+}
+function todo_edit_type() {
+    var type_id = document.getElementById("editTypeID").value;
+    var type_name = document.getElementById("type_edit_name").value;
+    document.getElementById("editTypesForm").classList.add("hidden");
+
+    if (type_name !== "" && type_id !== -1) {
+        if (typeIDs[type_id] == undefined) {
+            showErrorOverlay("{label35}");
+        } else {
+            const data = {
+                id: type_id,
+                new: type_name,
+            };
+            const jsondata = JSON.stringify(data);
+            socket.send("EDIT-TYPE=" + jsondata);
+        }
+    } else {
+        showErrorOverlay("{label35}");
+    }
+}
+function deleteType(id) {
+    socket.send("DELETE-TYPE=" + id);
+}
+function deleteCategory(id) {
+    socket.send("DELETE-CATEGORY=" + id);
 }

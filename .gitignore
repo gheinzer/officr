@@ -1,3 +1,9 @@
 package-lock.json
 */.old/*
 config.js
+daemon/officrbackend.wrapper.log
+daemon/officrbackend.err.log
+daemon/officrbackend.exe
+daemon/officrbackend.exe.config
+daemon/officrbackend.out.log
+daemon/officrbackend.xml

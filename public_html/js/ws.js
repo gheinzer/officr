@@ -209,10 +209,17 @@ function todo_get_types(callback) {
 }
 function todo_get_tasks(callback) {
     _getTasks(function (result) {
+        result = result.sort(function (a, b) {
+            return _reorderDate(a.Date) - _reorderDate(b.Date);
+        });
         tasks = result;
         todo_update_tasks();
         if (callback) callback();
     });
+}
+function _reorderDate(date) {
+    date = date.split(".")[2] + date.split(".")[1] + date.split(".")[0];
+    return date;
 }
 function todo_update_tasks() {
     var html = testForFilters();

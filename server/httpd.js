@@ -1,7 +1,6 @@
 // This script is responsible serving the files in public_html via http.
 const { readFileSync, existsSync, lstatSync } = require("fs");
 const http = require("http");
-const { exit } = require("process");
 const { httpd_config, pages, ws_config } = require("../config");
 const { handleFormInput } = require("./handleFormInput");
 const { session_verify, getUserByID } = require("./user_management");

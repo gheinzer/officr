@@ -1,6 +1,5 @@
 const { createWebSocketStream } = require("ws");
 const WebSocket = require("ws");
-const { brotliDecompressSync } = require("zlib");
 const { ws_config } = require("../config");
 const {
     session_verify,

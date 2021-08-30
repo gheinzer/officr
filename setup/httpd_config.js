@@ -31,9 +31,7 @@ const colors = {
     },
 };
 const labels = require("../server/lang-specific-content");
-const { config } = require("process");
 const readline = require("readline");
-const { rootCertificates } = require("tls");
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout,

@@ -5,6 +5,13 @@ const { httpd_config, pages, ws_config } = require("../config");
 const { handleFormInput } = require("./handleFormInput");
 const { session_verify, getUserByID } = require("./user_management");
 const labels = require("./lang-specific-content");
+const { exec } = require("child_process");
+
+let version;
+exec("git describe --tags", function (error, stdout, stderr) {
+    if (error) throw error;
+    version = stdout;
+});
 
 console.log("httpd.js started");
 

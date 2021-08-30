@@ -1092,4 +1092,8 @@ body .horizontal-container .account-options img {
   margin: 0.5rem !important;
   padding: 0;
 }
+
+.footer .little {
+  font-size: 0.75rem;
+}
 /*# sourceMappingURL=style.css.map */

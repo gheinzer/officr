@@ -136,11 +136,11 @@ server.on("connection", (socket) => {
                     socket.close();
                     return;
                 } else {
-                    socket.send("Verification successful.");
                     userID = result;
                     getUserByID(result, function (result) {
                         username = result.Username;
                         ready = true;
+                        socket.send("Verification successful.");
                     });
                 }
                 if (queue.length > 0) {

@@ -7,3 +7,5 @@ daemon/officrbackend.exe
 daemon/officrbackend.exe.config
 daemon/officrbackend.out.log
 daemon/officrbackend.xml
+officr.bat
+autstart.log

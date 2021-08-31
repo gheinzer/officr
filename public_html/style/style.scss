@@ -210,6 +210,8 @@ body {
     padding: 0;
     table {
         width: 100%;
+        max-width: 100%;
+        overflow-wrap: break-word;
         border-collapse: collapse;
         th {
             text-align: left;

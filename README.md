@@ -20,6 +20,7 @@ Officr is mainly a todo list to rember things like homework and meetings. I wrot
 
 -   You should have installed `node.js` on your machine
 -   You should be able to install npm modules
+-   You should have installed git.
 
 ## Required modules
 

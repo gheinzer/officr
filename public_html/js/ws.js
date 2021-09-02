@@ -50,6 +50,7 @@ socket.onopen = () => {
                 return;
             case "ADD_TODO_TASK_ANSWER=OK":
                 addTaskHandleAnswer();
+                showMessage("{label45}");
                 return;
             case "updateTasks":
                 todo_get_tasks();
@@ -62,9 +63,11 @@ socket.onopen = () => {
                 });
                 return;
             case "ADD-TODO-TYPE-ANSWER=OK":
+                showMessage("{label46}");
                 addTypeHandleAnswer();
                 return;
             case "ADD-TODO-CATEGORY-ANSWER=OK":
+                showMessage("{label47}");
                 addCategoryHandleAnswer();
                 return;
         }
@@ -481,4 +484,11 @@ function deleteType(id) {
 }
 function deleteCategory(id) {
     socket.send("DELETE-CATEGORY=" + id);
+}
+function showMessage(msg) {
+    var msgbox = document.createElement("div");
+    var child = document.createTextNode(msg);
+    msgbox.appendChild(child);
+    msgbox.classList.add("msg");
+    document.getElementById("messagecenter").appendChild(msgbox);
 }

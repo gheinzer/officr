@@ -226,6 +226,46 @@ body {
             margin: 0;
         }
     }
+    .msg-center {
+        padding: 2ch;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        display: flex;
+        flex-direction: column;
+        z-index: 40;
+        gap: 1ch;
+        transition: flex-grow 0.5s;
+        .msg {
+            padding: 1.5ch 3ch;
+            background-color: lighten($header-bg, 5%);
+            border-radius: 0.5ch;
+            animation: show-msg 0.2s forwards, show-msg reverse 0.2s 5s forwards,
+                remove-msg 0.1s 5.2s forwards;
+            opacity: 0;
+            pointer-events: none;
+            flex-grow: 0.00001;
+            text-align: center;
+            @keyframes show-msg {
+                from {
+                    opacity: 0;
+                    pointer-events: none;
+                }
+                to {
+                    opacity: 100%;
+                    pointer-events: none;
+                }
+            }
+            @keyframes remove-msg {
+                from {
+                    display: initial;
+                }
+                to {
+                    display: none;
+                }
+            }
+        }
+    }
 }
 .createTaskOverlay,
 .createCategoryOverlay,

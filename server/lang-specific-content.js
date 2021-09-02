@@ -48,6 +48,9 @@ const labels = {
         42: "Bei officr anmelden",
         43: "Diese Webseite benutzt technisch erforderliche Cookies, um die Dienste zur Verfügung zu stellen.",
         44: "Verstanden, nicht erneut anzeigen",
+        45: "Eintrag wurde erfolgreich erstellt.",
+        46: "Typ wurde erfolgreich erstellt.",
+        47: "Kategorie wurde erfolgreich erstellt.",
     },
     en: {
         1: "Category",
@@ -94,6 +97,9 @@ const labels = {
         42: "Get officr now!",
         43: "This website uses cookies to provide the services.",
         44: "Got it, don't show again",
+        45: "Task was created successfully",
+        46: "Type was created successfully",
+        47: "Category was created successfully",
     },
 };
 

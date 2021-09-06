@@ -1188,5 +1188,7 @@ code {
   font-weight: bold;
   font-family: "Courier New";
   font-size: 0.75rem;
+  border-radius: 0.5ch;
+  margin: 1ch;
 }
 /*# sourceMappingURL=style.css.map */

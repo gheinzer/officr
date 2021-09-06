@@ -231,6 +231,39 @@ function todo_update_tasks() {
 function testForFilters() {
     var html = "";
     tasks.forEach((element, index) => {
+        element.Description = element.Description.toString().replaceAll(
+            "\n",
+            "<br>"
+        );
+        boldFound = [...element.Description.toString().matchAll(/\*.*\*/g)];
+        if (boldFound) {
+            boldFound.forEach((boldString) => {
+                element.Description = element.Description.replace(
+                    boldString.toString(),
+                    "<b>" + boldString.toString().replaceAll("*", "") + "</b>"
+                );
+            });
+        }
+        italicFound = [...element.Description.toString().matchAll(/_.*_/g)];
+        if (italicFound) {
+            italicFound.forEach((italicString) => {
+                element.Description = element.Description.replace(
+                    italicString.toString(),
+                    "<i>" + italicString.toString().replaceAll("_", "") + "</i>"
+                );
+            });
+        }
+        monospaceFound = [...element.Description.toString().matchAll(/`.*`/g)];
+        if (monospaceFound) {
+            monospaceFound.forEach((monospaceString) => {
+                element.Description = element.Description.replace(
+                    monospaceString.toString(),
+                    "<code>" +
+                        monospaceString.toString().replaceAll("`", "") +
+                        "</code>"
+                );
+            });
+        }
         if (typeFilter !== -1 && parseInt(element.TypeID) !== typeFilter) {
             return;
         }

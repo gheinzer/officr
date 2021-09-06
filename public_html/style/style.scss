@@ -316,7 +316,7 @@ body {
     height: max-content;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: top;
     width: 100%;
     //padding: 0 1ch;
     label {
@@ -324,13 +324,14 @@ body {
         color: white;
         left: 0;
         transition: 0.5s;
-        top: 30%;
+        top: 1ch;
         opacity: 0.75;
         pointer-events: none;
         font-weight: 100;
         letter-spacing: $letter-spacing;
     }
     img {
+        margin-top: 0.8ch;
         height: 24px;
         width: 24px;
         & ~ label {
@@ -339,7 +340,8 @@ body {
     }
     &:focus-within label,
     input:not(:placeholder-shown) ~ label,
-    select ~ label {
+    select ~ label,
+    textarea:not(:placeholder-shown) ~ label {
         font-size: 0.5rem;
         top: 0;
         opacity: 1;
@@ -350,11 +352,13 @@ body {
         color: $accentColor;
     }
     &:not(:focus-within) input:not(:placeholder-shown) ~ label,
-    :not(:focus-within) select ~ label {
+    :not(:focus-within) select ~ label,
+    &:not(:focus-within) textarea:not(:placeholder-shown) ~ label {
         color: $accentColor;
     }
 
     input,
+    textarea,
     select {
         width: 100%;
         border: none;
@@ -664,4 +668,11 @@ body {
     .little {
         font-size: 0.75rem;
     }
+}
+code {
+    background-color: lighten($header-bg, 10%);
+    padding: 0.5ch;
+    font-weight: bold;
+    font-family: "Courier New";
+    font-size: 0.75rem;
 }

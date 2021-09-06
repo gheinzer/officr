@@ -651,9 +651,9 @@ body .horizontal-container .account-options img {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -webkit-box-align: top;
+      -ms-flex-align: top;
+          align-items: top;
   width: 100%;
 }
 
@@ -663,7 +663,7 @@ body .horizontal-container .account-options img {
   left: 0;
   -webkit-transition: 0.5s;
   transition: 0.5s;
-  top: 30%;
+  top: 1ch;
   opacity: 0.75;
   pointer-events: none;
   font-weight: 100;
@@ -671,6 +671,7 @@ body .horizontal-container .account-options img {
 }
 
 .input-container img {
+  margin-top: 0.8ch;
   height: 24px;
   width: 24px;
 }
@@ -681,7 +682,8 @@ body .horizontal-container .account-options img {
 
 .input-container:focus-within label,
 .input-container input:not(:placeholder-shown) ~ label,
-.input-container select ~ label {
+.input-container select ~ label,
+.input-container textarea:not(:placeholder-shown) ~ label {
   font-size: 0.5rem;
   top: 0;
   opacity: 1;
@@ -694,11 +696,13 @@ body .horizontal-container .account-options img {
 }
 
 .input-container:not(:focus-within) input:not(:placeholder-shown) ~ label,
-.input-container :not(:focus-within) select ~ label {
+.input-container :not(:focus-within) select ~ label,
+.input-container:not(:focus-within) textarea:not(:placeholder-shown) ~ label {
   color: #d40000;
 }
 
 .input-container input,
+.input-container textarea,
 .input-container select {
   width: 100%;
   border: none;
@@ -718,6 +722,7 @@ body .horizontal-container .account-options img {
 }
 
 .input-container input::-webkit-input-placeholder,
+.input-container textarea::-webkit-input-placeholder,
 .input-container select::-webkit-input-placeholder {
   color: rgba(255, 255, 255, 0.8);
   font-family: inherit;
@@ -725,6 +730,7 @@ body .horizontal-container .account-options img {
 }
 
 .input-container input:-ms-input-placeholder,
+.input-container textarea:-ms-input-placeholder,
 .input-container select:-ms-input-placeholder {
   color: rgba(255, 255, 255, 0.8);
   font-family: inherit;
@@ -732,6 +738,7 @@ body .horizontal-container .account-options img {
 }
 
 .input-container input::-ms-input-placeholder,
+.input-container textarea::-ms-input-placeholder,
 .input-container select::-ms-input-placeholder {
   color: rgba(255, 255, 255, 0.8);
   font-family: inherit;
@@ -739,6 +746,7 @@ body .horizontal-container .account-options img {
 }
 
 .input-container input::placeholder,
+.input-container textarea::placeholder,
 .input-container select::placeholder {
   color: rgba(255, 255, 255, 0.8);
   font-family: inherit;
@@ -746,11 +754,13 @@ body .horizontal-container .account-options img {
 }
 
 .input-container input:focus,
+.input-container textarea:focus,
 .input-container select:focus {
   outline: none;
 }
 
 .input-container input option,
+.input-container textarea option,
 .input-container select option {
   font-family: "Arial";
   font-size: 0.75rem;
@@ -1169,6 +1179,14 @@ body .horizontal-container .account-options img {
 }
 
 .footer .little {
+  font-size: 0.75rem;
+}
+
+code {
+  background-color: #3a3a3a;
+  padding: 0.5ch;
+  font-weight: bold;
+  font-family: "Courier New";
   font-size: 0.75rem;
 }
 /*# sourceMappingURL=style.css.map */

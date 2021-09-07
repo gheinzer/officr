@@ -116,18 +116,20 @@ server.on("request", (req, res) => {
         var remote_lang = httpd_config.lang;
         const url = req.url;
         if (httpd_config.lang == null) {
-            remote_lang =
-                req.headers["accept-language"][0] +
-                req.headers["accept-language"][1];
-            if (labels[remote_lang] == undefined) {
-                remote_lang = "en";
-            }
+            try {
+                remote_lang =
+                    req.headers["accept-language"][0] +
+                    req.headers["accept-language"][1];
+                if (labels[remote_lang] == undefined) {
+                    remote_lang = "en";
+                }
 
-            if (httpd_config.logging.remote_lang) {
-                console.log(
-                    `Detected language of the remote browser: ${remote_lang}`
-                );
-            }
+                if (httpd_config.logging.remote_lang) {
+                    console.log(
+                        `Detected language of the remote browser: ${remote_lang}`
+                    );
+                }
+            } catch {}
         }
         if (labels[remote_lang] == undefined) {
             remote_lang = "en";

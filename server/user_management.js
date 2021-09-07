@@ -76,21 +76,17 @@ function user_delete_sessions(username) {
 }
 
 function createAccount(username, password, email) {
-    try {
-        getUserByName(username, function (result) {
-            if (result === undefined) {
-                password = _md5(password);
-                execQuery(
-                    "INSERT INTO users (Username, Password, Email) VALUES (?, ?, ?)",
-                    [username, password, email]
-                );
-                return;
-            }
-            throw new Error("Already existing username.");
-        });
-    } catch {
-        const hashedPassword = _md5(password);
-    }
+    getUserByName(username, function (result) {
+        if (result === undefined) {
+            password = _md5(password);
+            execQuery(
+                "INSERT INTO users (Username, Password, Email) VALUES (?, ?, ?)",
+                [username, password, email]
+            );
+            return;
+        }
+        throw new Error("Already existing username.");
+    });
 }
 /**
  *This verifies user credentials and runs the callback method, when the verification is complete.

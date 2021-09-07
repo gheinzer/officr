@@ -127,7 +127,7 @@ server.on("connection", (socket) => {
         }
     }
     socket.on("message", (message) => {
-        const init = message.match(/INITIALIZE_WITH_SESSION_ID=.*/);
+        const init = message.toString().match(/INITIALIZE_WITH_SESSION_ID=.*/);
         if (init !== null) {
             const sessionID = init[0].split("=")[1];
             session_verify(sessionID, function (result) {

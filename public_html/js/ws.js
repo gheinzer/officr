@@ -71,30 +71,30 @@ socket.onopen = () => {
                 addCategoryHandleAnswer();
                 return;
         }
-        if (data.toString().match(/DATA-FOR-GET-CATEGORIES=\[{.*}\]/)) {
+        if (data.toString().match(/DATA-FOR-GET-CATEGORIES=\[.*\]/)) {
             const jsondata = data
                 .toString()
-                .match(/DATA-FOR-GET-CATEGORIES=\[{.*}\]/)[0]
+                .match(/DATA-FOR-GET-CATEGORIES=\[.*\]/)[0]
                 .toString()
                 .replace("DATA-FOR-GET-CATEGORIES=", "");
             const category_data = JSON.parse(jsondata);
             getCategoriesHandleAnswer(category_data);
             return;
         }
-        if (data.toString().match(/DATA-FOR-GET-TYPES=\[{.*}\]/)) {
+        if (data.toString().match(/DATA-FOR-GET-TYPES=\[.*\]/)) {
             const jsondata = data
                 .toString()
-                .match(/DATA-FOR-GET-TYPES=\[{.*}\]/)[0]
+                .match(/DATA-FOR-GET-TYPES=\[.*\]/)[0]
                 .toString()
                 .replace("DATA-FOR-GET-TYPES=", "");
             const category_data = JSON.parse(jsondata);
             getTypesHandleAnswer(category_data);
             return;
         }
-        if (data.toString().match(/DATA-FOR-GET-TASKS=\[{.*}\]/)) {
+        if (data.toString().match(/DATA-FOR-GET-TASKS=\[.*\]/)) {
             const jsondata = data
                 .toString()
-                .match(/DATA-FOR-GET-TASKS=\[{.*}\]/)[0]
+                .match(/DATA-FOR-GET-TASKS=\[.*\]/)[0]
                 .toString()
                 .replace("DATA-FOR-GET-TASKS=", "");
             const category_data = JSON.parse(jsondata);

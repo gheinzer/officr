@@ -3,7 +3,7 @@
 # officr
 
 ![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/gheinzer/officr?color=%23d40000&include_prereleases&logo=github&style=for-the-badge)
-![WebApp](https://img.shields.io/website?down_color=red&label=webapp&style=for-the-badge&up_color=green&url=http%3A%2F%2Fofficr.gabrielheinzer.ch&)
+[![WebApp](https://img.shields.io/website?down_color=red&label=webapp&style=for-the-badge&up_color=green&url=http%3A%2F%2Fofficr.gabrielheinzer.ch&)](http://officr.gabrielheinzer.ch)
 
 # What is it?
 

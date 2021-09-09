@@ -1100,6 +1100,10 @@ body .horizontal-container .account-options img {
   overflow-x: hidden;
 }
 
+.viewport-size * {
+  margin: 0 3ch;
+}
+
 .viewport-size p {
   font-size: 2rem;
   word-wrap: break-word;

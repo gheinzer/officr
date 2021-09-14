@@ -16,6 +16,11 @@ exec("git describe --tags", function (error, stdout, stderr) {
 
 console.log("httpd.js started");
 
+const options = {
+    key: readFileSync(httpd_config.ssl.options.key),
+    cert: readFileSync(httpd_config.ssl.options.cert),
+};
+
 const server = http.createServer((req, res) => {}).listen(httpd_config.port);
 
 server.on("request", (req, res) => {
@@ -27,7 +32,7 @@ server.on("error", (err) => {
 
 if (httpd_config.ssl.active) {
     const sslserver = https
-        .createServer(httpd_config.ssl.options, (req, res) => {})
+        .createServer(options, (req, res) => {})
         .listen(httpd_config.ssl.port);
     sslserver.on("request", (req, res) => {
         serverOnRequest(req, res);

@@ -10,6 +10,14 @@ const httpd_config = {
         remote_lang: true, // Configures, wheter the client language is logged or not. Default: true
         requested_path: true, // Configures, wheter the requested path is logged or not. Default: true
     },
+    ssl: {
+        active: false, // Sets, wheter the https server should run or not. Default: false
+        port: "443", // Sets the port for the https server. Default: 443
+        options: {
+            cert: "somecert.cert",
+            key: "somkey.pem",
+        },
+    },
 };
 /**
  * This sets up the my sql configuration.

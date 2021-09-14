@@ -1,6 +1,7 @@
 // This script is responsible serving the files in public_html via http.
 const { readFileSync, existsSync, lstatSync } = require("fs");
 const http = require("http");
+const https = require("https");
 const { httpd_config, pages, ws_config } = require("../config");
 const { handleFormInput } = require("./handleFormInput");
 const { session_verify, getUserByID } = require("./user_management");
@@ -15,8 +16,30 @@ exec("git describe --tags", function (error, stdout, stderr) {
 
 console.log("httpd.js started");
 
-const server = http.createServer((req, res) => {}).listen(httpd_config.port);
+const server = http
+    .createServer(options, (req, res) => {})
+    .listen(httpd_config.port);
+
 server.on("request", (req, res) => {
+    serverOnRequest(req, res);
+});
+server.on("error", (err) => {
+    console.warn(err);
+});
+
+if (httpd_config.ssl.active) {
+    const sslserver = https
+        .createServer(httpd_config.ssl.options, (req, res) => {})
+        .listen(httpd_config.ssl.port);
+    sslserver.on("request", (req, res) => {
+        serverOnRequest(req, res);
+    });
+    sslserver.on("error", (err) => {
+        console.warn(err);
+    });
+}
+
+function serverOnRequest(req, res) {
     req.url = req.url.toString().split("?")[0];
     const { headers } = req;
     if (headers.cookie !== undefined) {
@@ -37,6 +60,7 @@ server.on("request", (req, res) => {
                     res.statusCode = 302;
                     res.end("302 - You should be redirected to the home page.");
                     return;
+                    6;
                 }
                 getUserByID(result, function (result) {
                     if (checkForAuthenticatedRedirect()) {
@@ -246,7 +270,4 @@ server.on("request", (req, res) => {
         }
         res.end();
     }
-});
-server.on("error", (err) => {
-    console.warn(err);
-});
+}

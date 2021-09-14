@@ -16,9 +16,7 @@ exec("git describe --tags", function (error, stdout, stderr) {
 
 console.log("httpd.js started");
 
-const server = http
-    .createServer(options, (req, res) => {})
-    .listen(httpd_config.port);
+const server = http.createServer((req, res) => {}).listen(httpd_config.port);
 
 server.on("request", (req, res) => {
     serverOnRequest(req, res);

@@ -66,24 +66,29 @@ function serverOnRequest(req, res) {
                     6;
                 }
                 getUserByID(result, function (result) {
-                    if (checkForAuthenticatedRedirect()) {
-                        handleNormalRequest(result.Username, publicSessionID);
+                    if (checkForAuthenticatedRedirect(req, res)) {
+                        handleNormalRequest(
+                            result.Username,
+                            publicSessionID,
+                            req,
+                            res
+                        );
                         return;
                     }
                 });
             });
         } else {
-            if (checkForNoAuthenticationRedirect()) {
-                handleNormalRequest();
+            if (checkForNoAuthenticationRedirect(req, res)) {
+                handleNormalRequest(req, res);
             }
         }
     } else {
-        if (checkForNoAuthenticationRedirect()) {
-            handleNormalRequest();
+        if (checkForNoAuthenticationRedirect(req, res)) {
+            handleNormalRequest(req, res);
         }
     }
 }
-function checkForAuthenticatedRedirect() {
+function checkForAuthenticatedRedirect(req, res) {
     var matched = false;
     pages.redirect_when_authenticated.forEach((regex) => {
         if (req.url.match(regex) !== null) {
@@ -99,7 +104,7 @@ function checkForAuthenticatedRedirect() {
         return true;
     }
 }
-function checkForNoAuthenticationRedirect() {
+function checkForNoAuthenticationRedirect(req, res) {
     var matched = false;
     pages.authentication_required.forEach((regex) => {
         if (req.url.match(regex) !== null) {
@@ -117,7 +122,9 @@ function checkForNoAuthenticationRedirect() {
 }
 function handleNormalRequest(
     username = undefined,
-    publicSessionID = undefined
+    publicSessionID = undefined,
+    req,
+    res
 ) {
     if (req.url === "/logout") {
         res.setHeader("Location", "/");

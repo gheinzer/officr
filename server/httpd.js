@@ -8,6 +8,8 @@ const { session_verify, getUserByID } = require("./user_management");
 const labels = require("./lang-specific-content");
 const { exec } = require("child_process");
 
+var sslserver = undefined;
+
 let version;
 exec("git describe --tags", function (error, stdout, stderr) {
     if (error) throw error;
@@ -16,12 +18,14 @@ exec("git describe --tags", function (error, stdout, stderr) {
 
 console.log("httpd.js started");
 
-const server = http.createServer((req, res) => {}).listen(httpd_config.port);
+const httpserver = http
+    .createServer((req, res) => {})
+    .listen(httpd_config.port);
 
-server.on("request", (req, res) => {
+httpserver.on("request", (req, res) => {
     serverOnRequest(req, res);
 });
-server.on("error", (err) => {
+httpserver.on("error", (err) => {
     console.warn(err);
 });
 
@@ -274,3 +278,8 @@ function handleNormalRequest(
     }
     res.end();
 }
+
+module.exports = {
+    httpserver,
+    sslserver,
+};

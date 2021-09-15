@@ -1,6 +1,9 @@
 const { createWebSocketStream } = require("ws");
 const WebSocket = require("ws");
-const { ws_config } = require("../config");
+const { httpd_config } = require("../config");
+console.log("Starting httpd.js...");
+// This script is responsible for serving the files in public_html via http.
+const { httpserver, sslserver } = require("./httpd");
 const {
     session_verify,
     getUserByID,
@@ -17,14 +20,21 @@ const {
     user_todo_delete_category,
 } = require("./user_management");
 
-const server = new WebSocket.Server({ port: parseInt(ws_config.port) });
+const wsserver = new WebSocket.Server({ server: httpserver });
+if(httpd_config.ssl.active) const wssserver = new WebSocket.Server({ server: sslserver });
 
 const messagesFunctions = {
     getSubjects: null,
 };
 console.log("ws.js was started");
 
-server.on("connection", (socket) => {
+wsserver.on("connection", (socket) => {
+    wsOnConnection(socket);
+});
+wssserver.on("connection", (socket) => {
+    wsOnConnection(socket);
+});
+function wsOnConnection(socket) {
     let username;
     let userID;
     let ready = false;
@@ -158,4 +168,4 @@ server.on("connection", (socket) => {
         }
         if (!init && ready) executeMessage(message);
     });
-});
+}

@@ -271,8 +271,12 @@ function handleNormalRequest(
             );
         }
         if (originalHtmlContent.toString().match(/{WS_PORT}/)) {
-            if (ssl) const port = httpd_config.ssl.port;
-            else const port = httpd_config.port;
+            let port;
+            if (ssl) {
+                port = httpd_config.ssl.port;
+            } else {
+                port = httpd_config.port;
+            }
             originalHtmlContent = originalHtmlContent.toString();
             originalHtmlContent = originalHtmlContent.replace(
                 "{WS_PORT}",
@@ -280,8 +284,12 @@ function handleNormalRequest(
             );
         }
         if (originalHtmlContent.toString().match(/{WS_PROTOCOL}/)) {
-            if (ssl) const protocol = "ws";
-            else const protocol = "wss";
+            let protocol;
+            if (ssl) {
+                protocol = "wss";
+            } else {
+                protocol = "ws";
+            }
             originalHtmlContent = originalHtmlContent.toString();
             originalHtmlContent = originalHtmlContent.replace(
                 "{WS_PROTOCOL}",

@@ -23,7 +23,7 @@ const httpserver = http
     .listen(httpd_config.port);
 
 httpserver.on("request", (req, res) => {
-    serverOnRequest(req, res);
+    serverOnRequest(req, res, false);
 });
 httpserver.on("error", (err) => {
     console.warn(err);
@@ -38,14 +38,14 @@ if (httpd_config.ssl.active) {
         .createServer(options, (req, res) => {})
         .listen(httpd_config.ssl.port);
     sslserver.on("request", (req, res) => {
-        serverOnRequest(req, res);
+        serverOnRequest(req, res, true);
     });
     sslserver.on("error", (err) => {
         console.warn(err);
     });
 }
 
-function serverOnRequest(req, res) {
+function serverOnRequest(req, res, ssl) {
     req.url = req.url.toString().split("?")[0];
     const { headers } = req;
     if (headers.cookie !== undefined) {
@@ -71,6 +71,7 @@ function serverOnRequest(req, res) {
                 getUserByID(result, function (result) {
                     if (checkForAuthenticatedRedirect(req, res)) {
                         handleNormalRequest(
+                            ssl,
                             req,
                             res,
                             result.Username,
@@ -82,12 +83,12 @@ function serverOnRequest(req, res) {
             });
         } else {
             if (checkForNoAuthenticationRedirect(req, res)) {
-                handleNormalRequest(req, res);
+                handleNormalRequest(ssl, req, res);
             }
         }
     } else {
         if (checkForNoAuthenticationRedirect(req, res)) {
-            handleNormalRequest(req, res);
+            handleNormalRequest(ssl, req, res);
         }
     }
 }
@@ -124,6 +125,7 @@ function checkForNoAuthenticationRedirect(req, res) {
     }
 }
 function handleNormalRequest(
+    ssl,
     req,
     res,
     username = undefined,
@@ -266,6 +268,24 @@ function handleNormalRequest(
             originalHtmlContent = originalHtmlContent.replace(
                 "{USERNAME}",
                 username
+            );
+        }
+        if (originalHtmlContent.toString().match(/{WS_PORT}/)) {
+            if (ssl) const port = httpd_config.ssl.port;
+            else const port = httpd_config.port;
+            originalHtmlContent = originalHtmlContent.toString();
+            originalHtmlContent = originalHtmlContent.replace(
+                "{WS_PORT}",
+                port
+            );
+        }
+        if (originalHtmlContent.toString().match(/{WS_PROTOCOL}/)) {
+            if (ssl) const protocol = "ws";
+            else const protocol = "wss";
+            originalHtmlContent = originalHtmlContent.toString();
+            originalHtmlContent = originalHtmlContent.replace(
+                "{WS_PROTOCOL}",
+                protocol
             );
         }
         res.write(originalHtmlContent);

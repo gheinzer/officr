@@ -1,5 +1,5 @@
 const socket = new WebSocket(
-    "ws://" + location.hostname + ":{rawCodeLabel<ws_config.port>}"
+    "{WS_PROTOCOL}://" + location.hostname + ":{WS_PORT}"
 );
 
 function showErrorOverlay(msg) {

@@ -21,7 +21,6 @@ const {
 } = require("./user_management");
 
 const wsserver = new WebSocket.Server({ server: httpserver });
-if(httpd_config.ssl.active) const wssserver = new WebSocket.Server({ server: sslserver });
 
 const messagesFunctions = {
     getSubjects: null,
@@ -31,9 +30,13 @@ console.log("ws.js was started");
 wsserver.on("connection", (socket) => {
     wsOnConnection(socket);
 });
-wssserver.on("connection", (socket) => {
-    wsOnConnection(socket);
-});
+if (httpd_config.ssl.active) {
+    const wssserver = new WebSocket.Server({ server: sslserver });
+
+    wssserver.on("connection", (socket) => {
+        wsOnConnection(socket);
+    });
+}
 function wsOnConnection(socket) {
     let username;
     let userID;

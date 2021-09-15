@@ -16,11 +16,6 @@ exec("git describe --tags", function (error, stdout, stderr) {
 
 console.log("httpd.js started");
 
-const options = {
-    key: readFileSync(httpd_config.ssl.options.key),
-    cert: readFileSync(httpd_config.ssl.options.cert),
-};
-
 const server = http.createServer((req, res) => {}).listen(httpd_config.port);
 
 server.on("request", (req, res) => {
@@ -31,6 +26,10 @@ server.on("error", (err) => {
 });
 
 if (httpd_config.ssl.active) {
+    const options = {
+        key: readFileSync(httpd_config.ssl.options.key),
+        cert: readFileSync(httpd_config.ssl.options.cert),
+    };
     const sslserver = https
         .createServer(options, (req, res) => {})
         .listen(httpd_config.ssl.port);
@@ -68,10 +67,10 @@ function serverOnRequest(req, res) {
                 getUserByID(result, function (result) {
                     if (checkForAuthenticatedRedirect(req, res)) {
                         handleNormalRequest(
-                            result.Username,
-                            publicSessionID,
                             req,
-                            res
+                            res,
+                            result.Username,
+                            publicSessionID
                         );
                         return;
                     }
@@ -121,10 +120,10 @@ function checkForNoAuthenticationRedirect(req, res) {
     }
 }
 function handleNormalRequest(
-    username = undefined,
-    publicSessionID = undefined,
     req,
-    res
+    res,
+    username = undefined,
+    publicSessionID = undefined
 ) {
     if (req.url === "/logout") {
         res.setHeader("Location", "/");

@@ -216,6 +216,7 @@ function todo_get_tasks(callback) {
             return _reorderDate(a.Date) - _reorderDate(b.Date);
         });
         tasks = result;
+
         todo_update_tasks();
         if (callback) callback();
     });
@@ -226,6 +227,13 @@ function _reorderDate(date) {
 }
 function todo_update_tasks() {
     var html = testForFilters();
+    if (html == "") {
+        document.getElementById("notfound_message").style.display = "initial";
+        document.getElementById("tasks_table").style.display = "none";
+    } else {
+        document.getElementById("notfound_message").style.display = "none";
+        document.getElementById("tasks_table").style.display = "initial";
+    }
     document.getElementById("tasks").innerHTML = html;
 }
 function testForFilters() {

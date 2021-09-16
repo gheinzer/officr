@@ -81,7 +81,7 @@
                 <div class="msg-center" id="messagecenter">
                     <div class="msg">{label21}{rawCodeLabel<username>}</div>
                 </div>
-                <table>
+                <table id="tasks_table">
                     <tr>
                         <th>{label28}</th>
                         <th>
@@ -108,6 +108,10 @@
                     </tr>
                     <tbody id="tasks"></tbody>
                 </table>
+                <div id="notfound_message" style="display: none;">
+                    <img src="/assets/undraw/empty.svg" alt="" class="undraw-img" style="display: block;">
+                    <h1 style="text-align: center;">{label49}</h1>
+                </div>
             </div>
         </div>
         <div class="account-option-overlay" id="account-option-overlay">

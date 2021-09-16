@@ -7,8 +7,8 @@ const { handleFormInput } = require("./handleFormInput");
 const { session_verify, getUserByID } = require("./user_management");
 const labels = require("./lang-specific-content");
 const { exec } = require("child_process");
-
 var sslserver = undefined;
+const mime = require("mime");
 
 let version;
 exec("git describe --tags", function (error, stdout, stderr) {
@@ -48,6 +48,7 @@ if (httpd_config.ssl.active) {
 function serverOnRequest(req, res, ssl) {
     req.url = req.url.toString().split("?")[0];
     const { headers } = req;
+    res.setHeader("Server", `officr HTTPD`);
     if (headers.cookie !== undefined) {
         var sessionID = headers.cookie
             .toString()
@@ -202,6 +203,8 @@ function handleNormalRequest(
         if (httpd_config.logging.requested_path) {
             console.log("Requested Path: " + path);
         }
+        var mimeType = mime.getType(path);
+        res.setHeader("Content-Type", mimeType);
         var htmlContent = readFileSync(path);
         var regexForLabels = /{label[0-9]+}/;
         var originalHtmlContent = htmlContent;

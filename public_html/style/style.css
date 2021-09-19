@@ -816,6 +816,7 @@ body .horizontal-container .account-options img {
 
 .classic-button img {
   height: 2em;
+  width: auto;
   margin-right: 2ch;
   fill: white;
   -webkit-transition: 0.5s;

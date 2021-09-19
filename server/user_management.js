@@ -81,7 +81,17 @@ function createAccount(username, password, email) {
             password = _md5(password);
             execQuery(
                 "INSERT INTO users (Username, Password, Email) VALUES (?, ?, ?)",
-                [username, password, email]
+                [username, password, email],
+                function (result) {
+                    getUserByName(username, function (user) {
+                        user_todo_add_category(user.ID, "Family");
+                        user_todo_add_category(user.ID, "Work");
+                        user_todo_add_category(user.ID, "Others");
+
+                        user_todo_add_type(user.ID, "To do");
+                        user_todo_add_type(user.ID, "Meeting");
+                    });
+                }
             );
             return;
         }

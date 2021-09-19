@@ -33,8 +33,8 @@ const mysql_config = {
 };
 
 const pages = {
-    authentication_required: [/todo/],
-    redirect_when_authenticated: [/login*/, /signup*/],
+    authentication_required: [/todo?!(svg|png)/], // Sets the pages, that require authentication. Use JS regex. Default: [/todo?!(svg|png)/]
+    redirect_when_authenticated: [/login/, /signup/], // Sets the pages, that should not be visited when authenticated. Use JS regex. Default: [/login/, /signup/]
 };
 
 const ws_config = {

@@ -575,6 +575,7 @@ body {
 .editTypesOverlay,
 .editCategoriesOverlay {
     .flex {
+        padding: 1rem;
         gap: 3rem;
     }
     .list {

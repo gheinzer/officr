@@ -1042,6 +1042,7 @@ body .horizontal-container .account-options img {
 
 .editTypesOverlay .flex,
 .editCategoriesOverlay .flex {
+  padding: 1rem;
   gap: 3rem;
 }
 

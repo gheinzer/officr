@@ -37,7 +37,7 @@ function handleFormInput(body, req, res) {
                         );
                     } else {
                         var date = new Date();
-                        date.setDate(date.getDate() + 7);
+                        date.setDate(date.getDate() + 14);
                         res.setHeader(
                             "Set-Cookie",
                             `officr-user-session-id=${publicSessionID}; HttpOnly; Path=/; expires=${date.toUTCString()}`

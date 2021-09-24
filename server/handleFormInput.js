@@ -9,6 +9,8 @@ const {
 function handleFormInput(body, req, res) {
     switch (req.url) {
         case "/login/submit":
+            const ip =
+                req.headers["x-forwarded-for"] || req.socket.remoteAddress;
             var datachunks = body.toString().split("&");
             var data = {};
             datachunks.forEach((element) => {
@@ -26,7 +28,10 @@ function handleFormInput(body, req, res) {
             res.statusCode = 302;
             user_verify(username, password, function (result) {
                 if (result) {
-                    let publicSessionID = user_create_session(username).public;
+                    let publicSessionID = user_create_session(
+                        username,
+                        ip
+                    ).public;
                     if (
                         data.keepmeloggedin === undefined ||
                         data.keepmeloggedin === "off"

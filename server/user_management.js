@@ -24,12 +24,13 @@ function getUserByID(id, callback = function (result) {}) {
         }
     );
 }
-function user_create_session(username) {
+function user_create_session(username, ip) {
     const sessionID = _md5(
         Math.random() * Math.random() * 1000000000 * new Date().getTime()
     );
     const privateID = sessionID;
     const publicID = _md5(sessionID);
+    const expires = Math.floor(Date.now() / 1000) + 60 * 60 * 60 * 24 * 14; // The session should expire after 14 days
 
     getUserByName(username, function (result) {
         if (result === undefined) {
@@ -38,7 +39,7 @@ function user_create_session(username) {
         const userID = result.ID;
 
         execQuery(
-            `INSERT INTO usersessions (PrivateID, UserID) VALUES ('${privateID}', ${userID})`,
+            `INSERT INTO usersessions (PrivateID, UserID, Expires, IP) VALUES ('${privateID}', ${userID}, ${expires}, '${ip}')`,
             function (err, result) {
                 if (err) {
                     throw err;

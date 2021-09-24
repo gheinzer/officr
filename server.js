@@ -31,4 +31,6 @@ function start() {
     require("./server/console");
     console.log("Starting ws.js...");
     require("./server/ws"); // This script is responsible for creating a websocket for communication with the front end.
+    console.log("Starting expired-remover.js...");
+    require("./server/expired-remover"); // This script is responsible for removing all expired sessions
 }

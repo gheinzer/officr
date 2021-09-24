@@ -27,17 +27,19 @@ const messagesFunctions = {
 };
 console.log("ws.js was started");
 
-wsserver.on("connection", (socket) => {
-    wsOnConnection(socket);
+wsserver.on("connection", (socket, req) => {
+    wsOnConnection(socket, req);
 });
 if (httpd_config.ssl.active) {
     const wssserver = new WebSocket.Server({ server: sslserver });
 
-    wssserver.on("connection", (socket) => {
-        wsOnConnection(socket);
+    wssserver.on("connection", (socket, req) => {
+        wsOnConnection(socket, req);
     });
 }
-function wsOnConnection(socket) {
+function wsOnConnection(socket, req) {
+    let ip;
+    ip = req.connection.remoteAddress;
     let username;
     let userID;
     let ready = false;
@@ -143,26 +145,30 @@ function wsOnConnection(socket) {
         const init = message.toString().match(/INITIALIZE_WITH_SESSION_ID=.*/);
         if (init !== null) {
             const sessionID = init[0].split("=")[1];
-            session_verify(sessionID, function (result) {
-                if (!result) {
-                    socket.send("Verification failed.");
-                    socket.close();
-                    return;
-                } else {
-                    userID = result;
-                    getUserByID(result, function (result) {
-                        username = result.Username;
-                        ready = true;
-                        socket.send("Verification successful.");
-                    });
-                }
-                if (queue.length > 0) {
-                    queue.forEach((msg, index) => {
-                        executeMessage(msg);
-                        queue.splice(index, 1);
-                    });
-                }
-            });
+            session_verify(
+                sessionID,
+                function (result) {
+                    if (!result) {
+                        socket.send("Verification failed.");
+                        socket.close();
+                        return;
+                    } else {
+                        userID = result;
+                        getUserByID(result, function (result) {
+                            username = result.Username;
+                            ready = true;
+                            socket.send("Verification successful.");
+                        });
+                    }
+                    if (queue.length > 0) {
+                        queue.forEach((msg, index) => {
+                            executeMessage(msg);
+                            queue.splice(index, 1);
+                        });
+                    }
+                },
+                ip
+            );
             return;
         }
         if (!ready) {

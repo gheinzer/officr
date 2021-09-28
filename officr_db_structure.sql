@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
+-- version 4.9.7deb1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Erstellungszeit: 29. Aug 2021 um 13:28
--- Server-Version: 10.4.19-MariaDB
--- PHP-Version: 8.0.6
+-- Host: localhost:3306
+-- Erstellungszeit: 28. Sep 2021 um 19:24
+-- Server-Version: 8.0.26-0ubuntu0.21.04.3
+-- PHP-Version: 7.4.16
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -30,10 +31,10 @@ USE `officr`;
 --
 
 CREATE TABLE `todo_categories` (
-  `ID` int(11) NOT NULL,
-  `UserID` int(11) NOT NULL,
+  `ID` int NOT NULL,
+  `UserID` int NOT NULL,
   `Name` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -42,14 +43,14 @@ CREATE TABLE `todo_categories` (
 --
 
 CREATE TABLE `todo_tasks` (
-  `ID` int(11) NOT NULL,
-  `UserID` int(11) NOT NULL,
-  `CategoryID` int(11) NOT NULL,
-  `TypeID` int(11) NOT NULL,
-  `StateID` int(11) NOT NULL DEFAULT 0,
+  `ID` int NOT NULL,
+  `UserID` int NOT NULL,
+  `CategoryID` int NOT NULL,
+  `TypeID` int NOT NULL,
+  `StateID` int NOT NULL DEFAULT '0',
   `Description` text NOT NULL,
   `Date` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -58,10 +59,10 @@ CREATE TABLE `todo_tasks` (
 --
 
 CREATE TABLE `todo_types` (
-  `ID` int(11) NOT NULL,
-  `UserID` int(11) NOT NULL,
+  `ID` int NOT NULL,
+  `UserID` int NOT NULL,
   `Name` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -70,11 +71,11 @@ CREATE TABLE `todo_types` (
 --
 
 CREATE TABLE `users` (
-  `ID` int(11) NOT NULL,
+  `ID` int NOT NULL,
   `Username` text NOT NULL,
   `Password` text NOT NULL,
   `Email` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -83,10 +84,12 @@ CREATE TABLE `users` (
 --
 
 CREATE TABLE `usersessions` (
-  `ID` int(11) NOT NULL,
-  `UserID` int(11) NOT NULL,
-  `PrivateID` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `ID` int NOT NULL,
+  `UserID` int NOT NULL,
+  `PrivateID` text NOT NULL,
+  `Expires` text NOT NULL,
+  `IP` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Indizes der exportierten Tabellen
@@ -114,8 +117,7 @@ ALTER TABLE `todo_types`
 -- Indizes für die Tabelle `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`ID`),
-  ADD UNIQUE KEY `Username` (`Username`) USING HASH;
+  ADD PRIMARY KEY (`ID`);
 
 --
 -- Indizes für die Tabelle `usersessions`
@@ -131,31 +133,31 @@ ALTER TABLE `usersessions`
 -- AUTO_INCREMENT für Tabelle `todo_categories`
 --
 ALTER TABLE `todo_categories`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT für Tabelle `todo_tasks`
 --
 ALTER TABLE `todo_tasks`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT für Tabelle `todo_types`
 --
 ALTER TABLE `todo_types`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT für Tabelle `users`
 --
 ALTER TABLE `users`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT für Tabelle `usersessions`
 --
 ALTER TABLE `usersessions`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

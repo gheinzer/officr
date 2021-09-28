@@ -229,10 +229,8 @@ function todo_update_tasks() {
     var html = testForFilters();
     if (html == "") {
         document.getElementById("notfound_message").style.display = "initial";
-        document.getElementById("tasks_table").style.display = "none";
     } else {
         document.getElementById("notfound_message").style.display = "none";
-        document.getElementById("tasks_table").style.display = "initial";
     }
     document.getElementById("tasks").innerHTML = html;
 }

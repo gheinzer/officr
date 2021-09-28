@@ -116,8 +116,7 @@ function user_verify(username, password, callback = function (result) {}) {
  */
 function session_verify(
     session_id,
-    callback = function (result, publicSessionID) {},
-    ip
+    callback = function (result, publicSessionID) {}
 ) {
     execQuery("SELECT * FROM usersessions", [], function (err, result) {
         if (err) throw err;
@@ -130,7 +129,6 @@ function session_verify(
                 const publicID = _md5(element.PrivateID);
                 if (
                     session_id.toString() === publicID.toString() &&
-                    element.IP.toString() == ip.toString() &&
                     parseInt(element.Expires) > Math.floor(Date.now() / 1000) &&
                     !userIDFound
                 ) {

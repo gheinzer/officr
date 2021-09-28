@@ -38,8 +38,6 @@ if (httpd_config.ssl.active) {
     });
 }
 function wsOnConnection(socket, req) {
-    let ip;
-    ip = req.connection.remoteAddress;
     let username;
     let userID;
     let ready = false;
@@ -145,30 +143,26 @@ function wsOnConnection(socket, req) {
         const init = message.toString().match(/INITIALIZE_WITH_SESSION_ID=.*/);
         if (init !== null) {
             const sessionID = init[0].split("=")[1];
-            session_verify(
-                sessionID,
-                function (result) {
-                    if (!result) {
-                        socket.send("Verification failed.");
-                        socket.close();
-                        return;
-                    } else {
-                        userID = result;
-                        getUserByID(result, function (result) {
-                            username = result.Username;
-                            ready = true;
-                            socket.send("Verification successful.");
-                        });
-                    }
-                    if (queue.length > 0) {
-                        queue.forEach((msg, index) => {
-                            executeMessage(msg);
-                            queue.splice(index, 1);
-                        });
-                    }
-                },
-                ip
-            );
+            session_verify(sessionID, function (result) {
+                if (!result) {
+                    socket.send("Verification failed.");
+                    socket.close();
+                    return;
+                } else {
+                    userID = result;
+                    getUserByID(result, function (result) {
+                        username = result.Username;
+                        ready = true;
+                        socket.send("Verification successful.");
+                    });
+                }
+                if (queue.length > 0) {
+                    queue.forEach((msg, index) => {
+                        executeMessage(msg);
+                        queue.splice(index, 1);
+                    });
+                }
+            });
             return;
         }
         if (!ready) {

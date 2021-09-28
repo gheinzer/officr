@@ -54,42 +54,34 @@ function serverOnRequest(req, res, ssl) {
             .toString()
             .match(/officr-user-session-id=[A-Za-z0-9]{32}/);
         if (sessionID !== null) {
-            const ip =
-                req.headers["x-forwarded-for"] || req.socket.remoteAddress;
             sessionID = sessionID[0]
                 .toString()
                 .replace("officr-user-session-id=", "");
-            session_verify(
-                sessionID,
-                function (result, publicSessionID) {
-                    if (!result || req.url == "/logout") {
-                        res.setHeader(
-                            "Set-Cookie",
-                            `officr-user-session-id=deleted; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT`
-                        );
-                        res.setHeader("Location", "/");
-                        res.statusCode = 302;
-                        res.end(
-                            "302 - You should be redirected to the home page."
+            session_verify(sessionID, function (result, publicSessionID) {
+                if (!result || req.url == "/logout") {
+                    res.setHeader(
+                        "Set-Cookie",
+                        `officr-user-session-id=deleted; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT`
+                    );
+                    res.setHeader("Location", "/");
+                    res.statusCode = 302;
+                    res.end("302 - You should be redirected to the home page.");
+                    return;
+                    6;
+                }
+                getUserByID(result, function (result) {
+                    if (checkForAuthenticatedRedirect(req, res)) {
+                        handleNormalRequest(
+                            ssl,
+                            req,
+                            res,
+                            result.Username,
+                            publicSessionID
                         );
                         return;
-                        6;
                     }
-                    getUserByID(result, function (result) {
-                        if (checkForAuthenticatedRedirect(req, res)) {
-                            handleNormalRequest(
-                                ssl,
-                                req,
-                                res,
-                                result.Username,
-                                publicSessionID
-                            );
-                            return;
-                        }
-                    });
-                },
-                ip
-            );
+                });
+            });
         } else {
             if (checkForNoAuthenticationRedirect(req, res)) {
                 handleNormalRequest(ssl, req, res);

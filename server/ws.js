@@ -78,6 +78,7 @@ function wsOnConnection(socket, req) {
                     exec(
                         "git add . && git commit -m `Made changes for running officr` && git fetch && git pull"
                     );
+                    throw new Error("officr was updated. Restart.");
                 }
                 break;
         }

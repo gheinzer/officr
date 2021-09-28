@@ -77,7 +77,7 @@ const labels = {
         20: "Type",
         21: "Hello, ",
         22: "Sign out",
-        23: "Kee me logged in",
+        23: "Keep me logged in",
         24: "Oooops! Verification failed. Please try again or <a href='/logout'>sign out</a> and sign in again.",
         25: "Oooops! Something in our server went terribly wrong. Please reload the page.",
         26: "The E-Mail adress is only saved to have a way to contact you.",

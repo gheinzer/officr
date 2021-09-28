@@ -266,6 +266,12 @@ function user_todo_delete_category(userID, id, callback) {
         }
     );
 }
+function getNumberOfUsers(callback) {
+    execQuery("SELECT * FROM users", [], function (err, result, fields) {
+        result = JSON.parse(JSON.stringify(result));
+        callback(result.length);
+    });
+}
 
 module.exports = {
     user_create_session,
@@ -287,4 +293,5 @@ module.exports = {
     user_todo_edit_type,
     user_todo_delete_type,
     user_todo_delete_category,
+    getNumberOfUsers,
 };

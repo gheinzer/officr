@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Erstellungszeit: 28. Sep 2021 um 19:29
+-- Erstellungszeit: 28. Sep 2021 um 20:55
 -- Server-Version: 8.0.26-0ubuntu0.21.04.3
 -- PHP-Version: 7.4.16
 
@@ -74,7 +74,8 @@ CREATE TABLE `users` (
   `ID` int NOT NULL,
   `Username` text NOT NULL,
   `Password` text NOT NULL,
-  `Email` text NOT NULL
+  `Email` text NOT NULL,
+  `isAdmin` int NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------

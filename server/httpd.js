@@ -70,7 +70,9 @@ function serverOnRequest(req, res, ssl) {
                     6;
                 }
                 getUserByID(result, function (result) {
-                    if (checkForAuthenticatedRedirect(req, res)) {
+                    if (
+                        checkForAuthenticatedRedirect(req, res, result.isAdmin)
+                    ) {
                         handleNormalRequest(
                             ssl,
                             req,
@@ -93,13 +95,16 @@ function serverOnRequest(req, res, ssl) {
         }
     }
 }
-function checkForAuthenticatedRedirect(req, res) {
+function checkForAuthenticatedRedirect(req, res, isAdmin) {
     var matched = false;
     pages.redirect_when_authenticated.forEach((regex) => {
         if (req.url.match(regex) !== null) {
             matched = true;
         }
     });
+    if (req.url.match(/admin/) && isAdmin == 0) {
+        matched = true;
+    }
     if (matched) {
         res.statusCode = 302;
         res.setHeader("Location", "/todo");

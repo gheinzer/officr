@@ -18,6 +18,7 @@ const {
     user_todo_edit_type,
     user_todo_delete_type,
     user_todo_delete_category,
+    getNumberOfUsers,
 } = require("./user_management");
 
 const wsserver = new WebSocket.Server({ server: httpserver });
@@ -60,6 +61,25 @@ function wsOnConnection(socket, req) {
                 user_get_todo_tasks(userID, function (result) {
                     socket.send("DATA-FOR-GET-TASKS=" + JSON.stringify(result));
                 });
+                break;
+            case "getNumberOfUsers":
+                if (admin) {
+                    getNumberOfUsers(function (result) {
+                        socket.send(
+                            "DATA-FOR-GET-NUMBER-OF-USERS=" + result.toString()
+                        );
+                    });
+                }
+                break;
+            case "updateOfficr":
+                if (admin) {
+                    const { exec } = require("child_process");
+                    console.log("UPDATING OFFICR...");
+                    exec(
+                        "git add . && git commit -m `Made changes for running officr` && git fetch && git pull"
+                    );
+                }
+                break;
         }
         const add_todo_task = message.toString().match(/ADD_TODO_TASK={.*}/);
         if (add_todo_task) {
@@ -151,6 +171,11 @@ function wsOnConnection(socket, req) {
                 } else {
                     userID = result;
                     getUserByID(result, function (result) {
+                        if (result.isAdmin == 1) {
+                            admin = true;
+                        } else {
+                            admin = false;
+                        }
                         username = result.Username;
                         ready = true;
                         socket.send("Verification successful.");

@@ -53,6 +53,10 @@ const labels = {
         47: "Kategorie wurde erfolgreich erstellt.",
         48: "Syntax: *Fett*, _kursiv_, `code`",
         49: "Nichts gefunden.",
+        50: "Guten Tag!",
+        51: "Auf neuere Versionen überprüfen",
+        52: "Version",
+        53: "Benutzer",
     },
     en: {
         1: "Category",
@@ -104,6 +108,10 @@ const labels = {
         47: "Category was created successfully",
         48: "Syntax: *bold*, _italic_, `code`",
         49: "Nothing found",
+        50: "Good day!",
+        51: "Check for newer versions",
+        52: "Version",
+        53: "Users",
     },
 };
 

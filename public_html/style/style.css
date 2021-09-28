@@ -507,7 +507,7 @@ body .horizontal-container .account-options img {
   padding: 1.5ch 3ch;
   background-color: #2e2e2e;
   border-radius: 0.5ch;
-  animation: show-msg 0.2s forwards, show-msg reverse 0.2s 5s forwards, remove-msg 0.1s 5.2s forwards;
+  animation: show-msg 0.2s forwards, show-msg reverse 0.2s 5s forwards, remove-msg 0.1s 5.2s forwards;
   opacity: 0;
   pointer-events: none;
   -webkit-box-flex: 0.00001;
@@ -562,7 +562,8 @@ body .horizontal-container .account-options img {
 .filter-overlay,
 .editTypesOverlay,
 .editCategoriesOverlay,
-.cookie-note {
+.cookie-note,
+.simple-overlay {
   background-color: rgba(20, 20, 20, 0.9);
   height: 100%;
   width: 100%;
@@ -582,7 +583,8 @@ body .horizontal-container .account-options img {
 .filter-overlay .inner,
 .editTypesOverlay .inner,
 .editCategoriesOverlay .inner,
-.cookie-note .inner {
+.cookie-note .inner,
+.simple-overlay .inner {
   z-index: 46;
   height: 100%;
   position: relative;
@@ -594,7 +596,8 @@ body .horizontal-container .account-options img {
 .filter-overlay .inner .flex,
 .editTypesOverlay .inner .flex,
 .editCategoriesOverlay .inner .flex,
-.cookie-note .inner .flex {
+.cookie-note .inner .flex,
+.simple-overlay .inner .flex {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -614,7 +617,8 @@ body .horizontal-container .account-options img {
 .filter-overlay .inner .flex .content,
 .editTypesOverlay .inner .flex .content,
 .editCategoriesOverlay .inner .flex .content,
-.cookie-note .inner .flex .content {
+.cookie-note .inner .flex .content,
+.simple-overlay .inner .flex .content {
   height: -webkit-max-content;
   height: -moz-max-content;
   height: max-content;
@@ -627,7 +631,8 @@ body .horizontal-container .account-options img {
 .filter-overlay .inner .close-img,
 .editTypesOverlay .inner .close-img,
 .editCategoriesOverlay .inner .close-img,
-.cookie-note .inner .close-img {
+.cookie-note .inner .close-img,
+.simple-overlay .inner .close-img {
   position: absolute;
   right: 1ch;
   top: 1ch;
@@ -1203,5 +1208,36 @@ code {
   margin-top: 5rem;
   margin-left: auto;
   margin-right: auto;
+}
+
+.main-content.with-padding {
+  padding: 1rem;
+}
+
+p.letter-spacing {
+  letter-spacing: 0.375ch;
+}
+
+p.letter-spacing.little {
+  font-size: 0.8rem;
+}
+
+.flex.column {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-flow: row;
+      flex-flow: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.veryBig {
+  font-size: 5rem;
+  font-weight: normal;
+  margin: 0;
+  margin-top: 1rem;
+  line-height: 0.7;
 }
 /*# sourceMappingURL=style.css.map */

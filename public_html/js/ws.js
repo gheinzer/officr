@@ -42,11 +42,16 @@ socket.onopen = () => {
                 showErrorOverlay("{label24}");
                 return;
             case "Verification successful.":
-                todo_get_categories(function () {
-                    todo_get_types(function () {
-                        todo_get_tasks();
+                if (window.location.pathname.match(/todo/) !== null) {
+                    todo_get_categories(function () {
+                        todo_get_types(function () {
+                            todo_get_tasks();
+                        });
                     });
-                });
+                }
+                if (window.location.pathname.match(/admin/) !== null) {
+                    adminConsoleGetNumberOfUsers();
+                }
                 return;
             case "ADD_TODO_TASK_ANSWER=OK":
                 addTaskHandleAnswer();
@@ -99,6 +104,16 @@ socket.onopen = () => {
                 .replace("DATA-FOR-GET-TASKS=", "");
             const category_data = JSON.parse(jsondata);
             getTasksHandleAnswer(category_data);
+            return;
+        }
+        if (data.toString().match(/DATA-FOR-GET-NUMBER-OF-USERS=.*/)) {
+            const jsondata = data
+                .toString()
+                .match(/DATA-FOR-GET-NUMBER-OF-USERS=.*/)[0]
+                .toString()
+                .replace("DATA-FOR-GET-NUMBER-OF-USERS=", "");
+            const category_data = jsondata;
+            getUserNumberHandleAnswer(category_data);
             return;
         }
     };
@@ -530,4 +545,16 @@ function showMessage(msg) {
     msgbox.appendChild(child);
     msgbox.classList.add("msg");
     document.getElementById("messagecenter").appendChild(msgbox);
+}
+function _getNumberOfUsers(callback) {
+    socket.send("getNumberOfUsers");
+    getUserNumberHandleAnswer = callback;
+}
+function adminConsoleGetNumberOfUsers(callback) {
+    _getNumberOfUsers(function (result) {
+        document.getElementById("usernumber").innerHTML = result;
+    });
+}
+function adminConsoleCheckForNewerVersions() {
+    socket.send("updateOfficr");
 }

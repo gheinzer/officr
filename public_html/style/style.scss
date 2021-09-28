@@ -273,7 +273,8 @@ body {
 .filter-overlay,
 .editTypesOverlay,
 .editCategoriesOverlay,
-.cookie-note {
+.cookie-note,
+.simple-overlay {
     background-color: rgba($body-bg-color, 0.9);
     height: 100%;
     width: 100%;
@@ -688,4 +689,25 @@ code {
     margin-top: 5rem;
     margin-left: auto;
     margin-right: auto;
+}
+.main-content.with-padding {
+    padding: 1rem;
+}
+p.letter-spacing {
+    &.little {
+        font-size: 0.8rem;
+    }
+    letter-spacing: $letter-spacing * 0.75;
+}
+.flex.column {
+    flex-direction: column;
+    flex-flow: row;
+    flex-wrap: wrap;
+}
+.veryBig {
+    font-size: 5rem;
+    font-weight: normal;
+    margin: 0;
+    margin-top: 1rem;
+    line-height: 0.7;
 }

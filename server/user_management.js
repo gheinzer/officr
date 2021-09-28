@@ -24,7 +24,7 @@ function getUserByID(id, callback = function (result) {}) {
         }
     );
 }
-function user_create_session(username, ip) {
+function user_create_session(username) {
     const sessionID = _md5(
         Math.random() * Math.random() * 1000000000 * new Date().getTime()
     );
@@ -39,7 +39,7 @@ function user_create_session(username, ip) {
         const userID = result.ID;
 
         execQuery(
-            `INSERT INTO usersessions (PrivateID, UserID, Expires, IP) VALUES ('${privateID}', ${userID}, ${expires}, '${ip}')`,
+            `INSERT INTO usersessions (PrivateID, UserID, Expires) VALUES ('${privateID}', ${userID}, ${expires})`,
             function (err, result) {
                 if (err) {
                     throw err;

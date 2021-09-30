@@ -558,3 +558,16 @@ function adminConsoleGetNumberOfUsers(callback) {
 function adminConsoleCheckForNewerVersions() {
     socket.send("updateOfficr");
 }
+function adminConsoleSendNotification() {
+    const title = document.getElementById("notification-title").value;
+    const text = document
+        .getElementById("notification-text")
+        .value.replace("\n", "<br>");
+    socket.send(
+        "sendNotification=" + JSON.stringify({ title: title, text: text })
+    );
+    hideOverlay("sendNotificationOverlay");
+    document.getElementById("notification-title").value = "";
+    document.getElementById("notification-text").value = "";
+    showMessage("{label58}");
+}

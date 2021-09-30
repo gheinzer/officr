@@ -57,6 +57,11 @@ const labels = {
         51: "Auf neuere Versionen überprüfen",
         52: "Version",
         53: "Benutzer",
+        54: "Benachrichtigungen",
+        55: "Benachrichtigung senden",
+        56: "Inhalt",
+        57: "Titel",
+        58: "Ihre Benachrichtigung wurde erfolgreich erstellt.",
     },
     en: {
         1: "Category",
@@ -112,6 +117,11 @@ const labels = {
         51: "Check for newer versions",
         52: "Version",
         53: "Users",
+        54: "Notifications",
+        55: "Send a notification",
+        56: "Content",
+        57: "Title",
+        58: "The notification was created successfully.",
     },
 };
 

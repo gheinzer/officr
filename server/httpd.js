@@ -175,7 +175,9 @@ function handleNormalRequest(
                     `Detected language of the remote browser: ${remote_lang}`
                 );
             }
-        } catch {}
+        } catch {
+            remote_lang = "en";
+        }
     }
     if (labels[remote_lang] == undefined) {
         remote_lang = "en";

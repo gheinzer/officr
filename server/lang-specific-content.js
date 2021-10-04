@@ -1,3 +1,4 @@
+
 /**
  * Here is all the language-specific content defined.
  * When the language of the user is not configured, english will be used by default.

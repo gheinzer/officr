@@ -693,7 +693,7 @@ body .horizontal-container .account-options img {
   top: 1ch;
   opacity: 0.75;
   pointer-events: none;
-  font-weight: 100;
+  font-weight: 200;
   letter-spacing: 0.5ch;
 }
 
@@ -753,7 +753,7 @@ body .horizontal-container .account-options img {
 .input-container select::-webkit-input-placeholder {
   color: rgba(255, 255, 255, 0.8);
   font-family: inherit;
-  font-weight: 100;
+  font-weight: 200;
 }
 
 .input-container input:-ms-input-placeholder,
@@ -761,7 +761,7 @@ body .horizontal-container .account-options img {
 .input-container select:-ms-input-placeholder {
   color: rgba(255, 255, 255, 0.8);
   font-family: inherit;
-  font-weight: 100;
+  font-weight: 200;
 }
 
 .input-container input::-ms-input-placeholder,
@@ -769,7 +769,7 @@ body .horizontal-container .account-options img {
 .input-container select::-ms-input-placeholder {
   color: rgba(255, 255, 255, 0.8);
   font-family: inherit;
-  font-weight: 100;
+  font-weight: 200;
 }
 
 .input-container input::placeholder,
@@ -777,7 +777,7 @@ body .horizontal-container .account-options img {
 .input-container select::placeholder {
   color: rgba(255, 255, 255, 0.8);
   font-family: inherit;
-  font-weight: 100;
+  font-weight: 200;
 }
 
 .input-container input:focus,

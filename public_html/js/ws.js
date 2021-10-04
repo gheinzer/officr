@@ -43,13 +43,13 @@ socket.onopen = () => {
                 return;
             case "Verification successful.":
                 if (window.location.pathname.match(/todo/) !== null) {
+                    getNotifications();
                     todo_get_categories(function () {
-                        todo_get_types(function () {
-                            todo_get_tasks();
-                        });
+                        todo_get_types(function () {});
                     });
                 }
                 if (window.location.pathname.match(/admin/) !== null) {
+                    getNotifications();
                     adminConsoleGetNumberOfUsers();
                 }
                 return;
@@ -114,6 +114,16 @@ socket.onopen = () => {
                 .replace("DATA-FOR-GET-NUMBER-OF-USERS=", "");
             const category_data = jsondata;
             getUserNumberHandleAnswer(category_data);
+            return;
+        }
+        if (data.toString().match(/getNotificationsAnswer=\[{.*}\]/)) {
+            const jsondata = data
+                .toString()
+                .match(/getNotificationsAnswer=\[{.*}\]/)[0]
+                .toString()
+                .replace("getNotificationsAnswer=", "");
+            const notifications = JSON.parse(jsondata);
+            getNotificationsHandleAnswer(notifications);
             return;
         }
     };
@@ -570,4 +580,34 @@ function adminConsoleSendNotification() {
     document.getElementById("notification-title").value = "";
     document.getElementById("notification-text").value = "";
     showMessage("{label58}");
+}
+function getNotifications() {
+    socket.send("getNotifications");
+    getNotificationsHandleAnswer = function (result) {
+        result.forEach((element) => {
+            const id = element.ID;
+            const title = element.Title;
+            const content = element.Text;
+            const html = `<div class="notification-overlay" id="notification-overlay${id}">
+            <div class="inner">
+                <div class="flex">
+                    <div class="content">
+                        <img src="/assets/icons/notifications_white_24dp.svg" alt="" />
+                        <h1>${title}</h1>
+                        <p>${content}</p>
+                        <button class="border-button" style="width: max-content" onclick="markNotificationAsSeen(${id})">
+                            {label59}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>`;
+            document.getElementsByTagName("body")[0].innerHTML += html;
+            showOverlay("notification-overlay" + id);
+        });
+    };
+}
+function markNotificationAsSeen(id) {
+    socket.send("markNotificationAsSeen=" + id);
+    hideOverlay("notification-overlay" + id);
 }

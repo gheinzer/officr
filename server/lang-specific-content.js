@@ -62,6 +62,7 @@ const labels = {
         56: "Inhalt",
         57: "Titel",
         58: "Ihre Benachrichtigung wurde erfolgreich erstellt.",
+        59: "Als gelesen markieren",
     },
     en: {
         1: "Category",
@@ -122,6 +123,7 @@ const labels = {
         56: "Content",
         57: "Title",
         58: "The notification was created successfully.",
+        59: "Mark as seen",
     },
 };
 

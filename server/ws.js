@@ -19,6 +19,9 @@ const {
     user_todo_delete_type,
     user_todo_delete_category,
     getNumberOfUsers,
+    addNotification,
+    user_getNotifications,
+    user_mark_notification_as_seen,
 } = require("./user_management");
 
 const wsserver = new WebSocket.Server({ server: httpserver });
@@ -81,6 +84,14 @@ function wsOnConnection(socket, req) {
                     throw new Error("officr was updated. Restart.");
                 }
                 break;
+
+            case "getNotifications":
+                user_getNotifications(userID, function (result) {
+                    socket.send(
+                        "getNotificationsAnswer=" + JSON.stringify(result)
+                    );
+                });
+                break;
         }
         const add_todo_task = message.toString().match(/ADD_TODO_TASK={.*}/);
         if (add_todo_task) {
@@ -106,6 +117,22 @@ function wsOnConnection(socket, req) {
                 return;
             }
         }
+        const sendNotification = message
+            .toString()
+            .match(/sendNotification={.*}/);
+        if (sendNotification) {
+            if (admin) {
+                console.log(sendNotification[0]);
+                const json_data = JSON.parse(
+                    sendNotification[0]
+                        .toString()
+                        .replace("sendNotification=", "")
+                );
+                if (json_data.title && json_data.text) {
+                    addNotification(json_data.title, json_data.text);
+                }
+            }
+        }
         const toggle_state = message
             .toString()
             .match(/TOGGLE_STATE=[0-9]+,[0-1]/);
@@ -123,6 +150,13 @@ function wsOnConnection(socket, req) {
             user_todo_add_type(userID, name, function () {
                 socket.send("ADD-TODO-TYPE-ANSWER=OK");
             });
+        }
+        const mark_notification_as_seen = message
+            .toString()
+            .match(/markNotificationAsSeen=.*/);
+        if (mark_notification_as_seen) {
+            const id = mark_notification_as_seen[0].split("=")[1];
+            user_mark_notification_as_seen(id, userID);
         }
         const add_category = message.toString().match(/ADD-CATEGORY=.*/);
         if (add_category) {

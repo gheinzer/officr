@@ -563,7 +563,8 @@ body .horizontal-container .account-options img {
 .editTypesOverlay,
 .editCategoriesOverlay,
 .cookie-note,
-.simple-overlay {
+.simple-overlay,
+.notification-overlay {
   background-color: rgba(20, 20, 20, 0.9);
   height: 100%;
   width: 100%;
@@ -574,7 +575,7 @@ body .horizontal-container .account-options img {
   pointer-events: none;
   -webkit-transition: 0.2s;
   transition: 0.2s;
-  z-index: 45;
+  z-index: 30;
 }
 
 .createTaskOverlay .inner,
@@ -584,7 +585,8 @@ body .horizontal-container .account-options img {
 .editTypesOverlay .inner,
 .editCategoriesOverlay .inner,
 .cookie-note .inner,
-.simple-overlay .inner {
+.simple-overlay .inner,
+.notification-overlay .inner {
   z-index: 46;
   height: 100%;
   position: relative;
@@ -597,7 +599,8 @@ body .horizontal-container .account-options img {
 .editTypesOverlay .inner .flex,
 .editCategoriesOverlay .inner .flex,
 .cookie-note .inner .flex,
-.simple-overlay .inner .flex {
+.simple-overlay .inner .flex,
+.notification-overlay .inner .flex {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -618,7 +621,8 @@ body .horizontal-container .account-options img {
 .editTypesOverlay .inner .flex .content,
 .editCategoriesOverlay .inner .flex .content,
 .cookie-note .inner .flex .content,
-.simple-overlay .inner .flex .content {
+.simple-overlay .inner .flex .content,
+.notification-overlay .inner .flex .content {
   height: -webkit-max-content;
   height: -moz-max-content;
   height: max-content;
@@ -632,13 +636,31 @@ body .horizontal-container .account-options img {
 .editTypesOverlay .inner .close-img,
 .editCategoriesOverlay .inner .close-img,
 .cookie-note .inner .close-img,
-.simple-overlay .inner .close-img {
+.simple-overlay .inner .close-img,
+.notification-overlay .inner .close-img {
   position: absolute;
   right: 1ch;
   top: 1ch;
   height: 2rem;
   cursor: pointer;
   z-index: 47;
+}
+
+.notification-overlay {
+  overflow-y: auto;
+}
+
+.notification-overlay * {
+  overflow-y: auto;
+}
+
+.notification-overlay .content {
+  overflow-y: auto;
+}
+
+.notification-overlay .content img {
+  margin: 0;
+  height: 3rem;
 }
 
 .input-container {

@@ -274,7 +274,8 @@ body {
 .editTypesOverlay,
 .editCategoriesOverlay,
 .cookie-note,
-.simple-overlay {
+.simple-overlay,
+.notification-overlay {
     background-color: rgba($body-bg-color, 0.9);
     height: 100%;
     width: 100%;
@@ -284,7 +285,7 @@ body {
     opacity: 0;
     pointer-events: none;
     transition: 0.2s;
-    z-index: 45;
+    z-index: 30;
     .inner {
         z-index: 46;
         height: 100%;
@@ -307,6 +308,19 @@ body {
             height: 2rem;
             cursor: pointer;
             z-index: 47;
+        }
+    }
+}
+.notification-overlay {
+    overflow-y: auto;
+    * {
+        overflow-y: auto;
+    }
+    .content {
+        overflow-y: auto;
+        img {
+            margin: 0;
+            height: 3rem;
         }
     }
 }

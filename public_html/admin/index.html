@@ -61,7 +61,11 @@
                         <h2>{label53}</h2>
 
                         <p class="veryBig" id="usernumber"></p>
-                        <p>Benutzer</p>
+                        <p>{label53}</p>
+                    </section>
+                    <section>
+                        <h2>{label54}</h2>
+                        <button class="border-button" onclick="showOverlay('sendNotificationOverlay')">{label55}</button>
                     </section>
                 </div>
 
@@ -440,6 +444,42 @@
                             {label44}
                         </button>
                     </div>
+                </div>
+            </div>
+        </div>
+        <div class="simple-overlay" id="sendNotificationOverlay">
+            <div class="inner">
+                <img
+                    src="/assets/icons/close_white_24dp.svg"
+                    alt=""
+                    onclick="hideOverlay('sendNotificationOverlay')"
+                    class="close-img"
+                />
+                <div class="flex">
+                    <div class="content">
+                        <h1>{label55}</h1>
+                        <div class="input-container">
+                                <input name="" id="notification-title" type="text" placeholder="" class="classic-input">
+                                <label>{label57}</label>
+                        </div>
+                        <div class="input-container">
+                            <img
+                                    src="/assets/icons/description_white_24dp.svg"
+                                    alt=""
+                                />
+                                <textarea name="" id="notification-text" placeholder="" cols="30" rows="15" class="classic-input"></textarea>
+                                <label>{label56}</label>
+                        </div>
+                        <button
+                            class="classic-button"
+                            id="task_submit"
+                            onclick="adminConsoleSendNotification()"
+                        >
+                            <img
+                                src="/assets/icons/done_white_24dp.svg"
+                                alt=""
+                            />{label8}
+                        </button>
                 </div>
             </div>
         </div>

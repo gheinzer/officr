@@ -273,6 +273,57 @@ function getNumberOfUsers(callback) {
     });
 }
 
+function addNotification(title, text, callback = function () {}) {
+    execQuery(
+        "INSERT INTO notifications (Title, Text) VALUES (?, ?)",
+        [title, text],
+        function (err, result, fields) {
+            if (err) throw err;
+            callback();
+        }
+    );
+}
+function user_getNotifications(userID, callback) {
+    execQuery(
+        "SELECT * FROM notifications",
+        [],
+        function (err, allNotifications, fields) {
+            var result = [];
+            if (err) throw err;
+            execQuery(
+                "SELECT * FROM notifications_seen WHERE UserID=?",
+                [userID],
+                function (err, seenNotifications, fields) {
+                    if (seenNotifications) {
+                        allNotifications.forEach((element) => {
+                            var found = false;
+                            seenNotifications.forEach((seenNotification) => {
+                                if (
+                                    element.ID ==
+                                    seenNotification.NotificationID
+                                ) {
+                                    found = true;
+                                }
+                            });
+                            if (!found) {
+                                result.push(element);
+                            }
+                        });
+                        callback(result);
+                    } else {
+                        callback(allNotifications);
+                    }
+                }
+            );
+        }
+    );
+}
+function user_mark_notification_as_seen(id, userID) {
+    execQuery(
+        "INSERT INTO notifications_seen (UserID, NotificationID) VALUES (?, ?)",
+        [userID, id]
+    );
+}
 module.exports = {
     user_create_session,
     user_get_sessions,
@@ -294,4 +345,7 @@ module.exports = {
     user_todo_delete_type,
     user_todo_delete_category,
     getNumberOfUsers,
+    addNotification,
+    user_getNotifications,
+    user_mark_notification_as_seen,
 };

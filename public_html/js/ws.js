@@ -45,7 +45,9 @@ socket.onopen = () => {
                 if (window.location.pathname.match(/todo/) !== null) {
                     getNotifications();
                     todo_get_categories(function () {
-                        todo_get_types(function () {});
+                        todo_get_types(function () {
+                            todo_get_tasks();
+                        });
                     });
                 }
                 if (window.location.pathname.match(/admin/) !== null) {

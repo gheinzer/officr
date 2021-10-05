@@ -324,6 +324,16 @@ function user_mark_notification_as_seen(id, userID) {
         [userID, id]
     );
 }
+function sessionDestroy(sessionID) {
+    execQuery(
+        "DELETE FROM usersessions WHERE MD5(PrivateID)=?",
+        [sessionID],
+        function (err, res) {
+            if (err) throw err;
+            console.table(res);
+        }
+    );
+}
 module.exports = {
     user_create_session,
     user_get_sessions,
@@ -348,4 +358,5 @@ module.exports = {
     addNotification,
     user_getNotifications,
     user_mark_notification_as_seen,
+    sessionDestroy,
 };

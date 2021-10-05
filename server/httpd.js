@@ -4,7 +4,11 @@ const http = require("http");
 const https = require("https");
 const { httpd_config, pages, ws_config } = require("../config");
 const { handleFormInput } = require("./handleFormInput");
-const { session_verify, getUserByID } = require("./user_management");
+const {
+    session_verify,
+    getUserByID,
+    sessionDestroy,
+} = require("./user_management");
 const labels = require("./lang-specific-content");
 const { exec } = require("child_process");
 var sslserver = undefined;
@@ -59,6 +63,7 @@ function serverOnRequest(req, res, ssl) {
                 .replace("officr-user-session-id=", "");
             session_verify(sessionID, function (result, publicSessionID) {
                 if (!result || req.url == "/logout") {
+                    sessionDestroy(sessionID);
                     res.setHeader(
                         "Set-Cookie",
                         `officr-user-session-id=deleted; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT`

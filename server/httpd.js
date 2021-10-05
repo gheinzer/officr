@@ -270,6 +270,30 @@ function handleNormalRequest(
             }
             originalHtmlContent = htmlContent;
         }
+        htmlContent = originalHtmlContent.toString();
+        regexForLabels = /{includeRes:".*"}/;
+        element = htmlContent.match(regexForLabels);
+        if (element !== null) {
+            element = element[0].toString();
+            while (element !== null) {
+                var filename = element.match(/:".*"/)[0].toString();
+                filename =
+                    "res/" +
+                    filename.replace(":", "").replace('"', "").replace('"', "");
+                try {
+                    var result = readFileSync(filename).toString();
+                } catch {
+                    var result = "";
+                }
+                htmlContent = htmlContent.replace(element, result);
+                if (htmlContent.match(regexForLabels) !== null) {
+                    element = htmlContent.match(regexForLabels)[0].toString();
+                } else {
+                    element = null;
+                }
+            }
+            originalHtmlContent = htmlContent;
+        }
         if (
             originalHtmlContent.toString().match(/{USERNAME}/) !== null &&
             username !== undefined

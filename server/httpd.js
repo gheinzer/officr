@@ -213,8 +213,31 @@ function handleNormalRequest(
         var mimeType = mime.getType(path);
         res.setHeader("Content-Type", mimeType);
         var htmlContent = readFileSync(path);
-        var regexForLabels = /{label[0-9]+}/;
         var originalHtmlContent = htmlContent;
+        htmlContent = originalHtmlContent.toString();
+        regexForLabels = /{includeRes:".*"}/;
+        element = htmlContent.match(regexForLabels);
+        if (element !== null) {
+            element = element[0].toString();
+            while (element !== null) {
+                var filename = element.match(/:".*"/)[0].toString();
+                filename =
+                    "res/" +
+                    filename.replace(":", "").replace('"', "").replace('"', "");
+                try {
+                    var result = readFileSync(filename).toString();
+                } catch {
+                    var result = "";
+                }
+                htmlContent = htmlContent.replace(element, result);
+                if (htmlContent.match(regexForLabels) !== null) {
+                    element = htmlContent.match(regexForLabels)[0].toString();
+                } else {
+                    element = null;
+                }
+            }
+        }
+        var regexForLabels = /{label[0-9]+}/;
         htmlContent = htmlContent.toString();
         var element = htmlContent.match(regexForLabels);
         if (element !== null) {

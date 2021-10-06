@@ -53,6 +53,7 @@ function serverOnRequest(req, res, ssl) {
     req.url = req.url.toString().split("?")[0];
     const { headers } = req;
     res.setHeader("Server", `officr HTTPD`);
+    res.setHeader("Access-Control-Allow-Origin", "*")
     if (headers.cookie !== undefined) {
         var sessionID = headers.cookie
             .toString()
@@ -216,7 +217,7 @@ function handleNormalRequest(
             console.log("Requested Path: " + path);
         }
         var mimeType = mime.getType(path);
-        res.setHeader("Content-Type", mimeType);
+        res.setHeader("Content-Type", mimeType + "; charset=utf-8");
         var htmlContent = readFileSync(path);
         var originalHtmlContent = htmlContent;
         htmlContent = originalHtmlContent.toString();

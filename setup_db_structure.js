@@ -1,4 +1,4 @@
-const { exec } = require("child_process");
+const { exec } = require("child_process"); // Responsible for executing shell commands
 
 exec("mysql < officr_db_structure.sql", (error, stdout, stderr) => {
     if (error) {

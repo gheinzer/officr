@@ -1,5 +1,8 @@
+const path = require("path");
 /**
- * Note: This is from stackoverflow: https://stackoverflow.com/questions/16697791/nodejs-get-filename-of-caller-function
+ * * Note: This is from stackoverflow: https://stackoverflow.com/questions/16697791/nodejs-get-filename-of-caller-function
+ * This returns the filename of the file that called the function.
+ * @returns string. The filename of the file that called the function.
  */
 function _getCallerFile() {
     var filename;
@@ -28,6 +31,9 @@ function _getCallerFile() {
 
     return filename;
 }
+/**
+ * These are the color codes used in the terminal.
+ */
 const colors = {
     Reset: "\x1b[0m",
     Bright: "\x1b[1m",
@@ -57,8 +63,13 @@ const colors = {
         White: "\x1b[47m",
     },
 };
-const path = require("path");
+/**
+ * This is the original console.log function used later.
+ */
 var console_log = console.log;
+/**
+ * Redefined console.log function.
+ */
 console.log = function (msg, color = colors.Foreground.Green) {
     if (color === null) {
         console_log(`[${path.basename(_getCallerFile())}]: ${msg}`);
@@ -70,6 +81,7 @@ console.log = function (msg, color = colors.Foreground.Green) {
         );
     }
 };
+// The same for console.warn
 var console_warn = console.warn;
 console.warn = function (msg, color = colors.Foreground.Yellow) {
     console_warn(

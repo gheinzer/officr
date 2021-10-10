@@ -3,6 +3,7 @@ if (cluster.isMaster) {
     cluster.fork();
 
     cluster.on("exit", function (worker, code, signal) {
+        // This is responsible for restarting the server when it crashes.
         cluster.fork();
     });
 }
@@ -28,7 +29,7 @@ function start() {
                                                                                 `;
     console.log("Welcome to officr.");
     console.log(officr_logo);
-    require("./server/console");
+    require("./server/console"); // This script is responsible for the filename before any console.log output
     console.log("Starting ws.js...");
     require("./server/ws"); // This script is responsible for creating a websocket for communication with the front end.
     console.log("Starting expired-remover.js...");

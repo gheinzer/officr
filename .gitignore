@@ -9,3 +9,4 @@ daemon/officrbackend.out.log
 daemon/officrbackend.xml
 officr.bat
 autstart.log
+node_modules/http-gzip/package.json

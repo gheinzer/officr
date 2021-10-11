@@ -2,7 +2,7 @@
 const { readFileSync, existsSync, lstatSync } = require("fs");
 const http = require("http");
 const https = require("https");
-const { httpd_config, pages, ws_config } = require("../config");
+const { httpd_config, pages } = require("../config");
 const { handleFormInput } = require("./handleFormInput");
 const {
     session_verify,
@@ -53,7 +53,7 @@ function serverOnRequest(req, res, ssl) {
     req.url = req.url.toString().split("?")[0];
     const { headers } = req;
     res.setHeader("Server", `officr HTTPD`);
-    res.setHeader("Access-Control-Allow-Origin", "*")
+    res.setHeader("Access-Control-Allow-Origin", "*");
     if (headers.cookie !== undefined) {
         var sessionID = headers.cookie
             .toString()

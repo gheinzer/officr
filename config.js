@@ -38,8 +38,4 @@ const pages = {
     redirect_root_when_authenticated: true,
 };
 
-const ws_config = {
-    port: "8001", // Sets the port for the websocket. Default: 3000
-};
-
-module.exports = { httpd_config, mysql_config, pages, ws_config };
+module.exports = { httpd_config, mysql_config, pages };

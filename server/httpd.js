@@ -108,6 +108,9 @@ function checkForAuthenticatedRedirect(req, res, isAdmin) {
             matched = true;
         }
     });
+    if (req.url == "/" && pages.redirect_root_when_authenticated) {
+        matched = true;
+    }
     if (req.url.match(/admin/) && isAdmin == 0) {
         matched = true;
     }

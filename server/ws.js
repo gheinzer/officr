@@ -219,7 +219,7 @@ function wsOnConnection(socket, req) {
                 }
                 if (queue.length > 0) {
                     queue.forEach((msg, index) => {
-                        executeMessage(msg);
+                        executeMessage(msg.toString());
                         queue.splice(index, 1);
                     });
                 }
@@ -227,9 +227,9 @@ function wsOnConnection(socket, req) {
             return;
         }
         if (!ready) {
-            queue.push(message);
+            queue.push(message.toString());
             return;
         }
-        if (!init && ready) executeMessage(message);
+        if (!init && ready) executeMessage(message.toString());
     });
 }

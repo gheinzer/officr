@@ -32,6 +32,7 @@ Officr is mainly a todo list to rember things like homework and meetings. I wrot
 
 -   `mysql` (Install with `(sudo) npm install mysql`)
 -   `mime` (Install with `(sudo) npm install mime`)
+-   `ws` (Install with `(sudo) npm install ws`)
 
 ### Preinstalled modules (Don't need to be installed normally)
 

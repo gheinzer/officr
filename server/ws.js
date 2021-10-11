@@ -47,6 +47,7 @@ function wsOnConnection(socket, req) {
     let ready = false;
     let queue = [];
     function executeMessage(message) {
+        message = message.toString();
         switch (message) {
             case "getCategories":
                 user_get_todo_categories(userID, function (result) {

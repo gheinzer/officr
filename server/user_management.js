@@ -1,6 +1,11 @@
 const execQuery = require("./mysql");
 const crypto = require("crypto");
-const { sendHTMLMail, getRegisteredHTMLMailContent } = require("./mail");
+const {
+    sendHTMLMail,
+    getRegisteredHTMLMailContent,
+    getEmailConfirmationHTMLContent,
+} = require("./mail");
+const { execFile } = require("child_process");
 
 function _md5(str) {
     return crypto.createHash("md5").update(str.toString()).digest("hex");
@@ -81,15 +86,17 @@ function createAccount(username, password, email) {
     getUserByName(username, function (result) {
         if (result === undefined) {
             password = _md5(password);
+            var privateID = _md5(Math.random());
+            var publicID = _md5(privateID);
             execQuery(
-                "INSERT INTO users (Username, Password, Email) VALUES (?, ?, ?)",
-                [username, password, email],
+                "INSERT INTO not_confirmed_users (Username, Password, Email, PublicID) VALUES (?, ?, ?, ?)",
+                [username, password, email, publicID],
                 function (err, res) {
                     if (err) throw err;
                     sendHTMLMail(
                         email,
                         "Your officr account was created.",
-                        getRegisteredHTMLMailContent(username)
+                        getEmailConfirmationHTMLContent(username, privateID)
                     );
                 }
             );
@@ -97,6 +104,27 @@ function createAccount(username, password, email) {
         }
         throw new Error("Already existing username.");
     });
+}
+function confirmEmail(privateID) {
+    execQuery(
+        "SELECT * FROM not_confirmed_users WHERE PublicID=?",
+        [_md5(privateID)],
+        function (err, res, fields) {
+            if (err) throw err;
+            if (res[0]) {
+                var username = res[0].Username;
+                var password = res[0].Password;
+                var email = res[0].Email;
+                execQuery("DELETE FROM not_confirmed_users WHERE PublicID=?", [
+                    _md5(privateID),
+                ]);
+                execQuery(
+                    "INSERT INTO users (Username, Password, Email) VALUES (?, ?, ?)",
+                    [username, password, email]
+                );
+            }
+        }
+    );
 }
 /**
  *This verifies user credentials and runs the callback method, when the verification is complete.
@@ -367,4 +395,5 @@ module.exports = {
     user_getNotifications,
     user_mark_notification_as_seen,
     sessionDestroy,
+    confirmEmail,
 };

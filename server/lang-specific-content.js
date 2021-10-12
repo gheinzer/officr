@@ -64,7 +64,8 @@ const labels = {
         58: "Ihre Benachrichtigung wurde erfolgreich erstellt.",
         59: "Als gelesen markieren",
         60: "Dein Account wurde erstellt.",
-        61: "Du solltest eine E-Mail erhalten haben.",
+        61: "Du solltest eine E-Mail erhalten haben. Bevor du dich aber einloggen kannst, musst du deine E-Mailadresse mit dem Button im E-Mail bestätigen.",
+        62: "Du kannst dich nun anmelden.",
     },
     en: {
         1: "Category",
@@ -127,7 +128,8 @@ const labels = {
         58: "The notification was created successfully.",
         59: "Mark as seen",
         60: "Your account was created.",
-        61: "You should have received a e-mail",
+        61: "You should have received a e-mail. Before you can log in, you have to confirm your e-mail address with the button in the email.",
+        62: "You can sign in now.",
     },
 };
 

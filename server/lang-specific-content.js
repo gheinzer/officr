@@ -1,4 +1,3 @@
-
 /**
  * Here is all the language-specific content defined.
  * When the language of the user is not configured, english will be used by default.
@@ -64,6 +63,8 @@ const labels = {
         57: "Titel",
         58: "Ihre Benachrichtigung wurde erfolgreich erstellt.",
         59: "Als gelesen markieren",
+        60: "Dein Account wurde erstellt.",
+        61: "Du solltest eine E-Mail erhalten haben.",
     },
     en: {
         1: "Category",
@@ -125,6 +126,8 @@ const labels = {
         57: "Title",
         58: "The notification was created successfully.",
         59: "Mark as seen",
+        60: "Your account was created.",
+        61: "You should have received a e-mail",
     },
 };
 

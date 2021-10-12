@@ -1,5 +1,6 @@
 const execQuery = require("./mysql");
 const crypto = require("crypto");
+const { sendHTMLMail, getRegisteredHTMLMailContent } = require("./mail");
 
 function _md5(str) {
     return crypto.createHash("md5").update(str.toString()).digest("hex");
@@ -82,7 +83,15 @@ function createAccount(username, password, email) {
             password = _md5(password);
             execQuery(
                 "INSERT INTO users (Username, Password, Email) VALUES (?, ?, ?)",
-                [username, password, email]
+                [username, password, email],
+                function (err, res) {
+                    if (err) throw err;
+                    sendHTMLMail(
+                        email,
+                        "Your officr account was created.",
+                        getRegisteredHTMLMailContent(username)
+                    );
+                }
             );
             return;
         }

@@ -102,7 +102,7 @@ function handleFormInput(body, req, res) {
                         email
                     ); // Create the new account
 
-                    res.setHeader("Location", "/login"); // Redirect the user to the login page.
+                    res.setHeader("Location", "/signup/created"); // Redirect the user to the login page.
                     res.end("Registration successful.");
                 } else {
                     res.setHeader("Location", "/signup?alreadyTakenUsername");

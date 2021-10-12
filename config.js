@@ -40,10 +40,10 @@ const pages = {
 
 const mail = {
     // This is the mail configuration.
-    username: "noreply.officr@gabrielheinzer.ch", // The username to log in to the mailserver.
-    password: "CDJhOIcGrOeBabkhjfOw", // The password to log in to the mailserver.
-    smtp_server: "mail.cyon.ch", // The address of the mailserver
-    emailaddress: "noreply.officr@gabrielheinzer.ch", // The emailaddress that is used in the name
+    username: "", // The username to log in to the mailserver.
+    password: "", // The password to log in to the mailserver.
+    smtp_server: "", // The address of the mailserver
+    emailaddress: "", // The emailaddress that is used in the name
     host: "http://officr.gabrielheinzer.ch", // The hostname to be sent with mails (in links)
 };
 (mail["name"] = `officr <${mail.emailaddress}>`), // The name that is shown in the clients inbox. Defualt: `officr <${mail.emailaddress}>`

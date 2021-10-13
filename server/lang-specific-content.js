@@ -66,6 +66,10 @@ const labels = {
         60: "Dein Account wurde erstellt.",
         61: "Du solltest eine E-Mail erhalten haben. Bevor du dich aber einloggen kannst, musst du deine E-Mailadresse mit dem Button im E-Mail bestätigen.",
         62: "Du kannst dich nun anmelden.",
+        63: "Benutzer nicht gefunden",
+        64: "Sie können das Passwort nun mit der E-Mail, welche Ihnen gesendet wurde, zurücksetzen.",
+        65: "Dein Passwort wurde erfolgreich zurückgesetzt.",
+        66: "Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.",
     },
     en: {
         1: "Category",
@@ -130,6 +134,10 @@ const labels = {
         60: "Your account was created.",
         61: "You should have received a e-mail. Before you can log in, you have to confirm your e-mail address with the button in the email.",
         62: "You can sign in now.",
+        63: "User not found.",
+        64: "You can reset the password with the e-mail that was sent to you.",
+        65: "Your password has been reset successfully.",
+        66: "An error ocurred. Please retry.",
     },
 };
 

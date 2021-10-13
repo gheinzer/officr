@@ -22,6 +22,7 @@
         <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
     </head>
     <body onload="setTimeout(setLoaderAsFinished, 1200);">
+        {includeRes:"cookie-note.html"}
         <div class="horizontal-container">
             <header>
                 <img
@@ -37,20 +38,15 @@
                 <span>Accounts</span>
             </header>
         </div>
+
         <div class="main-content">
             <div class="flex-container centered">
-                <form action="/login/submit" method="POST">
-                    <div class="input-container">
-                        <input
-                            type="text"
-                            placeholder=""
-                            id="usernames"
-                            name="username"
-                            autocomplete="off"
-                            required
-                        />
-                        <label>{label10}</label>
-                    </div>
+                <form action="/login/reset_password/reset/submit" method="POST">
+                    <input type="hidden" name="privateID" id="privateID" />
+                    <script>
+                        document.getElementById("privateID").value =
+                            window.location.search.replace("?id=", "");
+                    </script>
                     <div class="input-container">
                         <input
                             type="password"
@@ -61,49 +57,26 @@
                         />
                         <label>{label11}</label>
                     </div>
-                    <div class="checkbox-container">
-                        <input
-                            type="checkbox"
-                            name="keepmeloggedin"
-                            id="keepmeloggedin"
-                        />
-                        <label for="keepmeloggedin">{label23}</label>
-                    </div>
                     <p class="important hidden" id="passwordUsernameLabel">
-                        {label19}
+                        {label66}
                     </p>
 
                     <script>
-                        if (
-                            window.location.search ===
-                            "?showUsernamePasswordError"
-                        ) {
+                        if (window.location.search === "?error") {
                             document.getElementById(
                                 "passwordUsernameLabel"
                             ).style.display = "block";
                         }
                     </script>
                     <input
-                        type="reset"
-                        value="{label9}"
-                        class="classic-button"
-                    />
-                    <input
                         type="submit"
-                        value="{label12}"
+                        value="{label18}"
                         class="classic-button"
                         onclick="showLoader()"
                     />
-                    <a class="classic-button" href="/signup">
-                        {label13} </a>
-                    <a class="classic-button" href="/login/reset_password">
-                        {label18} </a>   
                 </form>
             </div>
         </div>
-        
-        </div>
-        {includeRes:"cookie-note.html"}
         {includeRes:"loader-overlay.html"}
     </body>
 </html>

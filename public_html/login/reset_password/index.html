@@ -37,6 +37,7 @@
                 <span>Accounts</span>
             </header>
         </div>
+        {includeRes:"loader-overlay.html"}
         <div class="main-content">
             <div class="flex-container centered">
                 <form action="/login/reset_password/submit" method="POST">
@@ -52,6 +53,14 @@
                         />
                         <label>{label10}</label>
                     </div>
+                    <p class="important hidden" id="usernameError">{label63}</p>
+                    <script>
+                        if (window.location.search == "?usernotfound") {
+                            document
+                                .getElementById("usernameError")
+                                .classList.remove("hidden");
+                        }
+                    </script>
                     <input
                         type="reset"
                         value="{label9}"
@@ -65,6 +74,6 @@
                 </form>
             </div>
         </div>
-        {includeRes:"loader-overlay.html"} {includeRes:"cookie-note.html"}
+        {includeRes:"cookie-note.html"}
     </body>
 </html>

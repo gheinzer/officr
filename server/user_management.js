@@ -370,6 +370,53 @@ function sessionDestroy(sessionID) {
         }
     );
 }
+function createPasswordResetDataset(username, publicID) {
+    execQuery(
+        "INSERT INTO passwordresets (Username, PublicID) VALUES (?, ?)",
+        [username, publicID],
+        function (err) {
+            if (err) throw err;
+        }
+    );
+}
+function resetPassword(
+    privateID,
+    newPassword,
+    callback = function (success) {}
+) {
+    execQuery(
+        "SELECT * FROM passwordresets WHERE PublicID=?",
+        [_md5(privateID)],
+        function (err, result) {
+            if (err) throw err;
+            try {
+                if (result.lenght < 1) {
+                    callback(false);
+                    return;
+                }
+                result.forEach((resetDataset) => {
+                    execQuery(
+                        "DELETE FROM passwordresets WHERE Username=?",
+                        [resetDataset.Username],
+                        function (err) {
+                            if (err) throw err;
+                        }
+                    );
+                });
+                execQuery(
+                    "UPDATE users SET Password=? WHERE Username=?",
+                    [_md5(newPassword), result[0].Username],
+                    function (err) {
+                        if (err) throw err;
+                        callback(true);
+                    }
+                );
+            } catch {
+                callback(false);
+            }
+        }
+    );
+}
 module.exports = {
     user_create_session,
     user_get_sessions,
@@ -396,4 +443,6 @@ module.exports = {
     user_mark_notification_as_seen,
     sessionDestroy,
     confirmEmail,
+    createPasswordResetDataset,
+    resetPassword,
 };

@@ -29,10 +29,11 @@ jobs:
       - name: Copying config.js.template to config.js
         run: cp config.js.template config.js
       
-      - name: Commit chanes
-        run: | 
+      - name: Commit changes
+        run: |
           git config --local user.email "dev@gabrielheinzer.ch"
           git config --local user.name "GitHub Actions"
+          git add --force config.js
           git commit -m "Copied the configuration template to config.js"
         
       - name: Push changes

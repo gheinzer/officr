@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.7deb1
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Erstellungszeit: 28. Sep 2021 um 21:49
--- Server-Version: 8.0.26-0ubuntu0.21.04.3
--- PHP-Version: 7.4.16
+-- Host: 127.0.0.1
+-- Erstellungszeit: 12. Okt 2021 um 19:45
+-- Server-Version: 10.4.19-MariaDB
+-- PHP-Version: 8.0.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -27,14 +26,52 @@ USE `officr`;
 -- --------------------------------------------------------
 
 --
+-- Tabellenstruktur für Tabelle `notifications`
+--
+
+CREATE TABLE `notifications` (
+  `ID` int(11) NOT NULL,
+  `Title` text NOT NULL,
+  `Text` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `notifications_seen`
+--
+
+CREATE TABLE `notifications_seen` (
+  `ID` int(11) NOT NULL,
+  `NotificationID` int(11) NOT NULL,
+  `UserID` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `not_confirmed_users`
+--
+
+CREATE TABLE `not_confirmed_users` (
+  `ID` int(11) NOT NULL,
+  `Username` text NOT NULL,
+  `Password` text NOT NULL,
+  `Email` text NOT NULL,
+  `PublicID` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Tabellenstruktur für Tabelle `todo_categories`
 --
 
 CREATE TABLE `todo_categories` (
-  `ID` int NOT NULL,
-  `UserID` int NOT NULL,
+  `ID` int(11) NOT NULL,
+  `UserID` int(11) NOT NULL,
   `Name` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -43,14 +80,14 @@ CREATE TABLE `todo_categories` (
 --
 
 CREATE TABLE `todo_tasks` (
-  `ID` int NOT NULL,
-  `UserID` int NOT NULL,
-  `CategoryID` int NOT NULL,
-  `TypeID` int NOT NULL,
-  `StateID` int NOT NULL DEFAULT '0',
+  `ID` int(11) NOT NULL,
+  `UserID` int(11) NOT NULL,
+  `CategoryID` int(11) NOT NULL,
+  `TypeID` int(11) NOT NULL,
+  `StateID` int(11) NOT NULL DEFAULT 0,
   `Description` text NOT NULL,
   `Date` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -59,10 +96,10 @@ CREATE TABLE `todo_tasks` (
 --
 
 CREATE TABLE `todo_types` (
-  `ID` int NOT NULL,
-  `UserID` int NOT NULL,
+  `ID` int(11) NOT NULL,
+  `UserID` int(11) NOT NULL,
   `Name` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -71,12 +108,11 @@ CREATE TABLE `todo_types` (
 --
 
 CREATE TABLE `users` (
-  `ID` int NOT NULL,
+  `ID` int(11) NOT NULL,
   `Username` text NOT NULL,
   `Password` text NOT NULL,
-  `Email` text NOT NULL,
-  `isAdmin` int NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `Email` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -85,15 +121,22 @@ CREATE TABLE `users` (
 --
 
 CREATE TABLE `usersessions` (
-  `ID` int NOT NULL,
-  `UserID` int NOT NULL,
+  `ID` int(11) NOT NULL,
+  `UserID` int(11) NOT NULL,
   `PrivateID` text NOT NULL,
-  `Expires` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `Expires` int(11) NOT NULL,
+  `IP` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Indizes der exportierten Tabellen
 --
+
+--
+-- Indizes für die Tabelle `not_confirmed_users`
+--
+ALTER TABLE `not_confirmed_users`
+  ADD PRIMARY KEY (`ID`);
 
 --
 -- Indizes für die Tabelle `todo_categories`
@@ -117,7 +160,8 @@ ALTER TABLE `todo_types`
 -- Indizes für die Tabelle `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`ID`);
+  ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `Username` (`Username`) USING HASH;
 
 --
 -- Indizes für die Tabelle `usersessions`
@@ -130,34 +174,40 @@ ALTER TABLE `usersessions`
 --
 
 --
+-- AUTO_INCREMENT für Tabelle `not_confirmed_users`
+--
+ALTER TABLE `not_confirmed_users`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT für Tabelle `todo_categories`
 --
 ALTER TABLE `todo_categories`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT für Tabelle `todo_tasks`
 --
 ALTER TABLE `todo_tasks`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT für Tabelle `todo_types`
 --
 ALTER TABLE `todo_types`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT für Tabelle `users`
 --
 ALTER TABLE `users`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT für Tabelle `usersessions`
 --
 ALTER TABLE `usersessions`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -1,5 +1,11 @@
 const execQuery = require("./mysql");
 const crypto = require("crypto");
+const {
+    sendHTMLMail,
+    getRegisteredHTMLMailContent,
+    getEmailConfirmationHTMLContent,
+} = require("./mail");
+const { execFile } = require("child_process");
 
 function _md5(str) {
     return crypto.createHash("md5").update(str.toString()).digest("hex");
@@ -80,14 +86,45 @@ function createAccount(username, password, email) {
     getUserByName(username, function (result) {
         if (result === undefined) {
             password = _md5(password);
+            var privateID = _md5(Math.random());
+            var publicID = _md5(privateID);
             execQuery(
-                "INSERT INTO users (Username, Password, Email) VALUES (?, ?, ?)",
-                [username, password, email]
+                "INSERT INTO not_confirmed_users (Username, Password, Email, PublicID) VALUES (?, ?, ?, ?)",
+                [username, password, email, publicID],
+                function (err, res) {
+                    if (err) throw err;
+                    sendHTMLMail(
+                        email,
+                        "Your officr account was created.",
+                        getEmailConfirmationHTMLContent(username, privateID)
+                    );
+                }
             );
             return;
         }
         throw new Error("Already existing username.");
     });
+}
+function confirmEmail(privateID) {
+    execQuery(
+        "SELECT * FROM not_confirmed_users WHERE PublicID=?",
+        [_md5(privateID)],
+        function (err, res, fields) {
+            if (err) throw err;
+            if (res[0]) {
+                var username = res[0].Username;
+                var password = res[0].Password;
+                var email = res[0].Email;
+                execQuery("DELETE FROM not_confirmed_users WHERE PublicID=?", [
+                    _md5(privateID),
+                ]);
+                execQuery(
+                    "INSERT INTO users (Username, Password, Email) VALUES (?, ?, ?)",
+                    [username, password, email]
+                );
+            }
+        }
+    );
 }
 /**
  *This verifies user credentials and runs the callback method, when the verification is complete.
@@ -333,6 +370,53 @@ function sessionDestroy(sessionID) {
         }
     );
 }
+function createPasswordResetDataset(username, publicID) {
+    execQuery(
+        "INSERT INTO passwordresets (Username, PublicID) VALUES (?, ?)",
+        [username, publicID],
+        function (err) {
+            if (err) throw err;
+        }
+    );
+}
+function resetPassword(
+    privateID,
+    newPassword,
+    callback = function (success) {}
+) {
+    execQuery(
+        "SELECT * FROM passwordresets WHERE PublicID=?",
+        [_md5(privateID)],
+        function (err, result) {
+            if (err) throw err;
+            try {
+                if (result.lenght < 1) {
+                    callback(false);
+                    return;
+                }
+                result.forEach((resetDataset) => {
+                    execQuery(
+                        "DELETE FROM passwordresets WHERE Username=?",
+                        [resetDataset.Username],
+                        function (err) {
+                            if (err) throw err;
+                        }
+                    );
+                });
+                execQuery(
+                    "UPDATE users SET Password=? WHERE Username=?",
+                    [_md5(newPassword), result[0].Username],
+                    function (err) {
+                        if (err) throw err;
+                        callback(true);
+                    }
+                );
+            } catch {
+                callback(false);
+            }
+        }
+    );
+}
 module.exports = {
     user_create_session,
     user_get_sessions,
@@ -358,4 +442,7 @@ module.exports = {
     user_getNotifications,
     user_mark_notification_as_seen,
     sessionDestroy,
+    confirmEmail,
+    createPasswordResetDataset,
+    resetPassword,
 };

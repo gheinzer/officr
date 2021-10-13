@@ -8,6 +8,7 @@ const {
     session_verify,
     getUserByID,
     sessionDestroy,
+    confirmEmail,
 } = require("./user_management");
 const labels = require("./lang-specific-content");
 const { exec } = require("child_process");
@@ -50,6 +51,7 @@ if (httpd_config.ssl.active) {
 }
 
 function serverOnRequest(req, res, ssl) {
+    req.url_full = req.url;
     req.url = req.url.toString().split("?")[0];
     const { headers } = req;
     res.setHeader("Server", `officr HTTPD`);
@@ -153,6 +155,12 @@ function handleNormalRequest(
             "302 - Want to logout but was not logged in. Redirecting to root."
         );
         return;
+    }
+    if (req.url_full.match(/\/signup\/confirmemail\?id=.*/)) {
+        var privateID = req.url_full
+            .match(/\/signup\/confirmemail\?id=.*/)[0]
+            .replace("/signup/confirmemail?id=", "");
+        confirmEmail(privateID);
     }
     req.on("data", (data) => {
         handleFormInput(data, req, res);

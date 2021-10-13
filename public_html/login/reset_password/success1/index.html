@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta
+            name="description"
+            content="Your todo list. Anywhere. At any time. On any device."
+        />
+        <meta
+            name="keywords"
+            content="officr, todo, todo list, open-source, tasks"
+        />
+        <title>officr Accounts - Password Reset</title>
+        <link rel="stylesheet" href="/style/style.css" />
+        <script src="/js/overlays.js"></script>
+        <script src="/js/cookies.js"></script>
+        <link
+            rel="shortcut icon"
+            href="/assets/logo_single.svg"
+            type="image/x-icon"
+        />
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+        <meta property="og:title" content="officr - Your todo list" />
+        <meta
+            property="og:image"
+            content="https://officr.gabrielheinzer.ch/assets/social_preview.jpg"
+        />
+        <meta
+            property="og:description"
+            content="officr is a open-source todo software. It can be used for homework, familiy or many other things."
+        />
+        <meta property="og:url" content="https://officr.gabrielheinzer.ch" />
+        <meta property="og:image:width" content="1354" />
+        <meta property="og:image:height" content="469" />
+    </head>
+    <body onload="setTimeout(setLoaderAsFinished, 1200); showCookieOverlay()">
+        {includeRes:"cookie-note.html"}
+        <div class="vertical-container">
+            <div class="horizontal-container">
+                <header>
+                    <img
+                        src="/assets/logo_with_text_light.svg"
+                        alt="officr"
+                        class="desktop-only"
+                    />
+                    <img
+                        src="/assets/logo_single.svg"
+                        alt="officr"
+                        class="mobile-only"
+                    />
+                </header>
+            </div>
+            <div class="main-content">
+                <div
+                    id="notfound_message"
+                    style="text-align: center; padding: 1rem"
+                >
+                    <img
+                        src="/assets/undraw/done.svg"
+                        alt=""
+                        class="undraw-img"
+                        style="display: block; width: 60vw; max-height: 50vh"
+                    />
+                    <h1 style="text-align: center">{label64}</h1>
+                </div>
+            </div>
+        </div>
+        {includeRes:"loader-overlay.html"}
+    </body>
+</html>

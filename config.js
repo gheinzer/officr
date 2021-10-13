@@ -38,4 +38,13 @@ const pages = {
     redirect_root_when_authenticated: true,
 };
 
-module.exports = { httpd_config, mysql_config, pages };
+const mail = {
+    // This is the mail configuration.
+    username: "", // The username to log in to the mailserver.
+    password: "", // The password to log in to the mailserver.
+    smtp_server: "", // The address of the mailserver
+    emailaddress: "", // The emailaddress that is used in the name
+    host: "http://officr.gabrielheinzer.ch", // The hostname to be sent with mails (in links)
+};
+(mail["name"] = `officr <${mail.emailaddress}>`), // The name that is shown in the clients inbox. Defualt: `officr <${mail.emailaddress}>`
+    (module.exports = { httpd_config, mysql_config, pages, mail });

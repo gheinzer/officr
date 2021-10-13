@@ -1,9 +1,17 @@
+const { sendHTMLMail, getPasswordResetHTMLContent } = require("./mail");
 const {
     user_verify,
     user_create_session,
     createAccount,
     getUserByName,
+    createPasswordResetDataset,
+    resetPassword,
 } = require("./user_management");
+const crypto = require("crypto");
+
+function _md5(str) {
+    return crypto.createHash("md5").update(str.toString()).digest("hex");
+}
 
 /**
  * This handles the input of a POST request.
@@ -102,7 +110,7 @@ function handleFormInput(body, req, res) {
                         email
                     ); // Create the new account
 
-                    res.setHeader("Location", "/login"); // Redirect the user to the login page.
+                    res.setHeader("Location", "/signup/created"); // Redirect the user to the login page.
                     res.end("Registration successful.");
                 } else {
                     res.setHeader("Location", "/signup?alreadyTakenUsername");
@@ -110,9 +118,85 @@ function handleFormInput(body, req, res) {
                 }
             });
             break;
+        case "/login/reset_password/submit":
+            var datachunks = body.toString().split("&");
+            /**
+             * This is the data that is submitted by the user.
+             */
+            var data = {};
+            datachunks.forEach((element) => {
+                var key = element.split("=")[0];
+                var value = element.split("=")[1];
+                data[key] = value;
+            });
+            if (data.username === undefined) {
+                // Check all submitted fields
+                res.statusCode = 400;
+                res.end("Bad request");
+                return; // Send a 400 Bad request if fields are invalid.
+            }
+            var privateID = _md5(Math.random());
+            var publicID = _md5(privateID);
+            getUserByName(data.username, function (result) {
+                if (!result) {
+                    res.statusCode = 302;
+                    res.setHeader(
+                        "Location",
+                        "/login/reset_password?usernotfound"
+                    );
+                    res.end("User not found");
+                    return;
+                }
+                createPasswordResetDataset(data.username, publicID);
+                sendHTMLMail(
+                    result.Email,
+                    "Password reset of your officr account",
+                    getPasswordResetHTMLContent(data.username, privateID)
+                );
+                res.statusCode = 302;
+                res.setHeader("Location", "/login/reset_password/success1");
+                res.end("OK");
+            });
+            break;
+        case "/login/reset_password/reset/submit":
+            var datachunks = body.toString().split("&");
+            /**
+             * This is the data that is submitted by the user.
+             */
+            var data = {};
+            datachunks.forEach((element) => {
+                var key = element.split("=")[0];
+                var value = element.split("=")[1];
+                data[key] = value;
+            });
+            if (data.password === undefined || data.privateID === undefined) {
+                // Check all submitted fields
+                res.statusCode = 400;
+                res.end("Bad request");
+                return; // Send a 400 Bad request if fields are invalid.
+            }
+            resetPassword(data.privateID, data.password, function (success) {
+                if (!success) {
+                    res.statusCode = 302;
+                    res.setHeader(
+                        "Location",
+                        "/login/reset_password/reset?error"
+                    );
+                    res.end("ERROR");
+                }
+                if (success) {
+                    res.statusCode = 302;
+                    res.setHeader(
+                        "Location",
+                        "/login/reset_password/reset/success"
+                    );
+                    res.end("OK");
+                }
+            });
+            break;
         default:
             res.statusCode = 404;
-            res.end("404 - Not found"); // Return a regular 404 if a POST request is sent to a page where it is not valid.
+            res.end("404 - Not found"); // Return a regular 404 if a POST request is sent to a page where it is not valid
     }
 }
 

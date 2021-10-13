@@ -2,7 +2,7 @@ package-lock.json
 */.old/*
 config.js
 daemon/officrbackend.wrapper.log
-daemon/officrbackend.err.log
+daemon/officrbackend.err.logs
 daemon/officrbackend.exe
 daemon/officrbackend.exe.config
 daemon/officrbackend.out.log
@@ -14,3 +14,4 @@ node_modules/http-gzip/package.json
 package.json
 node_modules/*
 templates/*
+config.js

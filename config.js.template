@@ -3,15 +3,15 @@
  */
 const httpd_config = {
     public_html: "public_html", // Sets the path to the public_html directory. Default is public_html.
-    port: "8001", // Sets the port for the server. Default: 80
-    lang: null, // Sets the language for the documents. When set to null, the default language of the client is used. Default: undefined
+    port: "80", // Sets the port for the server. Default: 80
+    lang: null, // Sets the language for the documents. When set to null, the default language of the client is used. Default: null
     logging: {
         // Configures, what is logged by the server.
-        remote_lang: true, // Configures, wheter the client language is logged or not. Default: true
-        requested_path: true, // Configures, wheter the requested path is logged or not. Default: true
+        remote_lang: true, // Configures, whether the client language is logged or not. Default: true
+        requested_path: true, // Configures, whether the requested path is logged or not. Default: true
     },
     ssl: {
-        active: false, // Sets, wheter the https server should run or not. Default: false
+        active: false, // Sets, whether the https server should run or not. Default: false
         port: "443", // Sets the port for the https server. Default: 443
         options: {
             cert: "somecert.cert",
@@ -44,7 +44,7 @@ const mail = {
     password: "", // The password to log in to the mailserver.
     smtp_server: "", // The address of the mailserver
     emailaddress: "", // The emailaddress that is used in the name
-    host: "http://officr.gabrielheinzer.ch", // The hostname to be sent with mails (in links)
+    host: "", // The hostname to be sent with mails (in links)
 };
 (mail["name"] = `officr <${mail.emailaddress}>`), // The name that is shown in the clients inbox. Defualt: `officr <${mail.emailaddress}>`
     (module.exports = { httpd_config, mysql_config, pages, mail });

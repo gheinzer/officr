@@ -26,5 +26,11 @@ jobs:
       - uses: actions/checkout@v2
 
       # Runs a single command using the runners shell
-      - name: Rename config.js.template to config.js
+      - name: Copying config.js.template to config.js
         run: cp config.js.template config.js
+      
+      - name: Commit chanes
+        run: git commit -m "Copied the configuration template to config.js"
+        
+      - name: Push changes
+        run: git push

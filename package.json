@@ -1,0 +1,33 @@
+{
+    "name": "officr",
+    "version": "1.0.5-beta",
+    "description": "officr is a open-source todo list to use for work, family, school etc.",
+    "main": "server.js",
+    "dependencies": {
+        "axios": "^0.23.0",
+        "mime": "^2.5.2",
+        "mysql": "^2.18.1",
+        "nodemailer": "^6.7.0",
+        "ws": "^8.2.3"
+    },
+    "scripts": {
+        "test": "node tests/main.test.js",
+        "start": "node server.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/gheinzer/officr.git"
+    },
+    "keywords": [
+        "officr",
+        "office",
+        "todo-list",
+        "todo"
+    ],
+    "author": "Gabriel Heinzer",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/gheinzer/officr/issues"
+    },
+    "homepage": "https://github.com/gheinzer/officr#readme"
+}

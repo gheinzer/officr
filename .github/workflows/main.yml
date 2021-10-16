@@ -33,7 +33,7 @@ jobs:
       - name: Copy configuration template to config.js
         run: cp config.js.template config.js
       - name: Try to start server
-        run: timeout 10 npm run start || code=$?; if [[ $code -ne 124 && $code -ne 0 ]]; then exit $code; fi
+        run: sud timeout 10 sudo npm run start || code=$?; if [[ $code -ne 124 && $code -ne 0 ]]; then exit $code; fi
         
       - name: Run tests
-        run: npm test
+        run: sudo npm test

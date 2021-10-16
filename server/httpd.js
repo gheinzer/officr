@@ -18,7 +18,6 @@ const mime = require("mime");
 let version;
 try {
     exec("git describe --tags", function (error, stdout, stderr) {
-        if (error) throw error;
         version = stdout;
     });
 } catch {

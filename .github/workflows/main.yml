@@ -31,7 +31,7 @@ jobs:
         run: npm install
         
       - name: Try to start server
-        run: timeout 10 npm run || code=$?; if [[ $code -ne 124 && $code -ne 0 ]]; then exit $code; fi
+        run: timeout 10 npm run start || code=$?; if [[ $code -ne 124 && $code -ne 0 ]]; then exit $code; fi
         
       - name: Copy configuration template to config.js
         run: cp config.js.template config.js

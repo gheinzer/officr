@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
+name: tests
 
 # Controls when the workflow will run
 on:
@@ -33,7 +33,7 @@ jobs:
       - name: Copy configuration template to config.js
         run: cp config.js.template config.js
       - name: Try to start server
-        run: sud timeout 10 sudo npm run start || code=$?; if [[ $code -ne 124 && $code -ne 0 ]]; then exit $code; fi
+        run: sudo timeout 10 sudo npm run start || code=$?; if [[ $code -ne 124 && $code -ne 0 ]]; then exit $code; fi
         
       - name: Run tests
         run: sudo npm test

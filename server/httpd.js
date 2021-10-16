@@ -16,10 +16,14 @@ var sslserver = undefined;
 const mime = require("mime");
 
 let version;
-exec("git describe --tags", function (error, stdout, stderr) {
-    if (error) throw error;
-    version = stdout;
-});
+try {
+    exec("git describe --tags", function (error, stdout, stderr) {
+        if (error) throw error;
+        version = stdout;
+    });
+} catch {
+    version = "";
+}
 
 console.log("httpd.js started");
 

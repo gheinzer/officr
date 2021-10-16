@@ -4,7 +4,7 @@ const { HTTPMakeGETRequest } = require("./request");
 
 let passed = 1;
 
-server_proc = child_process.spawn("node", ["server.js"]);
+server_proc = child_process.spawn("npm", ["run", "start"]);
 server_proc.stdout.setEncoding("utf8");
 async function testHTTPReachability() {
     console.log("Testing HTTP reachability...");

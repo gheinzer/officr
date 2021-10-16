@@ -27,8 +27,10 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '14'
-      - name: Install dependencies
-        run: npm install
+      - name: Install dependenciesC
+        
+      - name: Copy configuration template to config.js
+        run: cp config.template.js config.js
         
       - name: Run tests
         run: npm test

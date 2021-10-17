@@ -42,7 +42,7 @@ if (httpd_config.ssl.active) {
         key: readFileSync(httpd_config.ssl.options.key),
         cert: readFileSync(httpd_config.ssl.options.cert),
     };
-    const sslserver = https
+    sslserver = https
         .createServer(options, (req, res) => {})
         .listen(httpd_config.ssl.port);
     sslserver.on("request", (req, res) => {

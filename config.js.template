@@ -5,6 +5,7 @@ const httpd_config = {
     public_html: "public_html", // Sets the path to the public_html directory. Default is public_html.
     port: "80", // Sets the port for the server. Default: 80
     lang: null, // Sets the language for the documents. When set to null, the default language of the client is used. Default: null
+    hostname: "", // Sets the hostname to redirect to when redirections are required.
     logging: {
         // Configures, what is logged by the server.
         remote_lang: true, // Configures, whether the client language is logged or not. Default: true
@@ -17,6 +18,7 @@ const httpd_config = {
             cert: "somecert.cert",
             key: "somkey.pem",
         },
+        auto_redirect: true, // Auto-redirect to HTTPS when the server is contacted on HTTP. Default is true.
     },
 };
 /**
@@ -46,5 +48,5 @@ const mail = {
     emailaddress: "", // The emailaddress that is used in the name
     host: "", // The hostname to be sent with mails (in links)
 };
-(mail["name"] = `officr <${mail.emailaddress}>`), // The name that is shown in the clients inbox. Defualt: `officr <${mail.emailaddress}>`
+(mail["name"] = `officr <${mail.emailaddress}>`), // The name that is shown in the clients inbox. Default: `officr <${mail.emailaddress}>`
     (module.exports = { httpd_config, mysql_config, pages, mail });

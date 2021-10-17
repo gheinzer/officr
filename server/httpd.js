@@ -54,6 +54,12 @@ if (httpd_config.ssl.active) {
 }
 
 function serverOnRequest(req, res, ssl) {
+    if (!ssl && httpd_config.ssl.auto_redirect) {
+        res.statusCode = 301;
+        res.setHeader("Location", "https://" + httpd_config.hostname + req.url);
+        res.end("Please go to HTTPS");
+        return;
+    }
     req.url_full = req.url;
     req.url = req.url.toString().split("?")[0];
     const { headers } = req;

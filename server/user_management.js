@@ -30,7 +30,7 @@ function getUserByID(id, callback = function (result) {}) {
         }
     );
 }
-function user_create_session(username) {
+function user_create_session(username, callback = function (publicID) {}) {
     const sessionID = _md5(
         Math.random() * Math.random() * 1000000000 * new Date().getTime()
     );
@@ -50,6 +50,7 @@ function user_create_session(username) {
                 if (err) {
                     throw err;
                 }
+                callback(publicID);
             }
         );
     });

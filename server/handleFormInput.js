@@ -44,29 +44,30 @@ function handleFormInput(body, req, res) {
             user_verify(username, password, function (result) {
                 if (result) {
                     // If result is true, the user is verified.
-                    let publicSessionID = user_create_session(username).public; // Creates a session and gets the public session id.
-                    if (
-                        data.keepmeloggedin === undefined ||
-                        data.keepmeloggedin === "off"
-                    ) {
-                        // If the keepmeloggedin field is not submitted of =off, set the cookie with the default lifetime.
-                        res.setHeader(
-                            "Set-Cookie",
-                            `officr-user-session-id=${publicSessionID}; HttpOnly; Path=/`
-                        );
-                    } else {
-                        // If the keepmeloggedin field is checked, set the cookie with increased lifetime.
-                        var date = new Date();
-                        date.setDate(date.getDate() + 14);
-                        res.setHeader(
-                            "Set-Cookie",
-                            `officr-user-session-id=${publicSessionID}; HttpOnly; Path=/; expires=${date.toUTCString()}`
-                        );
-                    }
-                    res.setHeader("Location", "/todo"); // Redirect the user to /todo
-                    setTimeout(function () {
-                        res.end("Authentication successful");
-                    }, 500); // This is delayed because of some speed issues with the MySQL Server.
+                    user_create_session(username, function (publicSessionID) {
+                        if (
+                            data.keepmeloggedin === undefined ||
+                            data.keepmeloggedin === "off"
+                        ) {
+                            // If the keepmeloggedin field is not submitted of =off, set the cookie with the default lifetime.
+                            res.setHeader(
+                                "Set-Cookie",
+                                `officr-user-session-id=${publicSessionID}; HttpOnly; Path=/`
+                            );
+                        } else {
+                            // If the keepmeloggedin field is checked, set the cookie with increased lifetime.
+                            var date = new Date();
+                            date.setDate(date.getDate() + 14);
+                            res.setHeader(
+                                "Set-Cookie",
+                                `officr-user-session-id=${publicSessionID}; HttpOnly; Path=/; expires=${date.toUTCString()}`
+                            );
+                        }
+                        res.setHeader("Location", "/todo"); // Redirect the user to /todo
+                        setTimeout(function () {
+                            res.end("Authentication successful");
+                        }, 500); // This is delayed because of some speed issues with the MySQL Server.
+                    });
                 } else {
                     res.setHeader(
                         "Location",

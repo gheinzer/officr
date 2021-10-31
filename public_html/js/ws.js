@@ -52,9 +52,9 @@ function connect() {
         //showErrorOverlay("{label25}");
     };
     socket.onopen = () => {
-            try {
-                hideLoader();
-            } catch {}
+        try {
+            hideLoader();
+        } catch {}
         if (queue.length > 0) {
             queue.forEach((element, index) => {
                 element();
@@ -160,7 +160,7 @@ function connect() {
             "INITIALIZE_WITH_SESSION_ID={rawCodeLabel<publicSessionID>}"
         );
     };
-    function todo_get_categories(callback) {
+    window.todo_get_categories = function (callback) {
         _getCategories(function (result) {
             var html = "";
             result.forEach((element, index) => {
@@ -212,7 +212,7 @@ function connect() {
             if (callback) callback();
         });
     }
-    function todo_get_types(callback) {
+    window.todo_get_types = function (callback) {
         _getTypes(function (result) {
             var html = "";
             result.forEach((element) => {
@@ -265,7 +265,7 @@ function connect() {
             if (callback) callback();
         });
     }
-    function todo_get_tasks(callback) {
+    window.todo_get_tasks = function (callback) {
         _getTasks(function (result) {
             result = result.sort(function (a, b) {
                 return _reorderDate(a.Date) - _reorderDate(b.Date);
@@ -280,7 +280,7 @@ function connect() {
         date = date.split(".")[2] + date.split(".")[1] + date.split(".")[0];
         return date;
     }
-    function todo_update_tasks() {
+    window.todo_update_tasks = function () {
         var html = testForFilters();
         if (html == "") {
             document.getElementById("notfound_message").style.display =
@@ -290,7 +290,7 @@ function connect() {
         }
         document.getElementById("tasks").innerHTML = html;
     }
-    function testForFilters() {
+    window.testForFilters = function () {
         var html = "";
         tasks.forEach((element, index) => {
             element.Description = element.Description.toString().replaceAll(
@@ -426,7 +426,7 @@ function connect() {
         document.getElementById("erroroverlay").style.opacity = 0;
     });
 
-    function todo_add_task() {
+    window.todo_add_task = function () {
         showLoader();
         const categoryID = document.getElementById("task_category").value;
         const typeID = document.getElementById("task_type").value;
@@ -452,16 +452,16 @@ function connect() {
             if (callback) callback();
         };
     }
-    function _addCategory(category_name, callback) {
+    window.todo_toggle_state = function _addCategory(category_name, callback) {
         socket.send(`ADD-CATEGORY=${category_name}`);
         addCategoryHandleAnswer = function () {
             if (callback) callback();
         };
     }
-    function todo_toggle_state(id, state) {
+    window.todo_toggle_state = function (id, state) {
         socket.send(`TOGGLE_STATE=${id},${state}`);
     }
-    function todo_add_type() {
+    window.todo_add_type = function () {
         showLoader();
         const type_name = document.getElementById("type_name").value;
         _addType(type_name, function () {
@@ -470,7 +470,7 @@ function connect() {
             todo_get_types();
         });
     }
-    function todo_add_category() {
+    window.todo_add_category = function () {
         showLoader();
         const type_name = document.getElementById("category_name").value;
         _addCategory(type_name, function () {
@@ -479,11 +479,11 @@ function connect() {
             todo_get_categories();
         });
     }
-    function todo_set_search_filter() {
+    window.todo_set_search_filter = function () {
         searchFilter = document.getElementById("search").value;
         todo_update_tasks();
     }
-    function todo_set_state_filter(element) {
+    window.todo_set_state_filter = function (element) {
         const selected = element.classList.contains("selected");
         const id = element.id;
         const SQLID = id.replace("state-", "");
@@ -499,7 +499,7 @@ function connect() {
         }
         todo_update_tasks();
     }
-    function todo_set_type_filter(element) {
+    window.todo_set_type_filter = function (element) {
         const selected = element.classList.contains("selected");
         const id = element.id;
         const SQLID = id.replace("type-", "");
@@ -515,7 +515,7 @@ function connect() {
         }
         todo_update_tasks();
     }
-    function todo_set_category_filter(element) {
+    window.todo_set_category_filter = function (element) {
         const selected = element.classList.contains("selected");
         const id = element.id;
         const SQLID = id.replace("category-", "");
@@ -531,19 +531,19 @@ function connect() {
         }
         todo_update_tasks();
     }
-    function editCategory(id) {
+    window.editCategory = function (id) {
         document.getElementById("editCategoryID").value = id;
         document.getElementById("category_edit_name").value = categoryIDs[id];
         document
             .getElementById("editCategoriesForm")
             .classList.remove("hidden");
     }
-    function editType(id) {
+    window.editType = function (id) {
         document.getElementById("editTypeID").value = id;
         document.getElementById("type_edit_name").value = typeIDs[id];
         document.getElementById("editTypesForm").classList.remove("hidden");
-    }
-    function todo_edit_category() {
+    };
+    window.todo_edit_category = function () {
         var category_id = document.getElementById("editCategoryID").value;
         var category_name = document.getElementById("category_edit_name").value;
         document.getElementById("editCategoriesForm").classList.add("hidden");
@@ -562,8 +562,8 @@ function connect() {
         } else {
             showErrorOverlay("{label35}");
         }
-    }
-    function todo_edit_type() {
+    };
+    window.todo_edit_type = function () {
         var type_id = document.getElementById("editTypeID").value;
         var type_name = document.getElementById("type_edit_name").value;
         document.getElementById("editTypesForm").classList.add("hidden");
@@ -582,20 +582,20 @@ function connect() {
         } else {
             showErrorOverlay("{label35}");
         }
-    }
-    function deleteType(id) {
+    };
+    window.deleteType = function (id) {
         socket.send("DELETE-TYPE=" + id);
-    }
-    function deleteCategory(id) {
+    };
+    window.deleteCategory = function (id) {
         socket.send("DELETE-CATEGORY=" + id);
-    }
-    function showMessage(msg) {
+    };
+    window.showMessage = function (msg) {
         var msgbox = document.createElement("div");
         var child = document.createTextNode(msg);
         msgbox.appendChild(child);
         msgbox.classList.add("msg");
         document.getElementById("messagecenter").appendChild(msgbox);
-    }
+    };
     function _getNumberOfUsers(callback) {
         socket.send("getNumberOfUsers");
         getUserNumberHandleAnswer = callback;
@@ -605,10 +605,10 @@ function connect() {
             document.getElementById("usernumber").innerHTML = result;
         });
     }
-    function adminConsoleCheckForNewerVersions() {
+    window.adminConsoleCheckForNewerVersions = function () {
         socket.send("updateOfficr");
-    }
-    function adminConsoleSendNotification() {
+    };
+    window.adminConsoleSendNotification = function () {
         const title = document.getElementById("notification-title").value;
         const text = document
             .getElementById("notification-text")
@@ -621,7 +621,7 @@ function connect() {
         document.getElementById("notification-text").value = "";
         showMessage("{label58}");
     }
-    function getNotifications() {
+    window.getNotifications = function () {
         socket.send("getNotifications");
         getNotificationsHandleAnswer = function (result) {
             result.forEach((element) => {
@@ -647,7 +647,7 @@ function connect() {
             });
         };
     }
-    function markNotificationAsSeen(id) {
+    window.markNotificationAsSeen = function (id) {
         socket.send("markNotificationAsSeen=" + id);
         hideOverlay("notification-overlay" + id);
     }

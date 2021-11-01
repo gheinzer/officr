@@ -8,7 +8,10 @@ $accentColor: #d40000;
 $secondColor: #00d4d4;
 $font-family: "Montserrat";
 $letter-spacing: 0.5ch;
-
+::selection {
+    background-color: $accentColor;
+    color: white;
+}
 body {
     box-sizing: border-box;
     background-color: $body-bg-color;

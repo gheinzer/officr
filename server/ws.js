@@ -22,6 +22,7 @@ const {
     addNotification,
     user_getNotifications,
     user_mark_notification_as_seen,
+    user_todo_edit_task,
 } = require("./user_management");
 
 const wsserver = new WebSocket.Server({ server: httpserver });
@@ -193,6 +194,22 @@ function wsOnConnection(socket, req) {
             user_todo_delete_category(userID, id, function () {
                 socket.send("updateAll");
             });
+        }
+        const edit_task = message.toString().match(/EDIT-TASK=.*/);
+        if (edit_task) {
+            const json = edit_task[0].split("=")[1];
+            const data = JSON.parse(json);
+            user_todo_edit_task(
+                data.id,
+                data.description,
+                data.date,
+                data.type,
+                data.category,
+                userID,
+                function () {
+                    socket.send("updateAll");
+                }
+            );
         }
     }
     socket.on("message", (message) => {

@@ -70,6 +70,7 @@ const labels = {
         64: "Sie können das Passwort nun mit der E-Mail, welche Ihnen gesendet wurde, zurücksetzen.",
         65: "Dein Passwort wurde erfolgreich zurückgesetzt.",
         66: "Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.",
+        67: "Aufgabe bearbeiten",
     },
     en: {
         1: "Category",
@@ -138,6 +139,7 @@ const labels = {
         64: "You can reset the password with the e-mail that was sent to you.",
         65: "Your password has been reset successfully.",
         66: "An error ocurred. Please retry.",
+        67: "Edit task",
     },
 };
 

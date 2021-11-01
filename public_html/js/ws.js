@@ -92,7 +92,7 @@ function connect() {
                 case "updateAll":
                     todo_get_categories(function () {
                         todo_get_types(function () {
-                            todo_get_tasks();
+                            todo_get_tasks(hideLoader);
                         });
                     });
                     return;
@@ -167,6 +167,7 @@ function connect() {
                 html += `<option value="${element.ID}">${element.Name}</option>`;
             });
             document.getElementById("task_category").innerHTML = html;
+            document.getElementById("edit_task_category").innerHTML = html;
 
             html = "";
             categoryFilterIDs = [];
@@ -211,7 +212,7 @@ function connect() {
             lastestActionCompleted = true;
             if (callback) callback();
         });
-    }
+    };
     window.todo_get_types = function (callback) {
         _getTypes(function (result) {
             var html = "";
@@ -219,6 +220,7 @@ function connect() {
                 html += `<option value="${element.ID}">${element.Name}</option>`;
             });
             document.getElementById("task_type").innerHTML = html;
+            document.getElementById("edit_task_type").innerHTML = html;
 
             html = "";
             typeFilterIDs = [];
@@ -264,7 +266,7 @@ function connect() {
             lastestActionCompleted = true;
             if (callback) callback();
         });
-    }
+    };
     window.todo_get_tasks = function (callback) {
         _getTasks(function (result) {
             result = result.sort(function (a, b) {
@@ -275,7 +277,7 @@ function connect() {
             todo_update_tasks();
             if (callback) callback();
         });
-    }
+    };
     function _reorderDate(date) {
         date = date.split(".")[2] + date.split(".")[1] + date.split(".")[0];
         return date;
@@ -289,7 +291,7 @@ function connect() {
             document.getElementById("notfound_message").style.display = "none";
         }
         document.getElementById("tasks").innerHTML = html;
-    }
+    };
     window.testForFilters = function () {
         var html = "";
         tasks.forEach((element, index) => {
@@ -374,6 +376,9 @@ function connect() {
                             <td>${categoryIDs[element.CategoryID]}</td>
                             <td>${desc}</td>
                             <td>${date}</td>
+                            <td><img src="/assets/icons/edit_white_24dp.svg" alt="" class="todo_state_symbol" onclick="edit_Task(${
+                                element.ID
+                            })"></td>
                         </tr>`;
                 html += elementHTML;
             } else if (searchFilter == "") {
@@ -383,13 +388,58 @@ function connect() {
                             <td>${categoryIDs[element.CategoryID]}</td>
                             <td>${element.Description}</td>
                             <td>${element.Date}</td>
+                            <td><img src="/assets/icons/edit_white_24dp.svg" alt="" class="todo_state_symbol" onclick="edit_Task(${
+                                element.ID
+                            })"></td>
                         </tr>`;
                 html += elementHTML;
             }
         });
         return html;
-    }
-
+    };
+    window.edit_Task = function (id) {
+        var taskDesc,
+            taskCategoryID,
+            taskTypeID,
+            taskDate = "";
+        tasks.forEach((element) => {
+            if (element.ID == id) {
+                taskDesc = element.Description;
+                var day = parseInt(element.Date.split(".")[0]) + 1;
+                var month = parseInt(element.Date.split(".")[1]) - 1; // Months begin at 0
+                var year = parseInt(element.Date.split(".")[2]);
+                taskDate = new Date(year, month, day);
+                taskCategoryID = element.CategoryID;
+                taskTypeID = element.TypeID;
+            }
+        });
+        document.getElementById("edit_task_category").value = taskCategoryID;
+        document.getElementById("edit_task_type").value = taskTypeID;
+        document.getElementById("edit_task_description").value = taskDesc;
+        document.getElementById("edit_task_date").valueAsDate = taskDate;
+        document.getElementById("edit_task_id").value = id;
+        showOverlay("editTaskOverlay");
+        checkForValuesInEditTaskOverlay();
+    };
+    window.submit_edited_task = function () {
+        var id = document.getElementById("edit_task_id").value;
+        var desc = document.getElementById("edit_task_description").value;
+        var type = document.getElementById("edit_task_type").value;
+        var category = document.getElementById("edit_task_category").value;
+        var duedate = document.getElementById("edit_task_date").value;
+        duedate = duedate.toString().split("-");
+        duedate = `${duedate[2]}.${duedate[1]}.${duedate[0]}`;
+        var data = {
+            id: id,
+            description: desc,
+            type: type,
+            category: category,
+            date: duedate,
+        };
+        socket.send("EDIT-TASK=" + JSON.stringify(data));
+        hideOverlay("editTaskOverlay");
+        showLoader();
+    };
     function _getCategories(callback) {
         socket.send("getCategories");
         getCategoriesHandleAnswer = function (msg) {
@@ -445,7 +495,7 @@ function connect() {
                 document.getElementById("task_date").value = "";
             });
         });
-    }
+    };
     function _addType(type_name, callback) {
         socket.send(`ADD-TYPE=${type_name}`);
         addTypeHandleAnswer = function () {
@@ -457,10 +507,10 @@ function connect() {
         addCategoryHandleAnswer = function () {
             if (callback) callback();
         };
-    }
+    };
     window.todo_toggle_state = function (id, state) {
         socket.send(`TOGGLE_STATE=${id},${state}`);
-    }
+    };
     window.todo_add_type = function () {
         showLoader();
         const type_name = document.getElementById("type_name").value;
@@ -469,7 +519,7 @@ function connect() {
             hideOverlay("createTypeOverlay");
             todo_get_types();
         });
-    }
+    };
     window.todo_add_category = function () {
         showLoader();
         const type_name = document.getElementById("category_name").value;
@@ -478,11 +528,11 @@ function connect() {
             hideOverlay("createCategoryOverlay");
             todo_get_categories();
         });
-    }
+    };
     window.todo_set_search_filter = function () {
         searchFilter = document.getElementById("search").value;
         todo_update_tasks();
-    }
+    };
     window.todo_set_state_filter = function (element) {
         const selected = element.classList.contains("selected");
         const id = element.id;
@@ -498,7 +548,7 @@ function connect() {
             stateFilter = -1;
         }
         todo_update_tasks();
-    }
+    };
     window.todo_set_type_filter = function (element) {
         const selected = element.classList.contains("selected");
         const id = element.id;
@@ -514,7 +564,7 @@ function connect() {
             typeFilter = -1;
         }
         todo_update_tasks();
-    }
+    };
     window.todo_set_category_filter = function (element) {
         const selected = element.classList.contains("selected");
         const id = element.id;
@@ -530,14 +580,14 @@ function connect() {
             categoryFilter = -1;
         }
         todo_update_tasks();
-    }
+    };
     window.editCategory = function (id) {
         document.getElementById("editCategoryID").value = id;
         document.getElementById("category_edit_name").value = categoryIDs[id];
         document
             .getElementById("editCategoriesForm")
             .classList.remove("hidden");
-    }
+    };
     window.editType = function (id) {
         document.getElementById("editTypeID").value = id;
         document.getElementById("type_edit_name").value = typeIDs[id];
@@ -620,7 +670,7 @@ function connect() {
         document.getElementById("notification-title").value = "";
         document.getElementById("notification-text").value = "";
         showMessage("{label58}");
-    }
+    };
     window.getNotifications = function () {
         socket.send("getNotifications");
         getNotificationsHandleAnswer = function (result) {
@@ -646,9 +696,9 @@ function connect() {
                 showOverlay("notification-overlay" + id);
             });
         };
-    }
+    };
     window.markNotificationAsSeen = function (id) {
         socket.send("markNotificationAsSeen=" + id);
         hideOverlay("notification-overlay" + id);
-    }
+    };
 }

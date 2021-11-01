@@ -418,6 +418,24 @@ function resetPassword(
         }
     );
 }
+function user_todo_edit_task(
+    id,
+    desc,
+    date,
+    type,
+    category,
+    userID,
+    callback = function () {}
+) {
+    execQuery(
+        "UPDATE todo_tasks SET Description=?, Date=?, TypeID=?, CategoryID=? WHERE ID=? AND UserID=?",
+        [desc, date, type, category, id, userID],
+        function (err) {
+            if (err) throw err;
+            callback();
+        }
+    );
+}
 module.exports = {
     user_create_session,
     user_get_sessions,
@@ -446,4 +464,5 @@ module.exports = {
     confirmEmail,
     createPasswordResetDataset,
     resetPassword,
+    user_todo_edit_task,
 };

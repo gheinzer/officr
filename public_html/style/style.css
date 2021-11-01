@@ -1,6 +1,15 @@
 @import url("font.css");
 @import url("style-d.css") only screen and (min-width: 992px);
 @import url("style-m.css") only screen and (max-width: 991px);
+::-moz-selection {
+  background-color: #d40000;
+  color: white;
+}
+::selection {
+  background-color: #d40000;
+  color: white;
+}
+
 body {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;

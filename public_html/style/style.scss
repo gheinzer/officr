@@ -548,6 +548,14 @@ body {
         opacity: 0.75;
     }
 }
+.todo_edit_symbol {
+    height: 1.5rem;
+    cursor: pointer;
+    transition: 0.2s;
+    &:hover {
+        opacity: 0.75;
+    }
+}
 .filter-item {
     padding: 1.5ch;
     border-radius: 0.5rem;

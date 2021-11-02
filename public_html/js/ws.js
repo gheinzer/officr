@@ -376,7 +376,7 @@ function connect() {
                             <td>${categoryIDs[element.CategoryID]}</td>
                             <td>${desc}</td>
                             <td>${date}</td>
-                            <td><img src="/assets/icons/edit_white_24dp.svg" alt="" class="todo_state_symbol" onclick="edit_Task(${
+                            <td><img src="/assets/icons/edit_white_24dp.svg" alt="" class="todo_edit_symbol" onclick="edit_Task(${
                                 element.ID
                             })"></td>
                         </tr>`;
@@ -388,7 +388,7 @@ function connect() {
                             <td>${categoryIDs[element.CategoryID]}</td>
                             <td>${element.Description}</td>
                             <td>${element.Date}</td>
-                            <td><img src="/assets/icons/edit_white_24dp.svg" alt="" class="todo_state_symbol" onclick="edit_Task(${
+                            <td><img src="/assets/icons/edit_white_24dp.svg" alt="" class="todo_edit_symbol" onclick="edit_Task(${
                                 element.ID
                             })"></td>
                         </tr>`;

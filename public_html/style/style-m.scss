@@ -36,3 +36,31 @@ header {
 .undraw-img {
     width: 70%;
 }
+.createTaskOverlay,
+.createCategoryOverlay,
+.createTypeOverlay,
+.filter-overlay,
+.editTaskOverlay,
+.editTypesOverlay,
+.editCategoriesOverlay,
+.cookie-note,
+.simple-overlay,
+.notification-overlay {
+    .content {
+        overflow-x: hidden;
+        padding: 1ch;
+        overflow-wrap: break-word !important;
+        word-wrap: break-word;
+        hyphens: auto;
+        white-space: normal;
+        max-width: 90%;
+        button {
+            overflow-wrap: break-word !important;
+            word-wrap: break-word;
+            hyphens: auto;
+            white-space: normal;
+            max-width: 90%;
+            font-size: 1em !important;
+        }
+    }
+}

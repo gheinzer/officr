@@ -39,4 +39,45 @@ header span {
 .undraw-img {
   width: 70%;
 }
+
+.createTaskOverlay .content,
+.createCategoryOverlay .content,
+.createTypeOverlay .content,
+.filter-overlay .content,
+.editTaskOverlay .content,
+.editTypesOverlay .content,
+.editCategoriesOverlay .content,
+.cookie-note .content,
+.simple-overlay .content,
+.notification-overlay .content {
+  overflow-x: hidden;
+  padding: 1ch;
+  overflow-wrap: break-word !important;
+  word-wrap: break-word;
+  -webkit-hyphens: auto;
+      -ms-hyphens: auto;
+          hyphens: auto;
+  white-space: normal;
+  max-width: 90%;
+}
+
+.createTaskOverlay .content button,
+.createCategoryOverlay .content button,
+.createTypeOverlay .content button,
+.filter-overlay .content button,
+.editTaskOverlay .content button,
+.editTypesOverlay .content button,
+.editCategoriesOverlay .content button,
+.cookie-note .content button,
+.simple-overlay .content button,
+.notification-overlay .content button {
+  overflow-wrap: break-word !important;
+  word-wrap: break-word;
+  -webkit-hyphens: auto;
+      -ms-hyphens: auto;
+          hyphens: auto;
+  white-space: normal;
+  max-width: 90%;
+  font-size: 1em !important;
+}
 /*# sourceMappingURL=style-m.css.map */

@@ -294,7 +294,9 @@ function connect() {
     };
     window.testForFilters = function () {
         var html = "";
-        tasks.forEach((element, index) => {
+        tasks_formatted = JSON.parse(JSON.stringify(tasks));
+
+        tasks_formatted.forEach((element, index) => {
             element.Description = element.Description.toString().replaceAll(
                 "\n",
                 "<br>"

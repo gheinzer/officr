@@ -210,7 +210,7 @@ function user_get_todo_tasks(userID, callback = function (result) {}) {
     execQuery(
         "SELECT * FROM todo_tasks WHERE UserID=? ORDER BY Date ASC",
         [userID],
-        function (err, res, fileds) {
+        function (err, res) {
             if (err) throw err;
             callback(res);
         }

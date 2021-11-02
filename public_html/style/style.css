@@ -1287,4 +1287,9 @@ p.letter-spacing.little {
   margin-top: 1rem;
   line-height: 0.7;
 }
+
+* {
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
 /*# sourceMappingURL=style.css.map */

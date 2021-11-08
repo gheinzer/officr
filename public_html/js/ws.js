@@ -448,7 +448,7 @@ function connect() {
             callback(msg);
         };
     };
-    windwow_getTypes = function (callback) {
+    window._getTypes = function (callback) {
         socket.send("getTypes");
         getTypesHandleAnswer = function (msg) {
             callback(msg);

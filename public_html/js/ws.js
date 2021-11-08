@@ -278,10 +278,10 @@ function connect() {
             if (callback) callback();
         });
     };
-    function _reorderDate(date) {
+    window._reorderDate = function (date) {
         date = date.split(".")[2] + date.split(".")[1] + date.split(".")[0];
         return date;
-    }
+    };
     window.todo_update_tasks = function () {
         var html = testForFilters();
         if (html == "") {
@@ -442,25 +442,31 @@ function connect() {
         hideOverlay("editTaskOverlay");
         showLoader();
     };
-    function _getCategories(callback) {
+    window._getCategories = function (callback) {
         socket.send("getCategories");
         getCategoriesHandleAnswer = function (msg) {
             callback(msg);
         };
-    }
-    function _getTypes(callback) {
+    };
+    windwow_getTypes = function (callback) {
         socket.send("getTypes");
         getTypesHandleAnswer = function (msg) {
             callback(msg);
         };
-    }
-    function _getTasks(callback) {
+    };
+    window._getTasks = function (callback) {
         socket.send("getTasks");
         getTasksHandleAnswer = function (msg) {
             callback(msg);
         };
-    }
-    function _addTask(categoryID, typeID, description, duedate, callback) {
+    };
+    window._addTask = function (
+        categoryID,
+        typeID,
+        description,
+        duedate,
+        callback
+    ) {
         const data = {
             categoryID: categoryID,
             typeID: typeID,
@@ -473,7 +479,7 @@ function connect() {
         addTaskHandleAnswer = function () {
             callback();
         };
-    }
+    };
     window.addEventListener("beforeunload", function () {
         document.getElementById("erroroverlay").style.opacity = 0;
     });
@@ -498,13 +504,13 @@ function connect() {
             });
         });
     };
-    function _addType(type_name, callback) {
+    window._addType = function (type_name, callback) {
         socket.send(`ADD-TYPE=${type_name}`);
         addTypeHandleAnswer = function () {
             if (callback) callback();
         };
-    }
-    window.todo_toggle_state = function _addCategory(category_name, callback) {
+    };
+    window._addCategory = function _addCategory(category_name, callback) {
         socket.send(`ADD-CATEGORY=${category_name}`);
         addCategoryHandleAnswer = function () {
             if (callback) callback();

@@ -729,7 +729,7 @@ p.letter-spacing {
 }
 .flex.column {
     flex-direction: column;
-    flex-flow: row;
+    gap: 3rem;
     flex-wrap: wrap;
 }
 .veryBig {

@@ -1274,8 +1274,7 @@ p.letter-spacing.little {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -ms-flex-flow: row;
-      flex-flow: row;
+  gap: 3rem;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
 }

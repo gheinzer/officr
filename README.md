@@ -7,7 +7,7 @@
 
 # What is it?
 
-Officr is mainly a todo list to rember things like homework and meetings. I wrote this for me, but maybe, someone is interested to try it put and post an issue, if something does not work.
+officr is mainly a todo list to rember things like homework and meetings. I wrote this for me, but maybe, someone is interested to try it put and post an issue, if something does not work.
 
 # Installation
 
@@ -23,25 +23,4 @@ Officr is mainly a todo list to rember things like homework and meetings. I wrot
 -   You should be able to install npm modules
 -   git should be installed on your machine
 -   You should have installed a mysql server
-
-## Required modules
-
-**The required modules are saved in the node_modules directory by default.**
-
-### Normally not installed modules
-
--   `mysql` (Install with `(sudo) npm install mysql`)
--   `mime` (Install with `(sudo) npm install mime`)
--   `ws` (Install with `(sudo) npm install ws`)
--   `nodemailer` (Install with `(sudo) npm install nodemailer`)
-
-### Preinstalled modules (Don't need to be installed normally)
-
--   `cluster`
--   `child_process`
--   `path`
--   `fs`
--   `http`
--   `crypto`
--   `ws`
--   `readline`
+-   You should have installed all dependencies (run `npm install` in the root directory)

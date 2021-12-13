@@ -3,8 +3,9 @@
     "short_name": "officr",
     "theme_color": "#d40000",
     "background_color": "#141414",
-    "display": "fullscreen",
+    "display": "standalone",
     "orientation": "portrait",
     "scope": "/",
-    "start_url": "/"
+    "start_url": "/",
+    "icons": [{"src": "/assets/apple-touch-icon.png", "type": "image/png"}]
 }

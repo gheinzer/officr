@@ -1,83 +1,75 @@
-body .horizontal-container .searchBar input {
-  width: auto;
-}
-
-header img {
-  margin-right: 1ch !important;
-  height: 1.5rem !important;
-}
-
-header span {
-  font-size: 1rem !important;
-  font-weight: 200;
-}
-
-.desktop-only {
-  display: none;
-}
-
-.mobile-only {
-  display: initial;
-}
-
-.flex {
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  position: relative;
-}
-
-.flex img {
-  width: 90%;
-}
-
-.flex * {
-  text-align: center;
-}
-
-.undraw-img {
-  width: 70%;
-}
-
-.createTaskOverlay .content,
-.createCategoryOverlay .content,
-.createTypeOverlay .content,
-.filter-overlay .content,
-.editTaskOverlay .content,
-.editTypesOverlay .content,
-.editCategoriesOverlay .content,
-.cookie-note .content,
-.simple-overlay .content,
-.notification-overlay .content {
-  overflow-x: hidden;
-  padding: 1ch;
-  overflow-wrap: break-word !important;
-  word-wrap: break-word;
-  -webkit-hyphens: auto;
-      -ms-hyphens: auto;
-          hyphens: auto;
-  white-space: normal;
-  max-width: 90%;
-}
-
-.createTaskOverlay .content button,
-.createCategoryOverlay .content button,
-.createTypeOverlay .content button,
-.filter-overlay .content button,
-.editTaskOverlay .content button,
-.editTypesOverlay .content button,
-.editCategoriesOverlay .content button,
-.cookie-note .content button,
-.simple-overlay .content button,
-.notification-overlay .content button {
-  overflow-wrap: break-word !important;
-  word-wrap: break-word;
-  -webkit-hyphens: auto;
-      -ms-hyphens: auto;
-          hyphens: auto;
-  white-space: normal;
-  max-width: 90%;
-  font-size: 1em !important;
+@media only screen and (max-width: 992px) {
+  body .horizontal-container .searchBar input {
+    width: auto;
+  }
+  header img {
+    margin-right: 1ch !important;
+    height: 1.5rem !important;
+  }
+  header span {
+    font-size: 1rem !important;
+    font-weight: 200;
+  }
+  .desktop-only {
+    display: none;
+  }
+  .mobile-only {
+    display: initial;
+  }
+  .flex {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    position: relative;
+  }
+  .flex img {
+    width: 90%;
+  }
+  .flex * {
+    text-align: center;
+  }
+  .undraw-img {
+    width: 70%;
+  }
+  .createTaskOverlay .content,
+  .createCategoryOverlay .content,
+  .createTypeOverlay .content,
+  .filter-overlay .content,
+  .editTaskOverlay .content,
+  .editTypesOverlay .content,
+  .editCategoriesOverlay .content,
+  .cookie-note .content,
+  .simple-overlay .content,
+  .notification-overlay .content {
+    overflow-x: hidden;
+    padding: 1ch;
+    overflow-wrap: break-word !important;
+    word-wrap: break-word;
+    -webkit-hyphens: auto;
+        -ms-hyphens: auto;
+            hyphens: auto;
+    white-space: normal;
+    max-width: 90%;
+  }
+  .createTaskOverlay .content button,
+  .createCategoryOverlay .content button,
+  .createTypeOverlay .content button,
+  .filter-overlay .content button,
+  .editTaskOverlay .content button,
+  .editTypesOverlay .content button,
+  .editCategoriesOverlay .content button,
+  .cookie-note .content button,
+  .simple-overlay .content button,
+  .notification-overlay .content button {
+    overflow-wrap: break-word !important;
+    word-wrap: break-word;
+    -webkit-hyphens: auto;
+        -ms-hyphens: auto;
+            hyphens: auto;
+    white-space: normal;
+    max-width: 90%;
+    font-size: 1em !important;
+  }
 }
 /*# sourceMappingURL=style-m.css.map */

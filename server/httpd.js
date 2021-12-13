@@ -241,7 +241,7 @@ function handleNormalRequest(
         var htmlContent = readFileSync(path);
         var originalHtmlContent = htmlContent;
         htmlContent = originalHtmlContent.toString();
-        regexForLabels = /{includeRes:".*"}/;
+        regexForLabels = /{includeRes:".*?"}/;
         element = htmlContent.match(regexForLabels);
         if (element !== null) {
             element = element[0].toString();
@@ -255,6 +255,10 @@ function handleNormalRequest(
                     var result = readFileSync(filename).toString();
                 } catch {
                     var result = "";
+                }
+                if (filename.includes(".css")) {
+                    result = `<style>${result}</style>`;
+                    console.log(filename);
                 }
                 htmlContent = htmlContent.replace(element, result);
                 if (htmlContent.match(regexForLabels) !== null) {

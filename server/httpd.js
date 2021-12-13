@@ -356,7 +356,7 @@ function handleNormalRequest(
             );
         }
         res.write(originalHtmlContent);
-        res.set('Cache-Control', 'public, max-age=3600');
+        res.setHeader('Cache-Control', 'public, max-age=3600');
     } else {
         if (httpd_config.logging.requested_path) {
             console.log("Requested Path: " + req.url);

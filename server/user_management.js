@@ -121,7 +121,22 @@ function confirmEmail(privateID) {
                 ]);
                 execQuery(
                     "INSERT INTO users (Username, Password, Email) VALUES (?, ?, ?)",
-                    [username, password, email]
+                    [username, password, email],
+                    function (err, res) {
+                        if (err) throw err;
+                        userID = res.ID;
+                        execQuery("SELECT * FROM notifications"),
+                            [],
+                            function (err, res) {
+                                if (err) throw err;
+                                res.forEach((element) => {
+                                    user_mark_notification_as_seen(
+                                        element.ID,
+                                        userID
+                                    );
+                                });
+                            };
+                    }
                 );
             }
         }

@@ -247,9 +247,10 @@ function handleNormalRequest(
             element = element[0].toString();
             while (element !== null) {
                 var filename = element.match(/:".*"/)[0].toString();
-                filename =
-                    "res/" +
-                    filename.replace(":", "").replace('"', "").replace('"', "");
+                filename = filename
+                    .replace(":", "")
+                    .replace('"', "")
+                    .replace('"', "");
                 try {
                     var result = readFileSync(filename).toString();
                 } catch {
@@ -355,7 +356,7 @@ function handleNormalRequest(
                 protocol
             );
         }
-        res.setHeader('Cache-Control', 'public, max-age=3600');
+        res.setHeader("Cache-Control", "public, max-age=3600");
         res.write(originalHtmlContent);
     } else {
         if (httpd_config.logging.requested_path) {

@@ -360,7 +360,7 @@ function handleNormalRequest(
                 protocol
             );
         }
-        res.setHeader("Cache-Control", "public, max-age=3600");
+        res.setHeader("Cache-Control", "public, max-age=604800");
         res.write(originalHtmlContent);
     } else {
         if (httpd_config.logging.requested_path) {

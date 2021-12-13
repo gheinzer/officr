@@ -355,8 +355,8 @@ function handleNormalRequest(
                 protocol
             );
         }
-        res.write(originalHtmlContent);
         res.setHeader('Cache-Control', 'public, max-age=3600');
+        res.write(originalHtmlContent);
     } else {
         if (httpd_config.logging.requested_path) {
             console.log("Requested Path: " + req.url);

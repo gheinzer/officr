@@ -71,6 +71,7 @@ const labels = {
         65: "Dein Passwort wurde erfolgreich zurückgesetzt.",
         66: "Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.",
         67: "Aufgabe bearbeiten",
+        68: "de",
     },
     en: {
         1: "Category",
@@ -140,6 +141,7 @@ const labels = {
         65: "Your password has been reset successfully.",
         66: "An error ocurred. Please retry.",
         67: "Edit task",
+        68: "en",
     },
 };
 

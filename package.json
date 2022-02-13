@@ -29,5 +29,8 @@
     "bugs": {
         "url": "https://github.com/gheinzer/officr/issues"
     },
-    "homepage": "https://github.com/gheinzer/officr#readme"
+    "homepage": "https://github.com/gheinzer/officr#readme",
+    "devDependencies": {
+        "cypress": "^9.4.1"
+    }
 }

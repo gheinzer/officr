@@ -1,5 +1,5 @@
 {
-    "name": "officr",
+    "name": "@gheinzer/officr",
     "version": "1.0.5-beta",
     "description": "officr is a open-source todo list to use for work, family, school etc.",
     "main": "server.js",

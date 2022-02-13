@@ -6,7 +6,7 @@ $header-bg: lighten($body-bg-color, 5%);
 
 $accentColor: #d40000;
 $secondColor: #00d4d4;
-$font-family: "Montserrat";
+$font-family: 'Montserrat';
 $letter-spacing: 0.5ch;
 ::selection {
     background-color: $accentColor;
@@ -112,8 +112,9 @@ body {
                 font-size: 1.5rem;
                 transition: 0.2s;
                 &::placeholder {
-                    color: lighten($header-bg, 20%);
-                    letter-spacing: $letter-spacing;
+                    color: lighten($header-bg, 25%);
+                    letter-spacing: 0.1ch;
+                    font-weight: 800;
                 }
                 &:focus {
                     outline: none;
@@ -403,13 +404,13 @@ body {
             outline: none;
         }
         option {
-            font-family: "Arial";
+            font-family: 'Arial';
             font-size: 0.75rem;
             padding: 1ch;
         }
     }
     &::after {
-        content: "";
+        content: '';
         padding: 0;
         margin: 0;
         background-color: $accentColor;
@@ -707,7 +708,7 @@ code {
     background-color: lighten($header-bg, 10%);
     padding: 0.5ch;
     font-weight: bold;
-    font-family: "Courier New";
+    font-family: 'Courier New';
     font-size: 0.75rem;
     border-radius: 0.5ch;
     margin: 1ch;

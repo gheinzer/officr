@@ -204,23 +204,27 @@ body .horizontal-container .searchBar input {
 }
 
 body .horizontal-container .searchBar input::-webkit-input-placeholder {
-  color: #545454;
-  letter-spacing: 0.5ch;
+  color: #616161;
+  letter-spacing: 0.1ch;
+  font-weight: 800;
 }
 
 body .horizontal-container .searchBar input:-ms-input-placeholder {
-  color: #545454;
-  letter-spacing: 0.5ch;
+  color: #616161;
+  letter-spacing: 0.1ch;
+  font-weight: 800;
 }
 
 body .horizontal-container .searchBar input::-ms-input-placeholder {
-  color: #545454;
-  letter-spacing: 0.5ch;
+  color: #616161;
+  letter-spacing: 0.1ch;
+  font-weight: 800;
 }
 
 body .horizontal-container .searchBar input::placeholder {
-  color: #545454;
-  letter-spacing: 0.5ch;
+  color: #616161;
+  letter-spacing: 0.1ch;
+  font-weight: 800;
 }
 
 body .horizontal-container .searchBar input:focus {
@@ -801,13 +805,13 @@ body .horizontal-container .account-options img {
 .input-container input option,
 .input-container textarea option,
 .input-container select option {
-  font-family: "Arial";
+  font-family: 'Arial';
   font-size: 0.75rem;
   padding: 1ch;
 }
 
 .input-container::after {
-  content: "";
+  content: '';
   padding: 0;
   margin: 0;
   background-color: #d40000;
@@ -1242,7 +1246,7 @@ code {
   background-color: #3a3a3a;
   padding: 0.5ch;
   font-weight: bold;
-  font-family: "Courier New";
+  font-family: 'Courier New';
   font-size: 0.75rem;
   border-radius: 0.5ch;
   margin: 1ch;

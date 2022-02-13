@@ -1,614 +1,336 @@
 <!DOCTYPE html>
 <html lang="{label68}">
-    <head>
-        {includeRes:"res/head.html"}
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>officr ToDo</title>
-        {includeRes:"public_html/style/style.css"}{includeRes:"public_html/style/style-m.css"}{includeRes:"public_html/style/style-d.css"}{includeRes:"public_html/style/font.css"}
-        <script>{includeRes:"public_html/js/searchbar.js"}</script>
-        <script>{includeRes:"public_html/js/filterbar.js"}</script>
-        <script>{includeRes:"public_html/js/overlays.js"}</script>
-        <script>{includeRes:"public_html/js/checkForValues.js"}</script>
-        <script>{includeRes:"public_html/js/ws.js"}</script>
-        <link
-            rel="shortcut icon"
-            href="/assets/logo_single.svg"
-            type="image/x-icon"
-        />
-        <meta name="description" content="Your todo list. Anywhere. At any time. On any device.">
-        <meta name="keywords" content="officr, todo, todo list, open-source, tasks">
-        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-    </head>
-    <body
-        onload="setTimeout(setLoaderAsFinished, 1200); checkForValuesInCreateTaskOverlay()"
-    >
-        <div class="vertical-container">
-            <div class="horizontal-container">
-                <header>
-                    <img
-                        src="/assets/logo_with_text_light.svg"
-                        alt="officr"
-                        class="desktop-only"
-                    />
-                    <img
-                        src="/assets/logo_single.svg"
-                        alt="officr"
-                        class="mobile-only"
-                    />
-                    <span>To Do</span>
-                </header>
-                <div class="icons">
-                    <img
-                        src="/assets/icons/search_white_24dp.svg"
-                        alt=""
-                        class="pointer"
-                        onclick="showSearch()"
-                    />
-                </div>
-                <div class="searchBar" id="searchBar">
-                    <input
-                        type="search"
-                        name="search"
-                        id="search"
-                        placeholder="Search"
-                        oninput="todo_set_search_filter()"
-                        onkeydown="todo_set_search_filter()"
-                        onpaste="todo_set_search_filter()"
-                    />
-                    <img
-                        src="/assets/icons/close_white_24dp.svg"
-                        alt=""
-                        class="pointer"
-                        onclick="hideSearch(); clearSearchBar(); todo_set_search_filter()"
-                    />
-                </div>
-                <div class="account-options">
-                    <img
-                        src="/assets/icons/account_circle_white_24dp.svg"
-                        alt=""
-                        class="pointer"
-                        onclick="showOverlay('account-option-overlay')"
-                    />
-                </div>
-                <div class="filter">
-                    <img
-                        src="/assets/icons/filter_alt_white_24dp.svg"
-                        alt=""
-                        class="pointer desktop-only"
-                        onclick="showOverlay('filter-overlay')"
-                    />
-                </div>
-            </div>
-            <div class="main-content">
-                <div class="msg-center" id="messagecenter">
-                    <div class="msg">{label21}{rawCodeLabel<username>}</div>
-                </div>
-                <table id="tasks_table">
-                    <tr>
-                        <th>{label28}</th>
-                        <th>
-                            {label20}
-                            <img
-                                src="/assets/icons/edit_white_24dp.svg"
-                                alt=""
-                                ¨
-                                class="pointer text-img"
-                                onclick="showOverlay('editTypesOverlay')"
-                            />
-                        </th>
-                        <th>
-                            {label1}
-                            <img
-                                src="/assets/icons/edit_white_24dp.svg"
-                                alt=""
-                                class="pointer text-img"
-                                onclick="showOverlay('editCategoriesOverlay')"
-                            />
-                        </th>
-                        <th>{label2}</th>
-                        <th>{label3}</th>
-                        <th></th>
-                    </tr>
-                    <tbody id="tasks"></tbody>
-                </table>
-                <div id="notfound_message" style="display: none;">
-                    <img src="/assets/undraw/empty.svg" alt="" class="undraw-img" style="display: block;">
-                    <h1 style="text-align: center;">{label49}</h1>
-                </div>
-            </div>
-        </div>
-        <div class="account-option-overlay" id="account-option-overlay">
-            <img
-                src="/assets/icons/close_white_24dp.svg"
-                alt=""
-                onclick="hideOverlay('account-option-overlay')"
-                class="close-img"
-            />
-            <div class="content">
-                <h2>{label21}{USERNAME}</h2>
-                <a href="/logout" class="classic-button"
-                    ><img
-                        src="/assets/icons/logout_white_24dp.svg"
-                        alt=""
-                    />{label22}</a
-                >
-            </div>
-        </div>
-        <div class="createButtonMenu">
-            <img
-                src="/assets/icons/add_task_white_24dp.svg"
-                alt=""
-                class="secondary-img"
-                title="{label4}"
-                onclick="showOverlay('createTaskOverlay'); document.getElementById('createTaskOverlayForm').reset()"
-            />
-            <img
-                src="/assets/icons/category_white_24dp.svg"
-                alt=""
-                class="secondary-img"
-                title="{label5}"
-                onclick="showOverlay('createCategoryOverlay'); document.getElementById('createCategoryOverlayForm').reset()"
-            />
-            <img
-                src="/assets/icons/format_list_bulleted_white_24dp.svg"
-                alt=""
-                class="secondary-img"
-                title="{label31}"
-                onclick="showOverlay('createTypeOverlay'); document.getElementById('createTypeOverlayForm').reset()"
-            />
-            <img
-                src="/assets/icons/add_white_24dp.svg"
-                alt=""
-                class="main-img"
-            />
-        </div>
-        {includeRes:"res/loader-overlay.html"}
-        <div class="createTaskOverlay" id="createTaskOverlay">
-            <div class="inner">
-                <img
-                    src="/assets/icons/close_white_24dp.svg"
-                    alt=""
-                    onclick="hideOverlay('createTaskOverlay')"
-                    class="close-img"
-                />
-                <div class="flex">
-                    <div class="content">
-                        <form
-                            id="createTaskOverlayForm"
-                            action=""
-                            onkeyup="checkForValuesInCreateTaskOverlay()"
-                            onchange="checkForValuesInCreateTaskOverlay()"
-                            onreset="                                setTimeout(checkForValuesInCreateTaskOverlay, 1)"
-                            method="POST"
-                            onsubmit="taskSubmit()"
-                        >
-                            <script>
-                                function taskSubmit(event) {
-                                    event.preventDefault();
-                                    todo_add_task();
-                                    return false;
-                                }
-                            </script>
-                            <img
-                                src="/assets/icons/add_task_white_24dp.svg"
-                                alt=""
-                                style="height: 2rem"
-                            />
-                            <h2>{label6}</h2>
-                            <div class="input-container">
-                                <img
-                                    src="/assets/icons/category_white_24dp.svg"
-                                    alt=""
-                                />
-                                <select
-                                    placeholder=""
-                                    id="task_category"
-                                ></select>
-                                <label>{label1}</label>
-                            </div>
-                            <div class="input-container">
-                                <img
-                                    src="/assets/icons/format_list_bulleted_white_24dp.svg"
-                                    alt=""
-                                />
-                                <select placeholder="" id="task_type"></select>
-                                <label>{label20}</label>
-                            </div>
-                            <div class="input-container">
-                                <img
-                                    src="/assets/icons/description_white_24dp.svg"
-                                    alt=""
-                                />
-                                <textarea
-                                    type="text"
-                                    placeholder=""
-                                    id="task_description"
-                                ></textarea>
-                                <label>{label7}</label>
-                            </div>
-                            <img src="/assets/icons/info_white_24dp.svg" alt="" style="width: 2ch;" title="{label48}">
-                            <div class="input-container">
-                                <img
-                                    src="/assets/icons/event_white_24dp.svg"
-                                    alt=""
-                                />
-                                <input
-                                    type="date"
-                                    placeholder=""
-                                    id="task_date"
-                                />
-                                <label>{label3}</label>
-                            </div>
-                            <input
-                                type="reset"
-                                class="classic-button"
-                                value="{label9}"
-                            />
-                        </form>
-                        <button
-                            class="classic-button"
-                            id="task_submit"
-                            onclick="todo_add_task()"
-                            disabled
-                        >
-                            <img
-                                src="/assets/icons/done_white_24dp.svg"
-                                alt=""
-                            />{label8}
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="createCategoryOverlay" id="createCategoryOverlay">
-            <div class="inner">
-                <img
-                    src="/assets/icons/close_white_24dp.svg"
-                    alt=""
-                    onclick="hideOverlay('createCategoryOverlay')"
-                    class="close-img"
-                />
-                <div class="flex">
-                    <div class="content">
-                        <form
-                            id="createCategoryOverlayForm"
-                            action=""
-                            onkeyup="checkForValuesInCreateCategoryOverlay()"
-                            onchange="checkForValuesInCreateCategoryOverlay()"
-                            onreset="                                setTimeout(checkForValuesInCreateCategoryOverlay, 1)"
-                            method="POST"
-                            onsubmit="categorySubmit()"
-                        >
-                            <script>
-                                function categorySubmit(event) {
-                                    event.preventDefault();
-                                    todo_add_category();
-                                    return false;
-                                }
-                            </script>
-                            <img
-                                src="/assets/icons/category_white_24dp.svg"
-                                style="height: 2rem"
-                            />
-                            <h2>{label5}</h2>
-                            <div class="input-container">
-                                <input
-                                    type="text"
-                                    placeholder=""
-                                    id="category_name"
-                                />
-                                <label>{label32}</label>
-                            </div>
-                            <input
-                                type="reset"
-                                class="classic-button"
-                                value="{label9}"
-                            />
-                        </form>
-                        <button
-                            class="classic-button"
-                            id="category_submit"
-                            onclick="todo_add_category()"
-                            disabled
-                        >
-                            <img
-                                src="/assets/icons/done_white_24dp.svg"
-                                alt=""
-                            />{label8}
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="createTypeOverlay" id="createTypeOverlay">
-            <div class="inner">
-                <img
-                    src="/assets/icons/close_white_24dp.svg"
-                    alt=""
-                    onclick="hideOverlay('createTypeOverlay')"
-                    class="close-img"
-                />
-                <div class="flex">
-                    <div class="content">
-                        <form
-                            id="createTypeOverlayForm"
-                            action=""
-                            onkeyup="checkForValuesInCreateTypeOverlay()"
-                            onchange="checkForValuesInCreateTypeOverlay()"
-                            onreset="                                setTimeout(checkForValuesInCreateTypeOverlay, 1)"
-                            method="POST"
-                            onsubmit="typeSubmit()"
-                        >
-                            <script>
-                                function typeSubmit(event) {
-                                    event.preventDefault();
-                                    todo_add_type();
-                                    return false;
-                                }
-                            </script>
-                            <img
-                                src="/assets/icons/format_list_bulleted_white_24dp.svg"
-                                style="height: 2rem"
-                            />
-                            <h2>{label31}</h2>
-                            <div class="input-container">
-                                <input
-                                    type="text"
-                                    placeholder=""
-                                    id="type_name"
-                                />
-                                <label>{label32}</label>
-                            </div>
-                            <input
-                                type="reset"
-                                class="classic-button"
-                                value="{label9}"
-                            />
-                        </form>
-                        <button
-                            class="classic-button"
-                            id="type_submit"
-                            onclick="todo_add_type()"
-                            disabled
-                        >
-                            <img
-                                src="/assets/icons/done_white_24dp.svg"
-                                alt=""
-                            />{label8}
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="editTypesOverlay" id="editTypesOverlay">
-            <div class="inner">
-                <img
-                    src="/assets/icons/close_white_24dp.svg"
-                    alt=""
-                    onclick="hideOverlay('editTypesOverlay')"
-                    class="close-img"
-                />
-                <div class="flex">
-                    <div class="list" id="editTypesList"></div>
-                    <div class="edit-form hidden" id="editTypesForm">
-                        <div class="input-container">
-                            <input
-                                type="text"
-                                placeholder=""
-                                id="type_edit_name"
-                            />
-                            <label>{label32}</label>
-                        </div>
-                        <input type="hidden" id="editTypeID" />
-                        <button
-                            class="classic-button"
-                            id="type_edit_submit"
-                            onclick="todo_edit_type()"
-                        >
-                            <img
-                                src="/assets/icons/done_white_24dp.svg"
-                                alt=""
-                            />{label8}
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="editCategoriesOverlay" id="editCategoriesOverlay">
-            <div class="inner">
-                <img
-                    src="/assets/icons/close_white_24dp.svg"
-                    alt=""
-                    onclick="hideOverlay('editCategoriesOverlay')"
-                    class="close-img"
-                />
 
-                <div class="flex">
-                    <div class="list" id="editCategoriesList"></div>
-                    <div class="edit-form hidden" id="editCategoriesForm">
+<head>
+    {includeRes:"res/head.html"}
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>officr ToDo</title>
+    {includeRes:"public_html/style/style.css"}{includeRes:"public_html/style/style-m.css"}{includeRes:"public_html/style/style-d.css"}{includeRes:"public_html/style/font.css"}
+    <script>
+        {includeRes:"public_html/js/searchbar.js"}
+    </script>
+    <script>
+        {includeRes:"public_html/js/filterbar.js"}
+    </script>
+    <script>
+        {includeRes:"public_html/js/overlays.js"}
+    </script>
+    <script>
+        {includeRes:"public_html/js/checkForValues.js"}
+    </script>
+    <script>
+        {includeRes:"public_html/js/ws.js"}
+    </script>
+    <link rel="shortcut icon" href="/assets/logo_single.svg" type="image/x-icon" />
+    <meta name="description" content="Your todo list. Anywhere. At any time. On any device.">
+    <meta name="keywords" content="officr, todo, todo list, open-source, tasks">
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+</head>
+
+<body onload="setTimeout(setLoaderAsFinished, 1200); checkForValuesInCreateTaskOverlay()">
+    <div class="vertical-container">
+        <div class="horizontal-container">
+            <header>
+                <img src="/assets/logo_with_text_light.svg" alt="officr" class="desktop-only" />
+                <img src="/assets/logo_single.svg" alt="officr" class="mobile-only" />
+                <span>To Do</span>
+            </header>
+            <div class="icons">
+                <img src="/assets/icons/search_white_24dp.svg" alt="" class="pointer" onclick="showSearch()" />
+            </div>
+            <div class="searchBar" id="searchBar">
+                <input type="search" name="search" id="search" placeholder="{label69}" oninput="todo_set_search_filter()" onkeydown="todo_set_search_filter()" onpaste="todo_set_search_filter()" />
+                <img src="/assets/icons/close_white_24dp.svg" alt="" class="pointer" onclick="hideSearch(); clearSearchBar(); todo_set_search_filter()" />
+            </div>
+            <div class="account-options">
+                <img src="/assets/icons/account_circle_white_24dp.svg" alt="" class="pointer" onclick="showOverlay('account-option-overlay')" />
+            </div>
+            <div class="filter">
+                <img src="/assets/icons/filter_alt_white_24dp.svg" alt="" class="pointer desktop-only" onclick="showOverlay('filter-overlay')" />
+            </div>
+        </div>
+        <div class="main-content">
+            <div class="msg-center" id="messagecenter">
+                <div class="msg">{label21}{rawCodeLabel
+                    <username>}</div>
+            </div>
+            <table id="tasks_table">
+                <tr>
+                    <th>{label28}</th>
+                    <th>
+                        {label20}
+                        <img src="/assets/icons/edit_white_24dp.svg" alt="" ¨ class="pointer text-img" onclick="showOverlay('editTypesOverlay')" />
+                    </th>
+                    <th>
+                        {label1}
+                        <img src="/assets/icons/edit_white_24dp.svg" alt="" class="pointer text-img" onclick="showOverlay('editCategoriesOverlay')" />
+                    </th>
+                    <th>{label2}</th>
+                    <th>{label3}</th>
+                    <th></th>
+                </tr>
+                <tbody id="tasks"></tbody>
+            </table>
+            <div id="notfound_message" style="display: none;">
+                <img src="/assets/undraw/empty.svg" alt="" class="undraw-img" style="display: block;">
+                <h1 style="text-align: center;">{label49}</h1>
+            </div>
+        </div>
+    </div>
+    <div class="account-option-overlay" id="account-option-overlay">
+        <img src="/assets/icons/close_white_24dp.svg" alt="" onclick="hideOverlay('account-option-overlay')" class="close-img" />
+        <div class="content">
+            <h2>{label21}{USERNAME}</h2>
+            <a href="/logout" class="classic-button"><img src="/assets/icons/logout_white_24dp.svg" alt="" />{label22}</a>
+        </div>
+    </div>
+    <div class="createButtonMenu">
+        <img src="/assets/icons/add_task_white_24dp.svg" alt="" class="secondary-img" title="{label4}" onclick="showOverlay('createTaskOverlay'); document.getElementById('createTaskOverlayForm').reset()" />
+        <img src="/assets/icons/category_white_24dp.svg" alt="" class="secondary-img" title="{label5}" onclick="showOverlay('createCategoryOverlay'); document.getElementById('createCategoryOverlayForm').reset()" />
+        <img src="/assets/icons/format_list_bulleted_white_24dp.svg" alt="" class="secondary-img" title="{label31}" onclick="showOverlay('createTypeOverlay'); document.getElementById('createTypeOverlayForm').reset()" />
+        <img src="/assets/icons/add_white_24dp.svg" alt="" class="main-img" />
+    </div>
+    {includeRes:"res/loader-overlay.html"}
+    <div class="createTaskOverlay" id="createTaskOverlay">
+        <div class="inner">
+            <img src="/assets/icons/close_white_24dp.svg" alt="" onclick="hideOverlay('createTaskOverlay')" class="close-img" />
+            <div class="flex">
+                <div class="content">
+                    <form id="createTaskOverlayForm" action="" onkeyup="checkForValuesInCreateTaskOverlay()" onchange="checkForValuesInCreateTaskOverlay()" onreset="                                setTimeout(checkForValuesInCreateTaskOverlay, 1)" method="POST" onsubmit="taskSubmit()">
+                        <script>
+                            function taskSubmit(event) {
+                                event.preventDefault();
+                                todo_add_task();
+                                return false;
+                            }
+                        </script>
+                        <img src="/assets/icons/add_task_white_24dp.svg" alt="" style="height: 2rem" />
+                        <h2>{label6}</h2>
                         <div class="input-container">
-                            <input
-                                type="text"
-                                placeholder=""
-                                id="category_edit_name"
-                            />
+                            <img src="/assets/icons/category_white_24dp.svg" alt="" />
+                            <select placeholder="" id="task_category"></select>
+                            <label>{label1}</label>
+                        </div>
+                        <div class="input-container">
+                            <img src="/assets/icons/format_list_bulleted_white_24dp.svg" alt="" />
+                            <select placeholder="" id="task_type"></select>
+                            <label>{label20}</label>
+                        </div>
+                        <div class="input-container">
+                            <img src="/assets/icons/description_white_24dp.svg" alt="" />
+                            <textarea type="text" placeholder="" id="task_description"></textarea>
+                            <label>{label7}</label>
+                        </div>
+                        <img src="/assets/icons/info_white_24dp.svg" alt="" style="width: 2ch;" title="{label48}">
+                        <div class="input-container">
+                            <img src="/assets/icons/event_white_24dp.svg" alt="" />
+                            <input type="date" placeholder="" id="task_date" />
+                            <label>{label3}</label>
+                        </div>
+                        <input type="reset" class="classic-button" value="{label9}" />
+                    </form>
+                    <button class="classic-button" id="task_submit" onclick="todo_add_task()" disabled>
+                            <img
+                                src="/assets/icons/done_white_24dp.svg"
+                                alt=""
+                            />{label8}
+                        </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="createCategoryOverlay" id="createCategoryOverlay">
+        <div class="inner">
+            <img src="/assets/icons/close_white_24dp.svg" alt="" onclick="hideOverlay('createCategoryOverlay')" class="close-img" />
+            <div class="flex">
+                <div class="content">
+                    <form id="createCategoryOverlayForm" action="" onkeyup="checkForValuesInCreateCategoryOverlay()" onchange="checkForValuesInCreateCategoryOverlay()" onreset="                                setTimeout(checkForValuesInCreateCategoryOverlay, 1)" method="POST"
+                        onsubmit="categorySubmit()">
+                        <script>
+                            function categorySubmit(event) {
+                                event.preventDefault();
+                                todo_add_category();
+                                return false;
+                            }
+                        </script>
+                        <img src="/assets/icons/category_white_24dp.svg" style="height: 2rem" />
+                        <h2>{label5}</h2>
+                        <div class="input-container">
+                            <input type="text" placeholder="" id="category_name" />
                             <label>{label32}</label>
                         </div>
-                        <input type="hidden" id="editCategoryID" />
-                        <button
-                            class="classic-button"
-                            id="category_edit_submit"
-                            onclick="todo_edit_category()"
-                        >
+                        <input type="reset" class="classic-button" value="{label9}" />
+                    </form>
+                    <button class="classic-button" id="category_submit" onclick="todo_add_category()" disabled>
                             <img
                                 src="/assets/icons/done_white_24dp.svg"
                                 alt=""
                             />{label8}
                         </button>
-                    </div>
                 </div>
             </div>
         </div>
-        <div class="filter-overlay" id="filter-overlay">
-            <div class="inner">
-                <img
-                    src="/assets/icons/close_white_24dp.svg"
-                    alt=""
-                    onclick="hideOverlay('filter-overlay')"
-                    class="close-img"
-                />
-                <div class="flex">
-                    <div class="filter-content">
-                        <div class="content">
+    </div>
+    <div class="createTypeOverlay" id="createTypeOverlay">
+        <div class="inner">
+            <img src="/assets/icons/close_white_24dp.svg" alt="" onclick="hideOverlay('createTypeOverlay')" class="close-img" />
+            <div class="flex">
+                <div class="content">
+                    <form id="createTypeOverlayForm" action="" onkeyup="checkForValuesInCreateTypeOverlay()" onchange="checkForValuesInCreateTypeOverlay()" onreset="                                setTimeout(checkForValuesInCreateTypeOverlay, 1)" method="POST" onsubmit="typeSubmit()">
+                        <script>
+                            function typeSubmit(event) {
+                                event.preventDefault();
+                                todo_add_type();
+                                return false;
+                            }
+                        </script>
+                        <img src="/assets/icons/format_list_bulleted_white_24dp.svg" style="height: 2rem" />
+                        <h2>{label31}</h2>
+                        <div class="input-container">
+                            <input type="text" placeholder="" id="type_name" />
+                            <label>{label32}</label>
+                        </div>
+                        <input type="reset" class="classic-button" value="{label9}" />
+                    </form>
+                    <button class="classic-button" id="type_submit" onclick="todo_add_type()" disabled>
                             <img
-                                src="/assets/icons/format_list_bulleted_white_24dp.svg"
+                                src="/assets/icons/done_white_24dp.svg"
                                 alt=""
-                            />
-                            <h2>{label20}</h2>
-                            <div
-                                class="filter-list"
-                                id="type-filter-list"
-                            ></div>
-                        </div>
-                        <div class="content">
-                            <img
-                                src="/assets/icons/category_white_24dp.svg"
-                                alt=""
-                            />
-                            <h2>{label1}</h2>
-                            <div
-                                class="filter-list"
-                                id="category-filter-list"
-                            ></div>
-                        </div>
-                        <div class="content">
-                            <h2>{label28}</h2>
-                            <div class="filter-list">
-                                <div
-                                    class="filter-item selected"
-                                    onclick="todo_set_state_filter(this)"
-                                    id="state-0"
-                                >
-                                    <img
-                                        src="/assets/icons/pending_white_24dp.svg"
-                                        alt=""
-                                    />{label29}
-                                </div>
-                                <div
-                                    class="filter-item"
-                                    onclick="todo_set_state_filter(this)"
-                                    id="state-1"
-                                >
-                                    <img
-                                        src="/assets/icons/done_white_24dp.svg"
-                                        alt=""
-                                    />{label30}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                            />{label8}
+                        </button>
                 </div>
             </div>
         </div>
-        <div class="editTaskOverlay" id="editTaskOverlay">
-            <div class="inner">
-                <img
-                    src="/assets/icons/close_white_24dp.svg"
-                    alt=""
-                    onclick="hideOverlay('editTaskOverlay')"
-                    class="close-img"
-                />
-                <div class="flex">
+    </div>
+    <div class="editTypesOverlay" id="editTypesOverlay">
+        <div class="inner">
+            <img src="/assets/icons/close_white_24dp.svg" alt="" onclick="hideOverlay('editTypesOverlay')" class="close-img" />
+            <div class="flex">
+                <div class="list" id="editTypesList"></div>
+                <div class="edit-form hidden" id="editTypesForm">
+                    <div class="input-container">
+                        <input type="text" placeholder="" id="type_edit_name" />
+                        <label>{label32}</label>
+                    </div>
+                    <input type="hidden" id="editTypeID" />
+                    <button class="classic-button" id="type_edit_submit" onclick="todo_edit_type()">
+                            <img
+                                src="/assets/icons/done_white_24dp.svg"
+                                alt=""
+                            />{label8}
+                        </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="editCategoriesOverlay" id="editCategoriesOverlay">
+        <div class="inner">
+            <img src="/assets/icons/close_white_24dp.svg" alt="" onclick="hideOverlay('editCategoriesOverlay')" class="close-img" />
+
+            <div class="flex">
+                <div class="list" id="editCategoriesList"></div>
+                <div class="edit-form hidden" id="editCategoriesForm">
+                    <div class="input-container">
+                        <input type="text" placeholder="" id="category_edit_name" />
+                        <label>{label32}</label>
+                    </div>
+                    <input type="hidden" id="editCategoryID" />
+                    <button class="classic-button" id="category_edit_submit" onclick="todo_edit_category()">
+                            <img
+                                src="/assets/icons/done_white_24dp.svg"
+                                alt=""
+                            />{label8}
+                        </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="filter-overlay" id="filter-overlay">
+        <div class="inner">
+            <img src="/assets/icons/close_white_24dp.svg" alt="" onclick="hideOverlay('filter-overlay')" class="close-img" />
+            <div class="flex">
+                <div class="filter-content">
                     <div class="content">
-                        <form
-                            id="createTaskOverlayForm"
-                            action=""
-                            method="POST"
-                            onsubmit="taskSubmit()"
-                            onkeyup="checkForValuesInEditTaskOverlay()"
-                            onchange="checkForValuesInEditTaskOverlay()"
-                        >
-                            <script>
-                                function taskSubmit(event) {
-                                    event.preventDefault();
-                                    todo_add_task();
-                                    return false;
-                                }
-                            </script>
-                            <img
-                                src="/assets/icons/add_task_white_24dp.svg"
-                                alt=""
-                                style="height: 2rem"
-                            />
-                            <h2>{label67}</h2>
-                            <div class="input-container">
-                                <img
-                                    src="/assets/icons/category_white_24dp.svg"
-                                    alt=""
-                                />
-                                <select
-                                    placeholder=""
-                                    id="edit_task_category"
-                                ></select>
-                                <label>{label1}</label>
+                        <img src="/assets/icons/format_list_bulleted_white_24dp.svg" alt="" />
+                        <h2>{label20}</h2>
+                        <div class="filter-list" id="type-filter-list"></div>
+                    </div>
+                    <div class="content">
+                        <img src="/assets/icons/category_white_24dp.svg" alt="" />
+                        <h2>{label1}</h2>
+                        <div class="filter-list" id="category-filter-list"></div>
+                    </div>
+                    <div class="content">
+                        <h2>{label28}</h2>
+                        <div class="filter-list">
+                            <div class="filter-item selected" onclick="todo_set_state_filter(this)" id="state-0">
+                                <img src="/assets/icons/pending_white_24dp.svg" alt="" />{label29}
                             </div>
-                            <div class="input-container">
-                                <img
-                                    src="/assets/icons/format_list_bulleted_white_24dp.svg"
-                                    alt=""
-                                />
-                                <select placeholder="" id="edit_task_type"></select>
-                                <label>{label20}</label>
+                            <div class="filter-item" onclick="todo_set_state_filter(this)" id="state-1">
+                                <img src="/assets/icons/done_white_24dp.svg" alt="" />{label30}
                             </div>
-                            <div class="input-container">
-                                <img
-                                    src="/assets/icons/description_white_24dp.svg"
-                                    alt=""
-                                />
-                                <textarea
-                                    type="text"
-                                    placeholder=""
-                                    id="edit_task_description"
-                                ></textarea>
-                                <label>{label7}</label>
-                            </div>
-                            <img src="/assets/icons/info_white_24dp.svg" alt="" style="width: 2ch;" title="{label48}">
-                            <div class="input-container">
-                                <img
-                                    src="/assets/icons/event_white_24dp.svg"
-                                    alt=""
-                                />
-                                <input
-                                    type="date"
-                                    placeholder=""
-                                    id="edit_task_date"
-                                />
-                                <label>{label3}</label>
-                            </div>
-                            <input type="hidden" id="edit_task_id">
-                        </form>
-                        <button
-                            class="classic-button"
-                            id="edit_task_submit"
-                            onclick="submit_edited_task()"
-                            disabled
-                        >
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="editTaskOverlay" id="editTaskOverlay">
+        <div class="inner">
+            <img src="/assets/icons/close_white_24dp.svg" alt="" onclick="hideOverlay('editTaskOverlay')" class="close-img" />
+            <div class="flex">
+                <div class="content">
+                    <form id="createTaskOverlayForm" action="" method="POST" onsubmit="taskSubmit()" onkeyup="checkForValuesInEditTaskOverlay()" onchange="checkForValuesInEditTaskOverlay()">
+                        <script>
+                            function taskSubmit(event) {
+                                event.preventDefault();
+                                todo_add_task();
+                                return false;
+                            }
+                        </script>
+                        <img src="/assets/icons/add_task_white_24dp.svg" alt="" style="height: 2rem" />
+                        <h2>{label67}</h2>
+                        <div class="input-container">
+                            <img src="/assets/icons/category_white_24dp.svg" alt="" />
+                            <select placeholder="" id="edit_task_category"></select>
+                            <label>{label1}</label>
+                        </div>
+                        <div class="input-container">
+                            <img src="/assets/icons/format_list_bulleted_white_24dp.svg" alt="" />
+                            <select placeholder="" id="edit_task_type"></select>
+                            <label>{label20}</label>
+                        </div>
+                        <div class="input-container">
+                            <img src="/assets/icons/description_white_24dp.svg" alt="" />
+                            <textarea type="text" placeholder="" id="edit_task_description"></textarea>
+                            <label>{label7}</label>
+                        </div>
+                        <img src="/assets/icons/info_white_24dp.svg" alt="" style="width: 2ch;" title="{label48}">
+                        <div class="input-container">
+                            <img src="/assets/icons/event_white_24dp.svg" alt="" />
+                            <input type="date" placeholder="" id="edit_task_date" />
+                            <label>{label3}</label>
+                        </div>
+                        <input type="hidden" id="edit_task_id">
+                    </form>
+                    <button class="classic-button" id="edit_task_submit" onclick="submit_edited_task()" disabled>
                             <img
                                 src="/assets/icons/done_white_24dp.svg"
                                 alt=""
                             />{label8}
                         </button>
-                    </div>
                 </div>
             </div>
         </div>
-        <div id="erroroverlay">
-            <img src="/assets/icons/error_white_24dp.svg" alt="" />
-            <p id="errormessage"></p>
-        </div>
-        {includeRes:"res/cookie-note.html"}
-        
-    </body>
+    </div>
+    <div id="erroroverlay">
+        <img src="/assets/icons/error_white_24dp.svg" alt="" />
+        <p id="errormessage"></p>
+    </div>
+    {includeRes:"res/cookie-note.html"}
+
+</body>
+
 </html>

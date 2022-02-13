@@ -1,117 +1,91 @@
 <!DOCTYPE html>
 <html lang="{label68}">
-    <head>
-        {includeRes:"res/head.html"}
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="description" content="Your todo list. Anywhere. At any time. On any device.">
-        <meta name="keywords" content="officr, todo, todo list, open-source, tasks">
-        <title>officr - Your open-source todo list.</title>
-        {includeRes:"public_html/style/style.css"}{includeRes:"public_html/style/style-m.css"}{includeRes:"public_html/style/style-d.css"}{includeRes:"public_html/style/font.css"}
-        <script>{includeRes:"public_html/js/overlays.js"}</script>
-        <script>{includeRes:"public_html/js/cookies.js"}</script>
-        <link
-            rel="shortcut icon"
-            href="/assets/logo_single.svg"
-            type="image/x-icon"
-        />
-        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-        <meta property="og:title" content="officr - Your todo list">
-        <meta property="og:image" content="https://officr.gabrielheinzer.ch/assets/social_preview.jpg">
-        <meta property="og:description" content="officr is a open-source todo software. It can be used for homework, family or many other things.">
-        <meta property="og:url" content="https://officr.gabrielheinzer.ch">
-        <meta property="og:image:width" content="1354">
-        <meta property="og:image:height" content="469">
-    </head>
-    <body
-        onload="setTimeout(setLoaderAsFinished, 1200); showCookieOverlay()"
-    >
 
-        <div class="vertical-container">
-            <div class="horizontal-container">
-                <header>
-                    <img
-                        src="/assets/logo_with_text_light.svg"
-                        alt="officr"
-                        class="desktop-only"
-                    />
-                    <img
-                        src="/assets/logo_single.svg"
-                        alt="officr"
-                        class="mobile-only"
-                    />
-                </header>
-                <div class="icons">
-                    <img
-                        src="/assets/icons/account_circle_white_24dp.svg"
-                        alt=""
-                        class="pointer"
-                        onclick="window.location.href = '/login'"
-                    />
-                </div>
-            </div>
-            <div class="main-content">
-                <div class="viewport-size flex centered column">
-                    <img
-                        src="/assets/logo_only_text_light.svg"
-                        alt=""
-                        style="width: 20%"
-                    />
-                    <h1>Your todo software</h1>
-                    <a href="/signup" class="border-button">{label36}</a>
-                    <a href="/login" class="border-button">{label12}</a>
-                    <!--<img src="/assets/mockup-macbook.png" alt="" style="min-width: 30%; width: auto; height: auto; max-height: 60%; " class="desktop-only">-->
-                </div>
-                <div class="viewport-size flex">
-                    <p>{label37}</p>
-                    <img src="/assets/undraw/easy_to_use.svg" alt="" />
-                </div>
-                <div class="viewport-size flex">
-                    <img
-                        src="/assets/undraw/organize.svg"
-                        alt=""
-                    />
-                    <p>{label38}</p>
-                </div>
-                <div class="viewport-size flex">
-                    <p>{label39}</p>
-                    <img src="/assets/undraw/filter.svg" alt="" />
-                </div>
-                <div class="viewport-size flex">
-                    <img src="/assets/undraw/browser.svg" alt="">
-                    <p>{label40}</p>
-                    
-                </div>
-                <div class="viewport-size flex">
-                    <p>{label41}</p>                    
-                    <img src="/assets/undraw/anywhere.svg" alt="">
-                </div>
-                <div class="viewport-size flex column">
-                    <img
-                        src="/assets/logo_with_text_light.svg"
-                        alt=""
-                        style="width: 30%"
-                    />
-                    <a href="/signup" class="border-button">{label42}</a>
-                </div>
-                <div class="flex bg-gray footer">
-                    <p>officr is a open-source project.</p>
-                    <p>
-                        <a
-                            href="https://www.github.com/gheinzer/officr"
-                            class="classic-button"
-                            ><img
-                                src="assets/GitHub-Mark-Light-120px-plus.png"
-                            />
-                            Contribute on GitHub</a
-                        >
-                    </p>
-                    <p class="little">officr {rawCodeLabel<version>}</p>
-                </div>
+<head>
+    {includeRes:"res/head.html"}
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Your todo list. Anywhere. At any time. On any device.">
+    <meta name="keywords" content="officr, todo, todo list, open-source, tasks">
+    <title>officr - Your open-source todo list.</title>
+    {includeRes:"public_html/style/style.css"}{includeRes:"public_html/style/style-m.css"}{includeRes:"public_html/style/style-d.css"}{includeRes:"public_html/style/font.css"}
+    <script>
+        {
+            includeRes: "public_html/js/overlays.js"
+        }
+    </script>
+    <script>
+        {
+            includeRes: "public_html/js/cookies.js"
+        }
+    </script>
+    <link rel="shortcut icon" href="/assets/logo_single.svg" type="image/x-icon" />
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta property="og:title" content="officr - Your todo list">
+    <meta property="og:image" content="https://officr.gabrielheinzer.ch/assets/social_preview.jpg">
+    <meta property="og:description" content="officr is a open-source todo software. It can be used for homework, family or many other things.">
+    <meta property="og:url" content="https://officr.gabrielheinzer.ch">
+    <meta property="og:image:width" content="1354">
+    <meta property="og:image:height" content="469">
+</head>
+
+<body onload="setTimeout(setLoaderAsFinished, 1200); showCookieOverlay()">
+
+    <div class="vertical-container">
+        <div class="horizontal-container">
+            <header>
+                <img src="/assets/logo_with_text_light.svg" alt="officr" class="desktop-only" />
+                <img src="/assets/logo_single.svg" alt="officr" class="mobile-only" />
+            </header>
+            <div class="icons">
+                <img src="/assets/icons/account_circle_white_24dp.svg" alt="" class="pointer" onclick="window.location.href = '/login'" />
             </div>
         </div>
-        {includeRes:"res/loader-overlay.html"}
-        {includeRes:"res/cookie-note.html"}
-    </body>
+        <div class="main-content">
+            <div class="viewport-size flex centered column">
+                <img src="/assets/logo_only_text_light.svg" alt="" style="width: 20%" />
+                <h1>Your todo software</h1>
+                <a href="/signup" class="border-button">{label36}</a>
+                <a href="/login" class="border-button">{label12}</a>
+                <!--<img src="/assets/mockup-macbook.png" alt="" style="min-width: 30%; width: auto; height: auto; max-height: 60%; " class="desktop-only">-->
+            </div>
+            <div class="viewport-size flex">
+                <p>{label37}</p>
+                <img src="/assets/undraw/easy_to_use.svg" alt="" />
+            </div>
+            <div class="viewport-size flex">
+                <img src="/assets/undraw/organize.svg" alt="" />
+                <p>{label38}</p>
+            </div>
+            <div class="viewport-size flex">
+                <p>{label39}</p>
+                <img src="/assets/undraw/filter.svg" alt="" />
+            </div>
+            <div class="viewport-size flex">
+                <img src="/assets/undraw/browser.svg" alt="">
+                <p>{label40}</p>
+
+            </div>
+            <div class="viewport-size flex">
+                <p>{label41}</p>
+                <img src="/assets/undraw/anywhere.svg" alt="">
+            </div>
+            <div class="viewport-size flex column">
+                <img src="/assets/logo_with_text_light.svg" alt="" style="width: 30%" />
+                <a href="/signup" class="border-button">{label42}</a>
+            </div>
+            <div class="flex bg-gray footer">
+                <p>officr is a open-source project.</p>
+                <p>
+                    <a href="https://www.github.com/gheinzer/officr" class="classic-button"><img style="height: 1.5em;" src="assets/GitHub-Mark-Light-120px-plus.png" /> Contribute on GitHub</a>
+                </p>
+                <p class="little">officr {rawCodeLabel
+                    <version>}</p>
+            </div>
+        </div>
+    </div>
+    {includeRes:"res/loader-overlay.html"} {includeRes:"res/cookie-note.html"}
+</body>
+
 </html>

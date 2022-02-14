@@ -39,5 +39,5 @@ function hideCookieOverlay() {
 }
 
 function openHomepage() {
-    cy.visit('officr.gabrielheinzer.ch');
+    cy.visit('localhost:80');
 }

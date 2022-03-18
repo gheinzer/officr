@@ -25,6 +25,7 @@ function sendHTMLMail(
             to: decodeURIComponent(receiver),
             subject: subject,
             html: body,
+            textEncoding: 'base64'
         })
         .then(function (info) {
             callback(info);

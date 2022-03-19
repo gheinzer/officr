@@ -4,7 +4,6 @@
     "description": "officr is a open-source todo list to use for work, family, school etc.",
     "main": "server.js",
     "dependencies": {
-        "axios": "^0.23.0",
         "mime": "^2.5.2",
         "mysql": "^2.18.1",
         "nodemailer": "^6.7.0",

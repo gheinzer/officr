@@ -1,39 +1,39 @@
 // This script is responsible serving the files in public_html via http.
-const { readFileSync, existsSync, lstatSync } = require("fs");
-const http = require("http");
-const https = require("https");
-const { httpd_config, pages } = require("../config");
-const { handleFormInput } = require("./handleFormInput");
+const { readFileSync, existsSync, lstatSync } = require('fs');
+const http = require('http');
+const https = require('https');
+const { httpd_config, pages } = require('../config');
+const { handleFormInput } = require('./handleFormInput');
 const {
     session_verify,
     getUserByID,
     sessionDestroy,
     confirmEmail,
-} = require("./user_management");
-const labels = require("./lang-specific-content");
-const { exec } = require("child_process");
+} = require('./user_management');
+const labels = require('./lang-specific-content');
+const { exec } = require('child_process');
 var sslserver = undefined;
-const mime = require("mime");
+const mime = require('mime');
 
 let version;
 try {
-    exec("git describe --tags", function (error, stdout, stderr) {
+    exec('git describe --tags', function(error, stdout, stderr) {
         version = stdout;
     });
 } catch {
-    version = "";
+    version = '';
 }
 
-console.log("httpd.js started");
+console.log('httpd.js started');
 
 const httpserver = http
     .createServer((req, res) => {})
     .listen(httpd_config.port);
 
-httpserver.on("request", (req, res) => {
+httpserver.on('request', (req, res) => {
     serverOnRequest(req, res, false);
 });
-httpserver.on("error", (err) => {
+httpserver.on('error', (err) => {
     console.warn(err);
 });
 
@@ -45,26 +45,26 @@ if (httpd_config.ssl.active) {
     sslserver = https
         .createServer(options, (req, res) => {})
         .listen(httpd_config.ssl.port);
-    sslserver.on("request", (req, res) => {
+    sslserver.on('request', (req, res) => {
         serverOnRequest(req, res, true);
     });
-    sslserver.on("error", (err) => {
+    sslserver.on('error', (err) => {
         console.warn(err);
     });
 }
 
 function serverOnRequest(req, res, ssl) {
-    if (!ssl && httpd_config.ssl.auto_redirect) {
+    if (!ssl && httpd_config.ssl.auto_redirect && httpd_config.ssl.active) {
         res.statusCode = 301;
-        res.setHeader("Location", "https://" + httpd_config.hostname + req.url);
-        res.end("Please go to HTTPS");
+        res.setHeader('Location', 'https://' + httpd_config.hostname + req.url);
+        res.end('Please go to HTTPS');
         return;
     }
     req.url_full = req.url;
-    req.url = req.url.toString().split("?")[0];
+    req.url = req.url.toString().split('?')[0];
     const { headers } = req;
-    res.setHeader("Server", `officr HTTPD`);
-    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader('Server', `officr HTTPD`);
+    res.setHeader('Access-Control-Allow-Origin', '*');
     if (headers.cookie !== undefined) {
         var sessionID = headers.cookie
             .toString()
@@ -72,21 +72,21 @@ function serverOnRequest(req, res, ssl) {
         if (sessionID !== null) {
             sessionID = sessionID[0]
                 .toString()
-                .replace("officr-user-session-id=", "");
-            session_verify(sessionID, function (result, publicSessionID) {
-                if (!result || req.url == "/logout") {
+                .replace('officr-user-session-id=', '');
+            session_verify(sessionID, function(result, publicSessionID) {
+                if (!result || req.url == '/logout') {
                     sessionDestroy(sessionID);
                     res.setHeader(
-                        "Set-Cookie",
+                        'Set-Cookie',
                         `officr-user-session-id=deleted; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT`
                     );
-                    res.setHeader("Location", "/");
+                    res.setHeader('Location', '/');
                     res.statusCode = 302;
-                    res.end("302 - You should be redirected to the home page.");
+                    res.end('302 - You should be redirected to the home page.');
                     return;
                     6;
                 }
-                getUserByID(result, function (result) {
+                getUserByID(result, function(result) {
                     if (
                         checkForAuthenticatedRedirect(req, res, result.isAdmin)
                     ) {
@@ -112,6 +112,7 @@ function serverOnRequest(req, res, ssl) {
         }
     }
 }
+
 function checkForAuthenticatedRedirect(req, res, isAdmin) {
     var matched = false;
     pages.redirect_when_authenticated.forEach((regex) => {
@@ -119,7 +120,7 @@ function checkForAuthenticatedRedirect(req, res, isAdmin) {
             matched = true;
         }
     });
-    if (req.url == "/" && pages.redirect_root_when_authenticated) {
+    if (req.url == '/' && pages.redirect_root_when_authenticated) {
         matched = true;
     }
     if (req.url.match(/admin/) && isAdmin == 0) {
@@ -127,13 +128,14 @@ function checkForAuthenticatedRedirect(req, res, isAdmin) {
     }
     if (matched) {
         res.statusCode = 302;
-        res.setHeader("Location", "/todo");
-        res.end("302 - You will be redirected to /todo");
+        res.setHeader('Location', '/todo');
+        res.end('302 - You will be redirected to /todo');
         return false;
     } else {
         return true;
     }
 }
+
 function checkForNoAuthenticationRedirect(req, res) {
     var matched = false;
     pages.authentication_required.forEach((regex) => {
@@ -143,13 +145,14 @@ function checkForNoAuthenticationRedirect(req, res) {
     });
     if (matched) {
         res.statusCode = 302;
-        res.setHeader("Location", "/login");
-        res.end("302 - You will be redirected to /login");
+        res.setHeader('Location', '/login');
+        res.end('302 - You will be redirected to /login');
         return false;
     } else {
         return true;
     }
 }
+
 function handleNormalRequest(
     ssl,
     req,
@@ -157,25 +160,25 @@ function handleNormalRequest(
     username = undefined,
     publicSessionID = undefined
 ) {
-    if (req.url === "/logout") {
-        res.setHeader("Location", "/");
+    if (req.url === '/logout') {
+        res.setHeader('Location', '/');
         res.statusCode = 302;
         res.end(
-            "302 - Want to logout but was not logged in. Redirecting to root."
+            '302 - Want to logout but was not logged in. Redirecting to root.'
         );
         return;
     }
     if (req.url_full.match(/\/signup\/confirmemail\?id=.*/)) {
         var privateID = req.url_full
             .match(/\/signup\/confirmemail\?id=.*/)[0]
-            .replace("/signup/confirmemail?id=", "");
+            .replace('/signup/confirmemail?id=', '');
         confirmEmail(privateID);
     }
-    req.on("data", (data) => {
+    req.on('data', (data) => {
         handleFormInput(data, req, res);
     });
     const { method } = req;
-    if (method === "POST") {
+    if (method === 'POST') {
         return;
     }
     /*
@@ -190,10 +193,10 @@ function handleNormalRequest(
     if (httpd_config.lang == null) {
         try {
             remote_lang =
-                req.headers["accept-language"][0] +
-                req.headers["accept-language"][1];
+                req.headers['accept-language'][0] +
+                req.headers['accept-language'][1];
             if (labels[remote_lang] == undefined) {
-                remote_lang = "en";
+                remote_lang = 'en';
             }
 
             if (httpd_config.logging.remote_lang) {
@@ -202,26 +205,26 @@ function handleNormalRequest(
                 );
             }
         } catch {
-            remote_lang = "en";
+            remote_lang = 'en';
         }
     }
     if (labels[remote_lang] == undefined) {
-        remote_lang = "en";
+        remote_lang = 'en';
     }
     if (
         (existsSync(`${httpd_config.public_html}/${url}`) &&
             lstatSync(`${httpd_config.public_html}/${url}`).isDirectory() ===
-                false) ||
+            false) ||
         (existsSync(`${httpd_config.public_html}/${url}/index.html`) &&
             lstatSync(
                 `${httpd_config.public_html}/${url}/index.html`
             ).isDirectory() === false)
     ) {
-        var path = "none";
+        var path = 'none';
         if (
             existsSync(`${httpd_config.public_html}/${url}`) &&
             lstatSync(`${httpd_config.public_html}/${url}`).isDirectory() ===
-                false
+            false
         ) {
             path = `${httpd_config.public_html}/${url}`;
         }
@@ -234,10 +237,10 @@ function handleNormalRequest(
             path = `${httpd_config.public_html}/${url}/index.html`;
         }
         if (httpd_config.logging.requested_path) {
-            console.log("Requested Path: " + path);
+            console.log('Requested Path: ' + path);
         }
         var mimeType = mime.getType(path);
-        res.setHeader("Content-Type", mimeType + "; charset=utf-8");
+        res.setHeader('Content-Type', mimeType + '; charset=utf-8');
         var htmlContent = readFileSync(path);
         var originalHtmlContent = htmlContent;
         htmlContent = originalHtmlContent.toString();
@@ -248,15 +251,15 @@ function handleNormalRequest(
             while (element !== null) {
                 var filename = element.match(/:".*"/)[0].toString();
                 filename = filename
-                    .replace(":", "")
-                    .replace('"', "")
-                    .replace('"', "");
+                    .replace(':', '')
+                    .replace('"', '')
+                    .replace('"', '');
                 try {
                     var result = readFileSync(filename).toString();
                 } catch {
-                    var result = "";
+                    var result = '';
                 }
-                if (filename.includes(".css")) {
+                if (filename.includes('.css')) {
                     result = `<style>${result}</style>`;
                     console.log(filename);
                 }
@@ -285,12 +288,12 @@ function handleNormalRequest(
                     if (labels[remote_lang] != undefined) {
                         htmlContent = htmlContent.replace(
                             `{label${labelID}}`,
-                            labels["en"][labelID]
+                            labels['en'][labelID]
                         );
                     } else {
                         htmlContent = htmlContent.replace(
                             `{label${labelID}}`,
-                            "Invalid Label ID"
+                            'Invalid Label ID'
                         );
                     }
                 }
@@ -309,11 +312,11 @@ function handleNormalRequest(
             element = element[0].toString();
             while (element !== null) {
                 var code = element.match(/<.*>/)[0].toString();
-                code = "(" + code.replace("<", "").replace(">", "") + ")";
+                code = '(' + code.replace('<', '').replace('>', '') + ')';
                 try {
                     var result = eval(code);
                 } catch {
-                    var result = "";
+                    var result = '';
                 }
                 htmlContent = htmlContent.replace(element, result);
                 if (htmlContent.match(regexForLabels) !== null) {
@@ -330,7 +333,7 @@ function handleNormalRequest(
         ) {
             originalHtmlContent = originalHtmlContent.toString();
             originalHtmlContent = originalHtmlContent.replace(
-                "{USERNAME}",
+                '{USERNAME}',
                 username
             );
         }
@@ -343,31 +346,31 @@ function handleNormalRequest(
             }
             originalHtmlContent = originalHtmlContent.toString();
             originalHtmlContent = originalHtmlContent.replace(
-                "{WS_PORT}",
+                '{WS_PORT}',
                 port
             );
         }
         if (originalHtmlContent.toString().match(/{WS_PROTOCOL}/)) {
             let protocol;
             if (ssl) {
-                protocol = "wss";
+                protocol = 'wss';
             } else {
-                protocol = "ws";
+                protocol = 'ws';
             }
             originalHtmlContent = originalHtmlContent.toString();
             originalHtmlContent = originalHtmlContent.replace(
-                "{WS_PROTOCOL}",
+                '{WS_PROTOCOL}',
                 protocol
             );
         }
-        res.setHeader("Cache-Control", "public, max-age=604800");
+        res.setHeader('Cache-Control', 'public, max-age=604800');
         res.write(originalHtmlContent);
     } else {
         if (httpd_config.logging.requested_path) {
-            console.log("Requested Path: " + req.url);
+            console.log('Requested Path: ' + req.url);
         }
         res.statusCode = 404;
-        res.write("404 - page not found");
+        res.write('404 - page not found');
     }
     res.end();
 }

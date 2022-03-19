@@ -13,3 +13,4 @@ node_modules/http-gzip/package.json
 node_modules/*
 templates/*
 config.js
+src

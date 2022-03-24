@@ -1,5 +1,4 @@
-/index.html
-/
-/login
-/signup
-/todo
+https://officr.gabrielheinzer.ch/
+https://officr.gabrielheinzer.ch/login
+https://officr.gabrielheinzer.ch/signup
+https://officr.gabrielheinzer.ch/todo
